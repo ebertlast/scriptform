@@ -1,0 +1,318 @@
+<div class="page-header">
+  <h1>
+    Administrativo
+    <small>
+      <i class="ace-icon fa fa-angle-double-right"></i>
+      Consultas
+    </small>
+    <small>
+      <i class="ace-icon fa fa-angle-double-right"></i>
+      Reportes Dinámicos
+    </small>
+  </h1>
+</div>
+<!-- /.page-header -->
+
+<div class="row">
+  <div class="col-sm-12">
+    <!-- #section:elements.tab -->
+    <div class="tabbable tabs-left">
+      <ul class="nav nav-tabs" id="myTab">
+        <li class="active">
+          <a data-toggle="tab" href="#home" aria-expanded="true">
+            <i class="green ace-icon fa fa-home bigger-120"></i>
+            Reportes
+          </a>
+        </li>
+
+        <li class="">
+          <a data-toggle="tab" href="#filtros" aria-expanded="false">
+            Filtros
+            <span class="badge badge-grey" [ngClass]="{'oculto': parametros.length>0}">0</span>
+            <span class="badge badge-danger" [ngClass]="{'oculto': parametros.length<=0}">{{parametros.length}}</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="tab-content">
+        <div id="home" class="tab-pane fade active in">
+          <!-- <p>Raw denim you probably haven't heard of them jean shorts Austin.</p> -->
+          <div>
+            <label for="form-field-select-1">Selecciona la consulta que deseas realizar</label>
+
+            <select class="form-control" id="form-field-select-1" [(ngModel)]="reporte">
+              <!-- <option value=""></option> -->
+              <option [ngValue]="item" *ngFor="let item of reportes"> {{item.NOMBRE}} </option>
+            </select>
+          </div>
+          <br/>
+          <!-- <div class="center">
+            <button id="btnEjecutarConsulta" type="button" class="btn btn-sm btn-success" data-loading-text="Cargando..." [ngClass]="{'oculto': !reporte.NOMBRE}"
+              (click)="ejecutarConsulta()">
+              Ejecutar Consulta
+              <i class="ace-icon fa fa-arrow-down icon-on-right bigger-110"></i>
+            </button>
+          </div> -->
+
+        </div>
+
+        <div id="filtros" class="tab-pane fade">
+          <!-- <p>El reporte no tiene.</p> -->
+          <div class="alert alert-info" [ngClass]="{'oculto': parametros.length>0}">
+            <!-- <button type="button" class="close" data-dismiss="alert">
+                <i class="ace-icon fa fa-times"></i>
+              </button> -->
+            El reporte
+            <strong>{{reporte.NOMBRE}}</strong> no tiene filtros configurados.
+            <br>
+          </div>
+          <div class="widget-body" *ngFor="let parametro of parametros">
+            <div class="widget-main no-padding">
+              <div *ngIf="parametros.TIPO === 'FECHA'">
+                <label for="parametro.PARAMETROID">{{parametro.NOMBRE}}</label>
+                <div class="row">
+                  <div class="col-xs-8 col-sm-4">
+                    <!-- #section:plugins/date-time.datepicker -->
+                    <div class="input-group">
+                      <input class="form-control date-picker input-mask-date" id="parametro.PARAMETROID" type="text" data-date-format="dd/mm/yyyy"
+                      />
+                      <span class="input-group-addon">
+                        <i class="fa fa-calendar bigger-110"></i>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row" *ngIf="parametros.QUERY !== ''">
+                <div class="col-xs-8 col-sm-8">
+                  <label for="parametro.PARAMETROID"> {{parametro.NOMBRE}}</label>
+
+                  <select (change)="onChangeValoresParametros(parametro.PARAMETROID,$event.target.value)" class="form-control" id="parametro.PARAMETROID"
+                    name="parametro.PARAMETROID">
+                    <option value=""></option>
+                    <option value="{{item.columna1}}" *ngFor="let item of consultaParametros" [ngClass]="{'oculto': item.parametroid!==parametro.PARAMETROID}"
+                      [selected]="item.columna1 === parametro.VALOR">{{item.columna2}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row" *ngIf="parametros.TIPO !== 'ALFANUMERICO' && parametros.QUERY === ''">
+                <div class="col-xs-8 col-sm-8">
+                  <label for="parametro.PARAMETROID">{{parametro.NOMBRE}}</label>
+                  <div class="input-group">
+                    <input type="text" id="parametro.PARAMETROID" class="form-control">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <a href="#my-modal" role="button" class="bigger-125 bg-primary white" data-toggle="modal" *ngIf="false">
+            &nbsp; Content Slider inside Modal Box &nbsp;
+          </a>
+
+          <div id="my-modal" class="modal fade" tabindex="-1" style="display: none;">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                  <h3 class="smaller lighter blue no-margin">A modal with a slider in it!</h3>
+                </div>
+
+                <div class="modal-body">
+                  Some content
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <br> 1
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <br> 2
+                </div>
+
+                <div class="modal-footer">
+                  <button class="btn btn-sm btn-danger pull-right" data-dismiss="modal">
+                    <i class="ace-icon fa fa-times"></i>
+                    Close
+                  </button>
+                </div>
+              </div>
+              <!-- /.modal-content -->
+              <div id="aside-inside-modal" class="modal aside aside-contained aside-bottom aside-hz aside-dark no-backdrop aside-hidden"
+                data-placement="bottom" data-background="true" data-backdrop="false" tabindex="-1" style="display: none;">
+                <div class="modal-dialog">
+                  <div class="modal-content ace-scroll">
+                    <div class="scroll-track scroll-white no-track idle-hide" style="display: none;">
+                      <div class="scroll-bar" style="top: 0px;"></div>
+                    </div>
+                    <div class="scroll-content" style="">
+                      <div class="modal-body">
+                        <div class="row">
+                          <div class="col-xs-12 white">
+                            <h3 class="lighter no-margin">Inside another modal</h3>
+
+                            <br>
+                            <br>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- /.modal-content -->
+
+                  <button class="btn btn-default btn-app btn-xs ace-settings-btn aside-trigger" data-target="#aside-inside-modal" data-toggle="modal"
+                    type="button">
+                    <i data-icon2="fa-arrow-down" data-icon1="fa-arrow-up" class="ace-icon fa bigger-110 icon-only fa-arrow-up"></i>
+                  </button>
+                </div>
+                <!-- /.modal-dialog -->
+              </div>
+            </div>
+            <!-- /.modal-dialog -->
+          </div>
+
+          <br />
+
+        </div>
+
+        <div class="center">
+          <button id="btnEjecutarConsulta" type="button" class="btn btn-sm btn-success" data-loading-text="Cargando..." [ngClass]="{'oculto': !reporte.NOMBRE}"
+            (click)="ejecutarConsulta()">
+            Ejecutar Consulta
+            <i class="ace-icon fa fa-arrow-down icon-on-right bigger-110"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- /section:elements.tab -->
+  </div>
+</div>
+
+<div class="page-header">
+  <!-- <h1>
+    Tables
+    <small>
+      <i class="ace-icon fa fa-angle-double-right"></i>
+      Static &amp; Dynamic Tables
+    </small>
+  </h1> -->
+</div>
+<div class="row" [ngClass]="{'oculto': !reporte.NOMBRE || data.length <= 0}">
+  <div class="col-xs-12">
+    <div class="table-header">
+      Resultados para "{{reporte.NOMBRE}}"
+      <div class="pull-right" style="padding-right: 20px;" [ngClass]="{'oculto': paginador.filasPorPagina<10}">
+        Registros por Página: &nbsp;
+        <select [(ngModel)]="paginador.filasPorPagina" (change)="onChangeFilasPorPagina($event)">
+          <option [ngValue]="10">10</option>
+          <option [ngValue]="30">30</option>
+          <option [ngValue]="50">50</option>
+          <option [ngValue]="100">100</option>
+          <option [ngValue]="500">500</option>
+          <option [ngValue]="1000">1000</option>
+        </select>
+      </div>
+    </div>
+
+    <table id="simple-table" class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th class="center" *ngIf="false">
+            <label class="pos-rel">
+              <input type="checkbox" class="ace">
+              <span class="lbl"></span>
+            </label>
+          </th>
+          <th *ngFor="let columna of columnas; let i=index" [ngClass]="{'hidden-480': i>4, 'detail-col': i<=4}">{{columna}}</th>
+          <!-- <th class="hidden-480">Domain</th>
+          <th class="hidden-480">Price</th>
+          <th class="hidden-480">Clicks</th> -->
+
+          <!-- <th class="hidden-480">
+            <i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
+            Update
+          </th>
+          <th class="hidden-480">Status</th> -->
+
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let row of data">
+          <td class="center" *ngIf="false">
+            <label class="pos-rel">
+              <input type="checkbox" class="ace">
+              <span class="lbl"></span>
+            </label>
+          </td>
+
+          <td class="center" *ngIf="false">
+            <div class="action-buttons">
+              <a href="#" class="green bigger-140 show-details-btn" title="Show Details">
+                <i class="ace-icon fa fa-angle-double-down"></i>
+                <span class="sr-only">Details</span>
+              </a>
+            </div>
+          </td>
+
+          <td *ngFor="let columna of columnas; let i = index" [ngClass]="{'hidden-480': i>4}">
+            {{row[columna]}}
+          </td>
+
+        </tr>
+      </tbody>
+    </table>
+    <div [ngClass]="{'oculto': data.length <= 0 && 1===2}">
+      <ul class="pagination">
+        <li [ngClass]="{'disabled': paginador.paginaActual === paginador.primeraPagina}">
+          <a href="#" (click)="setPagina(1)">
+            <i class="ace-icon fa fa-angle-double-left"></i>
+            Primera
+          </a>
+        </li>
+        <li [ngClass]="{'disabled': (paginador.paginaActual - 1) < paginador.primeraPagina}">
+          <a href="#" (click)="setPagina(paginador.paginaActual - 1)">
+            <i class="ace-icon fa fa-angle-left"></i>
+          </a>
+        </li>
+
+        <li [ngClass]="{'oculto': (paginador.paginaActual - 2) < paginador.primeraPagina}">
+          <a href="#" (click)="setPagina(paginador.paginaActual - 2)">{{paginador.paginaActual - 2}}</a>
+        </li>
+
+        <li [ngClass]="{'oculto': (paginador.paginaActual - 1) < paginador.primeraPagina}">
+          <a href="#" (click)="setPagina(paginador.paginaActual - 1)">{{paginador.paginaActual - 1}}</a>
+        </li>
+
+        <li class="disabled active">
+          <a href="javascript:void(0);">{{paginador.paginaActual}}</a>
+        </li>
+
+        <li [ngClass]="{'oculto': (paginador.paginaActual + 1) > paginador.ultimaPagina}">
+          <a href="#" (click)="setPagina(paginador.paginaActual + 1)">{{paginador.paginaActual + 1}}</a>
+        </li>
+
+        <li [ngClass]="{'oculto': (paginador.paginaActual + 2) > paginador.ultimaPagina}">
+          <a href="#" (click)="setPagina(paginador.paginaActual + 2)">{{paginador.paginaActual + 2}}</a>
+        </li>
+
+
+        <li [ngClass]="{'disabled': (paginador.paginaActual + 1) > paginador.ultimaPagina}">
+          <a href="#" (click)="setPagina(paginador.paginaActual + 1)">
+            <i class="ace-icon fa fa-angle-right"></i>
+          </a>
+        </li>
+        <li [ngClass]="{'disabled': paginador.paginaActual === paginador.ultimaPagina}">
+          <a href="#" (click)="setPagina(paginador.ultimaPagina)">
+            Última
+            <i class="ace-icon fa fa-angle-double-right"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!-- /.span -->
+</div>

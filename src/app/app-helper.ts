@@ -1,0 +1,163 @@
+import { Injectable } from '@angular/core';
+import { Location } from '@angular/common';
+import { environment } from '../environments/environment';
+declare var Snackbar: any;
+declare var $: any;
+declare var toastr: any;
+
+@Injectable()
+export class Helper {
+  constructor(private _location: Location) { }
+  // constructor(public toastr: ToastsManager, vcr: ViewContainerRef) {
+  //   toastr.setRootViewContainerRef(vcr);
+  // }
+  /**
+   * Despliegue de mensajes tipo notificaciones >> https://notifyjs.com/
+   * @param message Mensaje que se mostrará en el cuerpo de la notificación
+   * @param type Tipo de notificación: success [default] (verde), error (rojo), warning (amarillo), info (azul))
+   * @param divId Identificador del control
+   * @param autoHide Destruir automáticamente el mensaje
+   * @param position Posición de la pantalla donde se desplegará la notificación: top-right, bottom-right, bottom-left,
+   * top-full-width (Default), bottom-full-width, top-center, bottom-center
+   */
+  public Notificacion(message: string, type = 'success', divId = '', autoHide = true, position = 'top right'): void {
+    let options = {
+      // whether to hide the notification on click
+      clickToHide: true,
+      // whether to auto-hide the notification
+      autoHide: autoHide,
+      // if autoHide, hide after milliseconds
+      autoHideDelay: 5000,
+      // show the arrow pointing at the element
+      arrowShow: true,
+      // arrow size in pixels
+      arrowSize: 5,
+      // position defines the notification position though uses the defaults below
+      position: position,
+      // default positions
+      elementPosition: 'bottom left',
+      globalPosition: 'top right',
+      // default style
+      style: 'bootstrap',
+      // default class (string or [string])
+      className: type,
+      // show animation
+      showAnimation: 'slideDown',
+      // show animation duration
+      showDuration: 400,
+      // hide animation
+      hideAnimation: 'slideUp',
+      // hide animation duration
+      hideDuration: 200,
+      // padding between element and notification
+      gap: 2
+    };
+    // console.log(message);
+    if (divId === '') {
+      $.notify(message, options);
+    } else {
+      $('#' + divId).notify(message, options);
+    }
+  }
+
+  /**
+   * Aplica efectos de animaciones a un div
+   * @param idDiv Identificador del div donde se va a realizar la animacióm
+   * @param animation Nombre de la animación, que puede encontrarse en la documentacion https://github.com/daneden/animate.css
+   */
+  public AnimarDiv(idDiv: string, animation: string = 'shake') {
+
+    $('#' + idDiv)
+      .removeClass()
+      .addClass(animation + ' animated')
+      .one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+        $(this).removeClass();
+      });
+  }
+
+  /**
+   * Cambia de color principal a toda la plantilla
+   * @param color Color a ser utilizado. Opciones: blue, brown, cyan, deep-orange, deep-purple, green, grey, indigo, light-blue,
+   * light-green, lime, orange, pink, purple, red, teal, yellow. Valor por defecto: light-blue
+   * @param tonalidad Oscuridad de la tonalidad. Opciones: 300, 400, 500, 600, 700. Valor por Defecto: 500
+   */
+  public CambiarColorTema(color: string = 'light-blue', tonalidad: number = 500) {
+    $('#theme').attr('href', 'assets/css/style.' + color + '-' + tonalidad.toString() + '.min.css')
+  }
+
+  /**
+   * Tarda un determinado tiempo para ejecutar una acción, ejemplo:
+   * this.sleep(1500).then(() => {
+   *   console.log(' Do something after the sleep!');
+   * });
+   */
+  public Sleep(time) {
+    return new Promise((resolve) => setTimeout(resolve, time));
+  }
+
+  public PaginaAnterior() {
+    this._location.back();
+  }
+
+  public Capitalizar(s) {
+    return s.toLowerCase().replace(/\b./g, function (a) { return a.toUpperCase(); });
+  }
+
+  public FechaMayorQue(fechaInicial: Date, fechaFinal: Date): boolean {
+    // console.log(fechaInicial, fechaFinal);
+    // Verificamos que la fecha no sea posterior a la actual
+    const dateStart = fechaInicial;
+    const dateEnd = fechaFinal;
+    if (dateStart >= dateEnd) {
+      return true;
+    }
+    return false;
+  }
+
+  /**
+   * Posiciona el cursor hasta el principio de la página actual
+   */
+  public ScrollTop() {
+    $('html, body').animate({ scrollTop: 0 }, 'slow');
+    return false;
+  }
+
+  public ExcelReport(tabid: string)
+  {
+      let tab_text="<table border='2px'><tr bgcolor='#87AFC6'>";
+      let textRange; 
+      let j=0;
+      // const tab = document.getElementById('headerTable'); // id of table
+      let tab: any;
+      tab = document.getElementById(tabid); // id of table
+  
+      for(j = 0 ; j < tab.rows.length ; j++) 
+      {     
+          tab_text=tab_text+tab.rows[j].innerHTML+"</tr>";
+          //tab_text=tab_text+"</tr>";
+      }
+  
+      tab_text=tab_text+"</table>";
+      tab_text= tab_text.replace(/<A[^>]*>|<\/A>/g, "");//remove if u want links in your table
+      tab_text= tab_text.replace(/<img[^>]*>/gi,""); // remove if u want images in your table
+      tab_text= tab_text.replace(/<input[^>]*>|<\/input>/gi, ""); // reomves input params
+  
+      var ua = window.navigator.userAgent;
+      var msie = ua.indexOf("MSIE "); 
+  
+      let txtArea1: any;
+      let sa: any;
+      if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))      // If Internet Explorer
+      {
+          txtArea1.document.open("txt/html","replace");
+          txtArea1.document.write(tab_text);
+          txtArea1.document.close();
+          txtArea1.focus(); 
+          sa=txtArea1.document.execCommand("SaveAs",true,"Say Thanks to Sumit.xls");
+      }  
+      else                 //other browser not tested on IE 11
+          sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));  
+  
+      return (sa);
+  }
+}
