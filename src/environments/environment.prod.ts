@@ -5,5 +5,7 @@ export const environment = {
   companyname: 'RENDIMOS, LTDA',
   yearscopyrigth: '2017-2018',
   currentuser: 'scriptformswebuser',
-  apiurl: 'http://localhost:8082/scriptforms.api/public'
+  apiurl: 'http://localhost:8082/scriptforms.api/public',
+  urlfacebook: 'https://www.facebook.com/ebert.zerpa',
+  urltwitter: 'https://twitter.com/ebertzerpa'
 };

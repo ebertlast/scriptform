@@ -42,8 +42,8 @@ export class ReppService {
     const _headers = new Headers({ 'Authorization': 'Bearer ' + this._authService.Usuario().TOKEN });
     const _options = new RequestOptions({ headers: _headers });
     // console.log(_options);
-    const _url = environment.apiurl + '/parametros/actualizarvalor/' + reporteid + '/' + parametroid+ '/' + valor;
-    return this._http.put(_url, '',_options)
+    const _url = environment.apiurl + '/parametros/actualizarvalor/' + reporteid + '/' + parametroid + '/' + valor;
+    return this._http.put(_url, '', _options)
       .map((response: Response) => {
         const data = this._authService.ExtraerResultados(response);
         return data;
@@ -51,5 +51,5 @@ export class ReppService {
       .catch(err => this._authService.CapturarError(err));
   }
 
-
+  
 }

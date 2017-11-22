@@ -6,6 +6,7 @@ import { DinamicReportComponent } from './componentes/dinamic-report/dinamic-rep
 import { FormsModule } from '@angular/forms';
 import { DinamicReportConfiguracionComponent } from './componentes/dinamic-report-configuracion/dinamic-report-configuracion.component';
 import { GeneralModule } from '../general/general.module';
+import { RepuService } from './servicios/repu.service';
 @NgModule({
   imports: [
     CommonModule,
@@ -14,6 +15,6 @@ import { GeneralModule } from '../general/general.module';
   ],
   exports: [DinamicReportComponent, DinamicReportConfiguracionComponent],
   declarations: [DinamicReportComponent, DinamicReportConfiguracionComponent],
-  providers: [RepService, ReppService]
+  providers: [RepService, ReppService, RepuService]
 })
 export class ReportesModule { }

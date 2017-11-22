@@ -48,7 +48,7 @@ export class ConsultasComponent implements OnInit {
 
 
   ngOnInit() {
-    this._repService.reportes().subscribe(reportes => {
+    this._repService.reportesDisponibles().subscribe(reportes => {
       this.reportes = reportes;
       // console.log((this.reportes));
     });

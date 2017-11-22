@@ -7,8 +7,6 @@ import { Sed } from '../../../general/modelos/sed';
 import { Router } from '@angular/router';
 import { AuthService } from '../../servicios/auth.service';
 
-// import { log } from 'util';
-
 declare var $: any;
 declare var jQuery: any;
 declare var toastr: any;
@@ -105,7 +103,7 @@ export class IngresarComponent implements OnInit {
     // this._helper.Notificacion('Bienvenido a ' + this.environment.appname,'info');
     //$.notify("Hello World");
     this._authService.CerrarSesion();
-    const me=this;
+    const me = this;
     let aux = <HTMLElement>document.getElementById('USUARIOID');
     aux.addEventListener('keypress', function (e) {
       if (e.keyCode == 13) {
@@ -118,6 +116,7 @@ export class IngresarComponent implements OnInit {
         me.ingresar();
       }
     });
+
   }
 
   ingresar() {

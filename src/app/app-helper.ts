@@ -4,7 +4,7 @@ import { environment } from '../environments/environment';
 declare var Snackbar: any;
 declare var $: any;
 declare var toastr: any;
-
+declare var ion: any;
 @Injectable()
 export class Helper {
   constructor(private _location: Location) { }
@@ -53,6 +53,22 @@ export class Helper {
       gap: 2
     };
     // console.log(message);
+    switch (type) {
+      case 'success':
+        this.Sonido();
+        break;
+      case 'error':
+        this.Sonido('computer_error');
+        break;
+      case 'warning':
+        this.Sonido('snap');
+        break;
+      case 'info':
+        this.Sonido('glass');
+        break;
+      default:
+        this.Sonido();
+    }
     if (divId === '') {
       $.notify(message, options);
     } else {
@@ -122,42 +138,48 @@ export class Helper {
     return false;
   }
 
-  public ExcelReport(tabid: string)
-  {
-      let tab_text="<table border='2px'><tr bgcolor='#87AFC6'>";
-      let textRange; 
-      let j=0;
-      // const tab = document.getElementById('headerTable'); // id of table
-      let tab: any;
-      tab = document.getElementById(tabid); // id of table
-  
-      for(j = 0 ; j < tab.rows.length ; j++) 
-      {     
-          tab_text=tab_text+tab.rows[j].innerHTML+"</tr>";
-          //tab_text=tab_text+"</tr>";
-      }
-  
-      tab_text=tab_text+"</table>";
-      tab_text= tab_text.replace(/<A[^>]*>|<\/A>/g, "");//remove if u want links in your table
-      tab_text= tab_text.replace(/<img[^>]*>/gi,""); // remove if u want images in your table
-      tab_text= tab_text.replace(/<input[^>]*>|<\/input>/gi, ""); // reomves input params
-  
-      var ua = window.navigator.userAgent;
-      var msie = ua.indexOf("MSIE "); 
-  
-      let txtArea1: any;
-      let sa: any;
-      if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))      // If Internet Explorer
-      {
-          txtArea1.document.open("txt/html","replace");
-          txtArea1.document.write(tab_text);
-          txtArea1.document.close();
-          txtArea1.focus(); 
-          sa=txtArea1.document.execCommand("SaveAs",true,"Say Thanks to Sumit.xls");
-      }  
-      else                 //other browser not tested on IE 11
-          sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));  
-  
-      return (sa);
+  public ExcelReport(tabid: string) {
+    let tab_text = "<table border='2px'><tr bgcolor='#87AFC6'>";
+    let textRange;
+    let j = 0;
+    // const tab = document.getElementById('headerTable'); // id of table
+    let tab: any;
+    tab = document.getElementById(tabid); // id of table
+
+    for (j = 0; j < tab.rows.length; j++) {
+      tab_text = tab_text + tab.rows[j].innerHTML + "</tr>";
+      //tab_text=tab_text+"</tr>";
+    }
+
+    tab_text = tab_text + "</table>";
+    tab_text = tab_text.replace(/<A[^>]*>|<\/A>/g, "");//remove if u want links in your table
+    tab_text = tab_text.replace(/<img[^>]*>/gi, ""); // remove if u want images in your table
+    tab_text = tab_text.replace(/<input[^>]*>|<\/input>/gi, ""); // reomves input params
+
+    var ua = window.navigator.userAgent;
+    var msie = ua.indexOf("MSIE ");
+
+    let txtArea1: any;
+    let sa: any;
+    if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))      // If Internet Explorer
+    {
+      txtArea1.document.open("txt/html", "replace");
+      txtArea1.document.write(tab_text);
+      txtArea1.document.close();
+      txtArea1.focus();
+      sa = txtArea1.document.execCommand("SaveAs", true, "Say Thanks to Sumit.xls");
+    }
+    else                 //other browser not tested on IE 11
+      sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));
+
+    return (sa);
+  }
+
+  /**
+   * Reproduce efectos de sonidos para ser utilizados en botones y acciones de ventanas. Documentación: http://ionden.com/a/plugins/ion.sound/en.html, https://github.com/IonDen/ion.sound
+   * @param audioName Nombre del audio a reproducir. Valor por defecto: branch_break, opciones: [button_tiny, computer_error, glass, water_droplet, snap, branch_break]
+   */
+  public Sonido(audioName: string = 'branch_break') {
+    ion.sound.play(audioName);
   }
 }

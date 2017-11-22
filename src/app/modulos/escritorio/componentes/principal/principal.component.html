@@ -438,7 +438,7 @@
         </ul>
       </li>
 
-      <li class="">
+      <li class="" routerLinkActive="active">
         <a href="#" class="dropdown-toggle">
           <i class="menu-icon fa fa-desktop"></i>
           <!-- <i class="menu-icon fa fa-list"></i> -->
@@ -864,23 +864,23 @@
       <!-- #section:basics/footer -->
       <div class="footer-content">
         <span class="bigger-120">
-          <span class="blue bolder">Ace</span>
-          Application &copy; 2013-2014
+          <span class="blue bolder">{{environment.appname}}</span>
+          Application &copy; {{environment.yearscopyrigth}}
         </span>
 
         &nbsp; &nbsp;
         <span class="action-buttons">
-          <a href="#">
+          <a href="{{environment.urltwitter}}">
             <i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
           </a>
 
-          <a href="#">
+          <a href="{{environment.urlfacebook}}">
             <i class="ace-icon fa fa-facebook-square text-primary bigger-150"></i>
           </a>
 
-          <a href="#">
+          <!-- <a href="#">
             <i class="ace-icon fa fa-rss-square orange bigger-150"></i>
-          </a>
+          </a> -->
         </span>
       </div>
 

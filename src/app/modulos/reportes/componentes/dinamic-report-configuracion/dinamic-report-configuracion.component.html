@@ -1,3 +1,237 @@
-<p>
-  dinamic-report-configuracion works!
-</p>
+<div class="page-header">
+  <h1>
+    Sistema
+    <small>
+      <i class="ace-icon fa fa-angle-double-right"></i>
+      Reportes Dinámicos
+    </small>
+  </h1>
+</div>
+<!-- /.page-header -->
+
+<div class="row">
+  <div class="col-sm-12">
+    <!-- #section:elements.tab -->
+    <div class="tabbable tabs-left">
+      <ul class="nav nav-tabs" id="myTab">
+        <li class="active">
+          <a data-toggle="tab" href="#reporte" aria-expanded="true">
+            <i class="green ace-icon fa fa-circle-o bigger-120" *ngIf="reporte.NOMBRE !== ''"></i>
+            <i class="light-grey ace-icon fa fa-circle-o bigger-120" *ngIf="reporte.NOMBRE === ''"></i>
+            Reporte
+          </a>
+        </li>
+
+        <li class="">
+          <a data-toggle="tab" href="#consulta" aria-expanded="false">
+            <i class="orange2 ace-icon fa fa-dot-circle-o bigger-120" *ngIf="reporte.QUERY !== ''"></i>
+            <i class="light-grey ace-icon fa fa-dot-circle-o bigger-120" *ngIf="reporte.QUERY === ''"></i>
+            Consulta
+          </a>
+        </li>
+        <li class="">
+          <a data-toggle="tab" href="#filtros" aria-expanded="false">
+            <i class="red ace-icon fa fa-circle bigger-120" *ngIf="parametros.length>0"></i>
+            <i class="light-grey ace-icon fa fa-circle bigger-120" *ngIf="parametros.length<=0"></i>
+            Filtros
+            <span class="badge badge-grey" [ngClass]="{'oculto': parametros.length>0}">0</span>
+            <span class="badge badge-danger" [ngClass]="{'oculto': parametros.length<=0}">{{parametros.length}}</span>
+          </a>
+        </li>
+        <li class="">
+          <a data-toggle="tab" href="#usuarios" aria-expanded="false">
+            <i class="blue ace-icon fa fa-user-circle-o bigger-120" *ngIf="usuarios.length>0"></i>
+            <i class="light-grey ace-icon fa fa-user-circle-o bigger-120" *ngIf="usuarios.length<=0"></i>
+            Usuarios
+            <span class="badge badge-grey" [ngClass]="{'oculto': usuarios.length>0}">0</span>
+            <span class="badge badge-primary" [ngClass]="{'oculto': usuarios.length<=0}">{{usuarios.length}}</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="tab-content">
+        <div id="reporte" class="tab-pane fade active in">
+          <!-- <p>Raw denim you probably haven't heard of them jean shorts Austin.</p> -->
+          <div>
+            <label for="form-field-select-1">Elije el reporte que deseas editar/revisar</label>
+
+            <select class="form-control" id="form-field-select-1" [(ngModel)]="reporte">
+              <!-- <option value=""></option> -->
+              <option [ngValue]="item" *ngFor="let item of reportes"> {{item.NOMBRE}} </option>
+            </select>
+          </div>
+          <br/>
+
+
+        </div>
+
+
+        <div id="consulta" class="tab-pane fade">
+          <div>
+            <label for="form-field-9">Consulta vinculada al reporte {{reporte.NOMBRE}}</label>
+
+            <textarea [(ngModel)]="query" class="form-control limited" id="form-field-9" maxlength="8000">{{reporte.QUERY}}</textarea>
+          </div>
+          <div>
+            <button id="btnActualizarQuery" type="button" class="btn btn-sm btn-primary" data-loading-text="Cargando..." *ngIf="reporte.QUERY!==query"
+              (click)="actualizarQuery()">
+              Actualizar Consulta
+              <i class="ace-icon fa fa-database icon-on-right bigger-110"></i>
+            </button>
+          </div>
+          <br />
+
+        </div>
+
+        <div id="filtros" class="tab-pane fade">
+          <!-- <p>El reporte no tiene.</p> -->
+          <div class="alert alert-info" [ngClass]="{'oculto': parametros.length>0}">
+            <!-- <button type="button" class="close" data-dismiss="alert">
+                <i class="ace-icon fa fa-times"></i>
+              </button> -->
+            El reporte
+            <strong>{{reporte.NOMBRE}}</strong> no tiene filtros configurados.
+
+            <br>
+          </div>
+
+          <div class="col-xs-12 col-sm-12 widget-container-col ui-sortable" *ngIf="parametros.length>0">
+            <div class="widget-box widget-color-red3">
+              <div class="widget-body">
+                <div class="widget-main no-padding">
+                  <table class="table table-striped table-bordered table-hover">
+                    <thead class="thin-border-bottom">
+                      <tr>
+                        <th>
+                          Nombre
+                        </th>
+                        <th>
+                          Tipo
+                        </th>
+                        <th class="hidden-480">Query</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <tr *ngFor="let parametro of parametros">
+                        <td class="">{{parametro.NOMBRE}}</td>
+                        <td>
+                          {{parametro.TIPO}}
+                        </td>
+                        <td class="hidden-480">
+                          {{parametro.QUERY}}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <br />
+
+        </div>
+
+        <div id="usuarios" class="tab-pane fade">
+
+          <div class="col-xs-12 col-sm-12">
+            <div class="widget-box">
+              <div class="widget-header">
+                <h4 class="widget-title">Dar permiso a usuarios</h4>
+
+                <div class="widget-toolbar">
+                  <a href="#" data-action="collapse">
+                    <i class="ace-icon fa fa-chevron-up"></i>
+                  </a>
+
+                  <a href="#" data-action="close" *ngIf="false">
+                    <i class="ace-icon fa fa-times"></i>
+                  </a>
+                </div>
+              </div>
+
+              <div class="widget-body" style="display: block;">
+                <div class="widget-main">
+                  <div>
+                    <!-- <label for="usuariosDisponibles">Usuarios sin acceso al reporte</label> -->
+                    <select class="form-control" id="usuariosDisponibles" [(ngModel)]="usuario">
+                      <!-- <option value=""></option> -->
+                      <option [ngValue]="item" *ngFor="let item of usuariosDisponibles"> {{item.NOMBRE}} </option>
+                    </select>
+                  </div>
+
+                  <hr [ngClass]="{'oculto': usuario.NOMBRE === ''}">
+                  <div class="center" [ngClass]="{'oculto': usuario.NOMBRE === ''}">
+                    <button id="btnAgregarUsuario" type="button" class="btn btn-sm btn-success" data-loading-text="Cargando..." 
+                      (click)="agregarUsuario()">
+                      Agregar {{usuario.NOMBRE}} al reporte
+                      <i class="ace-icon fa fa-arrow-down icon-on-right bigger-110"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+          <div class="col-xs-12 col-sm-12 widget-container-col ui-sortable" id="widget-container-col-2">
+            <div class="widget-box widget-color-blue2" id="widget-box-2">
+
+              <div class="widget-body">
+                <div class="widget-main no-padding">
+                  <table class="table table-striped table-bordered table-hover">
+                    <thead class="thin-border-bottom">
+                      <tr>
+                        <th>
+                          <i class="ace-icon fa fa-user"></i>
+                          Usuario
+                        </th>
+                        <th class="hidden-480">
+                          <i class="ace-icon fa fa-building-o"></i>
+                          Sede
+                        </th>
+                        <th>
+                          <i>@</i>
+                          Nombre
+                        </th>
+                        <th></th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <tr *ngFor="let usuario of usuarios">
+                        <td class="">{{usuario.USUARIOID}}</td>
+                        <td class="hidden-480">
+                          {{usuario.SEDE}}
+                        </td>
+                        <td>
+                          {{usuario.NOMBRE}}
+                        </td>
+                        <td>
+                          <button class="btn btn-minier btn-danger" (click)="eliminarUsuario(usuario.USUARIOID, usuario.SEDEID)">Eliminar</button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br />
+        </div>
+        <div class="center oculto">
+          <button id="btnEjecutarConsulta" type="button" class="btn btn-sm btn-success" data-loading-text="Cargando..." [ngClass]="{'oculto': !reporte.NOMBRE}"
+            (click)="ejecutarConsulta()">
+            Probar Consulta
+            <i class="ace-icon fa fa-arrow-down icon-on-right bigger-110"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- /section:elements.tab -->
+  </div>
+</div>
