@@ -18,6 +18,7 @@ declare var bootbox: any;
 })
 export class DinamicReportConfiguracionComponent implements OnInit {
   private btnAgregarUsuario: any;
+  private nuevoFiltro = true;
   constructor(
     private _repService: RepService,
     private _reppService: ReppService,
@@ -29,21 +30,19 @@ export class DinamicReportConfiguracionComponent implements OnInit {
   ngOnInit() {
     this._repService.reportes().subscribe(reportes => {
       this.reportes = reportes;
-      // console.log((this.reportes));
     });
 
     this._usuService.usuarios().subscribe(usuarios => {
       this.usuariosDelSistema = usuarios;
-
-      // console.log('Usuarios Disponibles');
-      // console.log(this.usuariosDisponibles);
-      // console.log(this.usuario);
-
     });
     this.btnAgregarUsuario = $('#btnAgregarUsuario');
 
+
   }
 
+  // #region Metodos de Obtención y Establecimiento de valores
+
+  // #region Reportes
   private _reportes: Rep[] = [];
   public get reportes(): Rep[] {
     return this._reportes;
@@ -64,7 +63,9 @@ export class DinamicReportConfiguracionComponent implements OnInit {
     this.getParametros();
     this.getUsuarios();
   }
+  // #endregion
 
+  // #region Filtros en Reportes
   private _parametros: Repp[] = [];
   public get parametros(): Repp[] {
     return this._parametros;
@@ -73,6 +74,21 @@ export class DinamicReportConfiguracionComponent implements OnInit {
     this._parametros = v;
   }
 
+
+  private _parametro: Repp = new Repp();
+  public get parametro(): Repp {
+    if (!this._parametro) { this._parametro = new Repp(); }
+    if (this._parametro.TIPO === '') { this._parametro.TIPO = "ALFANUMERICO"; }
+    if (this._parametro.REPORTEID === '') { this._parametro.REPORTEID = this.reporte.REPORTEID; }
+    return this._parametro;
+  }
+  public set parametro(v: Repp) {
+    this._parametro = v;
+  }
+
+  // #endregion
+
+  // #region Querys
   private _query: string;
   public get query(): string {
     return this._query;
@@ -80,8 +96,9 @@ export class DinamicReportConfiguracionComponent implements OnInit {
   public set query(v: string) {
     this._query = v.trim();
   }
+  // #endregion
 
-
+  // #region Usuarios asignados al reporte
   private _usuarios: Repu[] = [];
   public get usuarios(): Repu[] {
     if (!this._usuarios) { this._usuarios = []; }
@@ -90,8 +107,9 @@ export class DinamicReportConfiguracionComponent implements OnInit {
   public set usuarios(v: Repu[]) {
     this._usuarios = v;
   }
+  // #endregion
 
-
+  // #region Usuarios del sistema
   private _usuario: Usu = new Usu();
   public get usuario(): Usu {
     if (!this._usuario) { this._usuario = new Usu(); }
@@ -102,8 +120,6 @@ export class DinamicReportConfiguracionComponent implements OnInit {
     // console.log(this.usuario);
   }
 
-
-
   private _usuariosDelSistema: Usu[] = [];
   public get usuariosDelSistema(): Usu[] {
     if (!this._usuariosDelSistema) { this._usuariosDelSistema = []; }
@@ -113,7 +129,6 @@ export class DinamicReportConfiguracionComponent implements OnInit {
     this._usuariosDelSistema = v;
   }
 
-
   private _usuariosDisponibles: Usu[] = [];
   public get usuariosDisponibles(): Usu[] {
     return this._usuariosDisponibles;
@@ -121,9 +136,9 @@ export class DinamicReportConfiguracionComponent implements OnInit {
   public set usuariosDisponibles(v: Usu[]) {
     this._usuariosDisponibles = v;
   }
+  // #endregion
 
-
-
+  // #endregion
 
   getParametros() {
     this.parametros = [];
@@ -137,6 +152,9 @@ export class DinamicReportConfiguracionComponent implements OnInit {
     }
   }
 
+  /**
+   * Obtiene los usuarios que tienen el permiso 
+   */
   getUsuarios() {
     this.usuarios = [];
     if (this.reporte.REPORTEID !== '') {
@@ -200,6 +218,9 @@ export class DinamicReportConfiguracionComponent implements OnInit {
     });
   }
 
+  /**
+   * Da permiso a un usuario al reporte, y consulta los usuarios asignados al reporte actualiza los filtros de los usuarios disponibles para ser agregados
+   */
   agregarUsuario() {
     const _me = this;
     this.btnAgregarUsuario.button('loading');
@@ -207,6 +228,7 @@ export class DinamicReportConfiguracionComponent implements OnInit {
     this._repuService.agregarUsuario(this.reporte.REPORTEID, this.usuario.USUARIOID, this.usuario.SEDEID).subscribe(registrado => {
       this.btnAgregarUsuario.button('reset');
       if (registrado) {
+        this.usuario = new Usu();
         this.getUsuarios();
         // this.usuariosDisponibles;
 
@@ -215,6 +237,111 @@ export class DinamicReportConfiguracionComponent implements OnInit {
         // this._helper.Notificacion('La consulta no ha podido ser actualizada en la base de datos. Si el problema persiste, contacta por favor al departamento de tecnología', 'error', '', false);
       }
     });
+    return false;
+  }
+
+  agregarEditarFiltro() {
+    this.parametro.NOMBRE = this.parametro.NOMBRE.toUpperCase();
+    if (this.nuevoFiltro) {
+      this._reppService.nuevoParametro(this.parametro).subscribe(registrado => {
+        if (registrado) {
+          this.getParametros();
+          this.nuevoFiltro = true;
+          this.parametro = new Repp();
+          if ($('#btnMinimizarFiltros > i').hasClass('fa-chevron-up')) {
+            $('#btnMinimizarFiltros').click();
+          }
+          this._helper.Notificacion('Filtro agregado al reporte');
+        } else {
+          this._helper.Notificacion('El filtro no ha podido ser agregado al reporte. Si el problema persiste, contacta por favor al departamento de tecnología', 'error', '', false);
+        }
+      });
+    } else {
+      this._reppService.actualizarParametro(this.parametro).subscribe(actualizado => {
+        if (actualizado) {
+          this.getParametros();
+          this.nuevoFiltro = true;
+          this.parametro = new Repp();
+          if ($('#btnMinimizarFiltros > i').hasClass('fa-chevron-up')) {
+            $('#btnMinimizarFiltros').click();
+          }
+          this._helper.Notificacion('Datos del filtro actualizados');
+        } else {
+          this._helper.Notificacion('Los datos del filtro no han podido ser actualizados. Si el problema persiste, contacta por favor al departamento de tecnología', 'error', '', false);
+        }
+      });
+    }
+  }
+
+  cancelarEditarFiltro() {
+    this.nuevoFiltro=true;
+    this.parametro = new Repp();
+  }
+
+  editarParametro(parametro: Repp) {
+    this.nuevoFiltro = false;
+    this.parametro = parametro;
+    if ($('#btnMinimizarFiltros > i').hasClass('fa-chevron-down')) {
+      $('#btnMinimizarFiltros').click();
+    }
+    $('#filtroNombre').focus();
+    return false;
+  }
+
+  borrarParametro(parametroid) {
+    const me = this;
+    // bootbox.confirm("¿Confirma que realmente desea eliminar el filtro del reporte? Ésta acción no podrá deshacerse.", function (result) {
+    //   if (result) {
+    //     me._reppService.quitarParametro(parametroid).subscribe(eliminado => {
+    //       if (eliminado) {
+    //         me.getParametros();
+    //         // me.nuevoFiltro = true;
+    //         // me.parametro = new Repp();
+    //         // if($('#btnMinimizarFiltros > i').hasClass('fa-chevron-down')){
+    //         //   $('#btnMinimizarFiltros').click();
+    //         // }
+    //         me._helper.Notificacion('Filtro eliminado');
+    //       } else {
+    //         me._helper.Notificacion('El filtro no ha ha podido ser eliminado del reporte. Si el problema persiste, contacta por favor al departamento de tecnología', 'error', '', false);
+    //       }
+    //     });
+    //   }
+    // });
+    bootbox.dialog({
+      message: "<span class='bigger-110'>¿Confirma que realmente desea eliminar el filtro del reporte? Ésta acción no podrá deshacerse.</span>",
+      buttons:
+        {
+          "click":
+            {
+              "label": "Cancelar",
+              "className": "btn-sm btn-primary",
+              "callback": function () {
+                //Example.show("Primary button");
+              }
+            },
+          "danger":
+            {
+              "label": "Borrar!",
+              "className": "btn-sm btn-danger",
+              "callback": function () {
+                me._reppService.quitarParametro(parametroid).subscribe(eliminado => {
+                  if (eliminado) {
+                    me.getParametros();
+                    // me.nuevoFiltro = true;
+                    // me.parametro = new Repp();
+                    // if($('#btnMinimizarFiltros > i').hasClass('fa-chevron-down')){
+                    //   $('#btnMinimizarFiltros').click();
+                    // }
+                    me._helper.Notificacion('Filtro eliminado');
+                  } else {
+                    me._helper.Notificacion('El filtro no ha ha podido ser eliminado del reporte. Si el problema persiste, contacta por favor al departamento de tecnología', 'error', '', false);
+                  }
+                });
+              }
+            }
+        }
+    });
+
     return false;
   }
 

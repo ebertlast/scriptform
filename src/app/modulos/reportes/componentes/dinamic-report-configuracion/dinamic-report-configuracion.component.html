@@ -95,6 +95,65 @@
             <br>
           </div>
 
+          <div class="col-xs-12 col-sm-12 ">
+            <div class="widget-box widget-color-red3 collapsed">
+              <div class="widget-header">
+                <h4 class="widget-title">Agregar/Editar Filtros</h4>
+                <div class="widget-toolbar">
+                  <a href="#" id="btnMinimizarFiltros" data-action="collapse">
+                    <i class="ace-icon fa fa-chevron-down"></i>
+                  </a>
+                </div>
+              </div>
+              <!-- <hr> -->
+              <div class="widget-body" style="display: none;">
+                <div class="widget-main">
+                  <div>
+                    <label for="filtroNombre">Nombre del Filtro:</label>
+                    <input type="text" class="form-control" id="filtroNombre" name="filtroNombre" [(ngModel)]="parametro.NOMBRE" placeholder="Ej: @NOMBRE" [disabled]="!nuevoFiltro">
+                  </div>
+                  <hr>
+                  <div>
+                    <label for="form-field-11">Tipo:</label>
+                    <select name="filtroTipo" id="filtroTipo" [(ngModel)]="parametro.TIPO">
+                      <option value="ALFANUMERICO" selected>Alfanumérico</option>
+                      <option value="FECHA">Fecha</option>
+                      <option value="NUMERICO">Numérico</option>
+                    </select>
+                  </div>
+                  <hr [ngClass]="{'oculto': parametro.TIPO!=='ALFANUMERICO'}">
+                  <!-- #section:plugins/input.limiter -->
+                  <div [ngClass]="{'oculto': parametro.TIPO!=='ALFANUMERICO'}">
+                    <label for="filtroQuery">Consulta del Filtro:</label>
+
+                    <textarea class="form-control limited" id="filtroQuery" [(ngModel)]="parametro.QUERY" maxlength="8000"></textarea>
+                  </div>
+                  <!-- /section:plugins/input.limiter -->
+                  <hr [ngClass]="{'oculto': parametro.NOMBRE===''}">
+                  <div class="center">
+                    <button id="btnAgregarEditarFiltro" type="button" class="btn btn-sm btn-success" data-loading-text="Cargando..." [ngClass]="{'oculto': parametro.NOMBRE===''}"
+                      (click)="agregarEditarFiltro()">
+                      <div [ngClass]="{'oculto': nuevoFiltro}">
+                        Actualizar filtro {{parametro.NOMBRE.toUpperCase()}}
+                        <i class="ace-icon fa fa-arrow-down icon-on-right bigger-110"></i>
+                      </div>
+                      <div [ngClass]="{'oculto': !nuevoFiltro}">
+                        Agregar filtro {{parametro.NOMBRE.toUpperCase()}} al reporte
+                          <i class="ace-icon fa fa-arrow-down icon-on-right bigger-110"></i>
+                      </div>
+                      
+                    </button>
+                    <button id="btnCancelarEditarFiltro" type="button" class="btn btn-sm btn-danger" data-loading-text="Cargando..." [ngClass]="{'oculto': parametro.NOMBRE===''}"
+                    (click)="cancelarEditarFiltro()">
+                      Cancelar
+                        <i class="ace-icon fa fa-ban icon-on-right bigger-110"></i>
+                  </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div class="col-xs-12 col-sm-12 widget-container-col ui-sortable" *ngIf="parametros.length>0">
             <div class="widget-box widget-color-red3">
               <div class="widget-body">
@@ -102,13 +161,10 @@
                   <table class="table table-striped table-bordered table-hover">
                     <thead class="thin-border-bottom">
                       <tr>
-                        <th>
-                          Nombre
-                        </th>
-                        <th>
-                          Tipo
-                        </th>
+                        <th>Nombre</th>
+                        <th>Tipo</th>
                         <th class="hidden-480">Query</th>
+                        <th></th>
                       </tr>
                     </thead>
 
@@ -120,6 +176,14 @@
                         </td>
                         <td class="hidden-480">
                           {{parametro.QUERY}}
+                        </td>
+                        <td>
+                          <a href="#" (click)="editarParametro(parametro)" data-action="close">
+                            <i class="ace-icon fa fa-pencil-square-o"></i>
+                          </a>
+                          <a href="#" (click)="borrarParametro(parametro.PARAMETROID)">
+                            <i class="ace-icon fa fa-trash-o"></i>
+                          </a>
                         </td>
                       </tr>
                     </tbody>
@@ -136,13 +200,13 @@
         <div id="usuarios" class="tab-pane fade">
 
           <div class="col-xs-12 col-sm-12">
-            <div class="widget-box">
+            <div class="widget-box widget-color-blue2 collapsed">
               <div class="widget-header">
                 <h4 class="widget-title">Dar permiso a usuarios</h4>
 
                 <div class="widget-toolbar">
                   <a href="#" data-action="collapse">
-                    <i class="ace-icon fa fa-chevron-up"></i>
+                    <i class="ace-icon fa fa-chevron-down"></i>
                   </a>
 
                   <a href="#" data-action="close" *ngIf="false">
@@ -151,7 +215,7 @@
                 </div>
               </div>
 
-              <div class="widget-body" style="display: block;">
+              <div class="widget-body" style="display: none;">
                 <div class="widget-main">
                   <div>
                     <!-- <label for="usuariosDisponibles">Usuarios sin acceso al reporte</label> -->
@@ -163,8 +227,7 @@
 
                   <hr [ngClass]="{'oculto': usuario.NOMBRE === ''}">
                   <div class="center" [ngClass]="{'oculto': usuario.NOMBRE === ''}">
-                    <button id="btnAgregarUsuario" type="button" class="btn btn-sm btn-success" data-loading-text="Cargando..." 
-                      (click)="agregarUsuario()">
+                    <button id="btnAgregarUsuario" type="button" class="btn btn-sm btn-success" data-loading-text="Cargando..." (click)="agregarUsuario()">
                       Agregar {{usuario.NOMBRE}} al reporte
                       <i class="ace-icon fa fa-arrow-down icon-on-right bigger-110"></i>
                     </button>
@@ -223,7 +286,7 @@
           <br />
         </div>
         <div class="center oculto">
-          <button id="btnEjecutarConsulta" type="button" class="btn btn-sm btn-success" data-loading-text="Cargando..." [ngClass]="{'oculto': !reporte.NOMBRE}"
+          <button id="btnAgregarEditarFiltro" type="button" class="btn btn-sm btn-success" data-loading-text="Cargando..." [ngClass]="{'oculto': !reporte.NOMBRE}"
             (click)="ejecutarConsulta()">
             Probar Consulta
             <i class="ace-icon fa fa-arrow-down icon-on-right bigger-110"></i>

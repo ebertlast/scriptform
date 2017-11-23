@@ -28,6 +28,7 @@ export class AuthService {
    * @param mostrarError Muestra al usuario o no lo que contiene el campo 'error' en el response.
    */
   public ExtraerResultados(res: Response, mostrarError: boolean = true) {
+    // console.log(res);
     const body = res.json();
     // console.log('global.service.ExtraerResultados');
     // console.log(res.json());

@@ -1,3 +1,11 @@
 .oculto{
     display: none;
 }
+
+#filtroNombre{
+    text-transform: uppercase;
+}
+
+.disabled{
+    pointer-events: none;
+}
