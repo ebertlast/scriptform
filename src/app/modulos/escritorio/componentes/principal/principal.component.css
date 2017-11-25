@@ -1,3 +1,14 @@
 .oculto{
     display: none
 }
+/* a [class="dropdown-toggle"] {
+    cursor: pointer;
+} */
+
+a:not([href]){
+    cursor: pointer; 
+    -webkit-user-select: none; 
+    -moz-user-select: none; 
+    user-select: none;
+    /* pointer-events: none; */
+}

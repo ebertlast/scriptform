@@ -4,6 +4,7 @@ import { Repp } from '../../modelos/repp';
 import { RepService } from '../../servicios/rep.service';
 import { ReppService } from '../../servicios/repp.service';
 import { Helper } from '../../../../app-helper';
+import { environment } from '../../../../../environments/environment';
 declare var $: any;
 declare var jQuery: any;
 declare var ace: any;
@@ -15,6 +16,9 @@ declare var ace: any;
 export class DinamicReportComponent implements OnInit {
   constructor(private _repService: RepService, private _reppService: ReppService, private _helper: Helper) { }
   private btnEjecutarConsulta: any;
+  public totalPaginasConsultaFull = 1;
+  public paginaActualConsultaFull = 0;
+
 
   private _reportes: Rep[] = [];
   public get reportes(): Rep[] {
@@ -146,6 +150,13 @@ export class DinamicReportComponent implements OnInit {
 
       //make content sliders resizable using jQuery UI (you should include jquery ui files)
       //$('#right-menu > .modal-dialog').resizable({handles: "w", grid: [ 20, 0 ], minWidth: 200, maxWidth: 600});
+
+      $($('.tableTools-container')).find('a.dt-button').each(function() {
+        var div = $(this).find(' > div').first();
+        if(div.length == 1) div.tooltip({container: 'body', title: div.parent().text()});
+        else $(this).tooltip({container: 'body', title: $(this).text()});
+      });
+
     });
 
     //datepicker plugin
@@ -231,7 +242,7 @@ export class DinamicReportComponent implements OnInit {
     this.data = [];
     const _me = this;
     this.btnEjecutarConsulta.button('loading');
-    this._repService.ejecutarReporte(this.reporte.REPORTEID, this.paginador.filasPorPagina, this.paginador.paginaActual).subscribe(
+    const request = this._repService.ejecutarReporte(this.reporte.REPORTEID, this.paginador.filasPorPagina, this.paginador.paginaActual).subscribe(
       respuesta => {
         this.data = respuesta['data'];
         this.paginador.totalPaginas = respuesta['totalpaginas'];
@@ -253,6 +264,7 @@ export class DinamicReportComponent implements OnInit {
 
       }
     );
+    // request.unsubscribe();
     // this.paginador.paginaActual = 1000;
     // console.log(this.paginador)
     // setTimeout(function () {
@@ -281,6 +293,21 @@ export class DinamicReportComponent implements OnInit {
       }
     })
     // console.log(this.reporte.REPORTEID+'.- '+parametroid+': '+valor);
+  }
+
+  exportarData() {
+    this._helper.ExportarExcel(this.data);
+  }
+  exportarAllData() {
+    let data: any[] = [];
+    const filasPorPagina = 10000;
+    let totalPaginas = 1;
+    // this.btnEjecutarConsulta.button('loading');
+    const request = this._repService.excel(this.reporte.REPORTEID).subscribe(filename=>{
+      // console.log(environment.urlFilesDownload+filename);
+      window.open(environment.urlFilesDownload+filename);
+    });
+
   }
 }
 

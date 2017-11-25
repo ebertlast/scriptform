@@ -59,6 +59,7 @@ export class RepService {
     const _headers = new Headers({ 'Authorization': 'Bearer ' + this._authService.Usuario().TOKEN });
     const _options = new RequestOptions({ headers: _headers });
     const _url = environment.apiurl + '/reportes/ejecutar/' + reporteid + '/' + filasPorPagina.toString() + '/' + nroPagina;
+    console.log(_url);
     return this._http.get(_url, _options)
       .map((response: Response) => {
         const data = this._authService.ExtraerResultados(response);
@@ -79,6 +80,41 @@ export class RepService {
     // console.log(_options);
     const _url = environment.apiurl + '/reportes/actualizarquery/' + reporteid + '/' + query;
     return this._http.put(_url, '', _options)
+      .map((response: Response) => {
+        const data = this._authService.ExtraerResultados(response);
+        return data;
+      })
+      .catch(err => this._authService.CapturarError(err));
+  }
+
+  /**
+   * Registra un nuevo reporte en la base de datos
+   * @param nombre Nombre del reporte nuevo
+   * @param query Consulta vinculada al reporte (Opcional)
+   */
+  public nuevoReporte(nombre: string, query: string = ''): Observable<boolean> {
+    const _headers = new Headers({ 'Authorization': 'Bearer ' + this._authService.Usuario().TOKEN });
+    const _options = new RequestOptions({ headers: _headers });
+    // console.log(_options);
+    const _url = environment.apiurl + '/reportes/nuevo/' + nombre + '/' + query;
+    return this._http.put(_url, '', _options)
+      .map((response: Response) => {
+        const data = this._authService.ExtraerResultados(response);
+        return data;
+      })
+      .catch(err => this._authService.CapturarError(err));
+  }
+
+  /**
+   * Exporta a excel reporte en el servidor y devuelve el nombre del archivo para ser descargado
+   * @param reporteid Identificador del reporte a descargar en excel
+   */
+  public excel(reporteid: string): Observable<string> {
+    const _headers = new Headers({ 'Authorization': 'Bearer ' + this._authService.Usuario().TOKEN });
+    const _options = new RequestOptions({ headers: _headers });
+    const _url = environment.apiurl + '/reportes/excel/' + reporteid;
+    console.log(_url);
+    return this._http.get(_url, _options)
       .map((response: Response) => {
         const data = this._authService.ExtraerResultados(response);
         return data;

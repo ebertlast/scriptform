@@ -193,7 +193,7 @@
               <ul class="dropdown-menu dropdown-navbar">
                 <li>
                   <a href="#" class="clearfix">
-                    <img src="../assets/avatars/avatar.png" class="msg-photo" alt="Alex's Avatar" />
+                    <img src="assets/avatars/avatar.png" class="msg-photo" alt="Alex's Avatar" />
                     <span class="msg-body">
                       <span class="msg-title">
                         <span class="blue">Alex:</span>
@@ -210,7 +210,7 @@
 
                 <li>
                   <a href="#" class="clearfix">
-                    <img src="../assets/avatars/avatar3.png" class="msg-photo" alt="Susan's Avatar" />
+                    <img src="assets/avatars/avatar3.png" class="msg-photo" alt="Susan's Avatar" />
                     <span class="msg-body">
                       <span class="msg-title">
                         <span class="blue">Susan:</span>
@@ -227,7 +227,7 @@
 
                 <li>
                   <a href="#" class="clearfix">
-                    <img src="../assets/avatars/avatar4.png" class="msg-photo" alt="Bob's Avatar" />
+                    <img src="assets/avatars/avatar4.png" class="msg-photo" alt="Bob's Avatar" />
                     <span class="msg-body">
                       <span class="msg-title">
                         <span class="blue">Bob:</span>
@@ -244,7 +244,7 @@
 
                 <li>
                   <a href="#" class="clearfix">
-                    <img src="../assets/avatars/avatar2.png" class="msg-photo" alt="Kate's Avatar" />
+                    <img src="assets/avatars/avatar2.png" class="msg-photo" alt="Kate's Avatar" />
                     <span class="msg-body">
                       <span class="msg-title">
                         <span class="blue">Kate:</span>
@@ -261,7 +261,7 @@
 
                 <li>
                   <a href="#" class="clearfix">
-                    <img src="../assets/avatars/avatar5.png" class="msg-photo" alt="Fred's Avatar" />
+                    <img src="assets/avatars/avatar5.png" class="msg-photo" alt="Fred's Avatar" />
                     <span class="msg-body">
                       <span class="msg-title">
                         <span class="blue">Fred:</span>
@@ -290,7 +290,7 @@
         <!-- #section:basics/navbar.user_menu -->
         <li class="light-blue dropdown-modal">
           <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-            <img class="nav-user-photo" src="../assets/avatars/user-default.jpg" alt="Jason's Photo" />
+            <img class="nav-user-photo" src="assets/avatars/user-default.jpg" alt="Jason's Photo" />
             <span class="user-info">
               <small>Bienvenid@,</small>
               {{usuario.NOMBRE.toLowerCase().substr(0,usuario.NOMBRE.search(' '))|capitalizar}}
@@ -392,7 +392,8 @@
       </li>
 
       <li class="" routerLinkActive="active">
-        <a href="#" class="dropdown-toggle">
+        
+        <a href="#" id="menuAdministrativo" class="dropdown-toggle" >
           <i class="menu-icon fa fa-pencil-square-o"></i>
           <!-- <i class="menu-icon fa fa-desktop"></i> -->
           <span class="menu-text">
@@ -406,7 +407,7 @@
 
         <ul class="submenu">
           <li class="" routerLinkActive="active">
-            <a href="#" class="dropdown-toggle">
+            <a href="#" id="menuConsultas" class="dropdown-toggle">
               <i class="menu-icon fa fa-caret-right"></i>
 
               Consultas
@@ -421,7 +422,7 @@
                   <i class="menu-icon fa fa-caret-right"></i>
                   Reportes Dinámicos
                 </a>
-                <b class="arrow"></b>
+                <!-- <b class="arrow"></b> -->
               </li>
             </ul>
           </li>
@@ -439,7 +440,7 @@
       </li>
 
       <li class="" routerLinkActive="active">
-        <a href="#" class="dropdown-toggle">
+        <a href="#" id="menuSistema" class="dropdown-toggle">
           <i class="menu-icon fa fa-desktop"></i>
           <!-- <i class="menu-icon fa fa-list"></i> -->
           <span class="menu-text"> Sistema </span>
@@ -455,16 +456,16 @@
               Reportes Dinamicos
             </a>
 
-            <b class="arrow"></b>
+            <!-- <b class="arrow"></b> -->
           </li>
 
-          <li class="">
+          <li class="" *ngIf="false">
             <a href="jqgrid.html">
               <i class="menu-icon fa fa-caret-right"></i>
               jqGrid plugin
             </a>
 
-            <b class="arrow"></b>
+            <!-- <b class="arrow"></b> -->
           </li>
         </ul>
       </li>
@@ -849,10 +850,10 @@
         </div>
         <!-- /.ace-settings-container -->
 
-        
+
         <!-- /section:settings.box -->
         <router-outlet></router-outlet>
-        
+
       </div>
       <!-- /.page-content -->
     </div>

@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Directive, Input } from '@angular/core';
 import { environment } from '../../../../../environments/environment';
 import { Usu } from '../../../seguridad/modelos/usu';
 import { AuthService } from '../../../seguridad/servicios/auth.service';
 import { Router } from '@angular/router';
+import { MyLinkDirective } from '../../../general/directivas/my-link.directive';
+
 declare var jQuery: any;
 declare var $: any;
 declare var ace: any;
@@ -30,6 +32,24 @@ export class PrincipalComponent implements OnInit {
     // <!-- inline scripts related to this page -->
     // this._router.navigate(['/consultas']);
 
+  }
+  passTheSalt() {
+    return false;
+  }
+
+  prueba() {
+    // nav-show
+    // nav-hide
+    // if ($('#ebert > ul').hasClass('nav-show')) {
+    //   // $('#btnMinimizarFiltros').click();
+    //   $('#ebert').parent().addClass('open');
+    //   $('#ebert > ul').removeClass('nav-hide').addClass('nav-show');
+    // }else{
+    //   $('#ebert').parent().removeClass('open');
+    //   $('#ebert > ul').removeClass('nav-show').addClass('nav-hide');
+    // }
+    // console.log("Prueba ");
+    // return false;
   }
 
 }

@@ -117,7 +117,7 @@ export class ReppService {
     });
     const _options = new RequestOptions({ headers: _headers });
     const _json = "json=" + JSON.stringify({ model });
-    console.log(_json);
+    // console.log(_json);
     
     const _url = environment.apiurl + '/parametros/actualizar';
     return this._http.put(_url, _json, _options)

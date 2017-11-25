@@ -18,7 +18,8 @@ declare var bootbox: any;
 })
 export class DinamicReportConfiguracionComponent implements OnInit {
   private btnAgregarUsuario: any;
-  private nuevoFiltro = true;
+  public nuevoFiltro = true;
+  public nombreReporteNuevo: string = '';
   constructor(
     private _repService: RepService,
     private _reppService: ReppService,
@@ -37,6 +38,7 @@ export class DinamicReportConfiguracionComponent implements OnInit {
     });
     this.btnAgregarUsuario = $('#btnAgregarUsuario');
 
+    // this._repService.excel('1');
 
   }
 
@@ -243,6 +245,7 @@ export class DinamicReportConfiguracionComponent implements OnInit {
   agregarEditarFiltro() {
     this.parametro.NOMBRE = this.parametro.NOMBRE.toUpperCase();
     if (this.nuevoFiltro) {
+      this.parametro.REPORTEID = this.reporte.REPORTEID;
       this._reppService.nuevoParametro(this.parametro).subscribe(registrado => {
         if (registrado) {
           this.getParametros();
@@ -274,7 +277,7 @@ export class DinamicReportConfiguracionComponent implements OnInit {
   }
 
   cancelarEditarFiltro() {
-    this.nuevoFiltro=true;
+    this.nuevoFiltro = true;
     this.parametro = new Repp();
   }
 
@@ -345,4 +348,56 @@ export class DinamicReportConfiguracionComponent implements OnInit {
     return false;
   }
 
+
+  public generarExcel() {
+    let tab: any;
+    var textRange; var j = 0;
+    tab = document.getElementById('tablaFiltros'); // id of table
+
+    var tab_text = "<table border='2px'><tr bgcolor='#87AFC6'>";
+    for (j = 0; j < tab.rows.length; j++) {
+      tab_text = tab_text + tab.rows[j].innerHTML + "</tr>";
+      //tab_text=tab_text+"</tr>";
+    }
+    tab_text = tab_text + "</table>";
+    tab_text = tab_text.replace(/<A[^>]*>|<\/A>/g, "");//remove if u want links in your table
+    tab_text = tab_text.replace(/<img[^>]*>/gi, ""); // remove if u want images in your table
+    tab_text = tab_text.replace(/<input[^>]*>|<\/input>/gi, ""); // reomves input params
+
+    var ua = window.navigator.userAgent;
+    var msie = ua.indexOf("MSIE ");
+
+    let sa: any;
+    if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))      // If Internet Explorer
+    {
+      let txtArea1 = $('#txtArea1');
+      txtArea1.document.open("txt/html", "replace");
+      txtArea1.document.write(tab_text);
+      txtArea1.document.close();
+      txtArea1.focus();
+      sa = txtArea1.document.execCommand("SaveAs", true, "Say Thanks to Sumit.xls");
+    }
+    else                 //other browser not tested on IE 11
+    {
+      sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));
+    }
+
+    return (sa);
+  }
+
+  nuevoReporte() {
+    this._repService.nuevoReporte(this.nombreReporteNuevo).subscribe(registrado => {
+      if (registrado) {
+        this.reporte = new Rep();
+        this.reportes = [];
+        this._repService.reportes().subscribe(reportes => {
+          this.reportes = reportes;
+        });
+        this.nombreReporteNuevo = '';
+        this._helper.Notificacion('Reporte agregado a la base de datos, seleccionelo para editar');
+      } else {
+        this._helper.Notificacion('El reporte no ha podido ser registrado. Si el problema persiste, contacta por favor al departamento de tecnología', 'error', '', false);
+      }
+    });
+  }
 }

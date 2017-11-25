@@ -61,8 +61,17 @@
             </select>
           </div>
           <br/>
+          <div class="center">
+            Ó
+          </div>
+          Agrega un nuevo reporte: <br>
+          <input type="text" id="nombreReporteNuevo" name="nombreReporteNuevo" [(ngModel)]="nombreReporteNuevo" placeholder="Nombre del Reporte"
+            class="col-xs-10 col-sm-5">
 
-
+          <button class="btn btn-sm btn-success" *ngIf="nombreReporteNuevo!==''" (click)="nuevoReporte()">
+            <i class="ace-icon fa fa-check bigger-110"></i>
+            <span class="bigger-110 no-text-shadow">Registrar</span>
+          </button>
         </div>
 
 
@@ -98,7 +107,7 @@
           <div class="col-xs-12 col-sm-12 ">
             <div class="widget-box widget-color-red3 collapsed">
               <div class="widget-header">
-                <h4 class="widget-title">Agregar/Editar Filtros</h4>
+                <h4 class="widget-title">Agregar/Editar Filtros para {{reporte.NOMBRE}}</h4>
                 <div class="widget-toolbar">
                   <a href="#" id="btnMinimizarFiltros" data-action="collapse">
                     <i class="ace-icon fa fa-chevron-down"></i>
@@ -110,7 +119,8 @@
                 <div class="widget-main">
                   <div>
                     <label for="filtroNombre">Nombre del Filtro:</label>
-                    <input type="text" class="form-control" id="filtroNombre" name="filtroNombre" [(ngModel)]="parametro.NOMBRE" placeholder="Ej: @NOMBRE" [disabled]="!nuevoFiltro">
+                    <input type="text" class="form-control" id="filtroNombre" name="filtroNombre" [(ngModel)]="parametro.NOMBRE" placeholder="Ej: @NOMBRE"
+                      [disabled]="!nuevoFiltro">
                   </div>
                   <hr>
                   <div>
@@ -118,12 +128,13 @@
                     <select name="filtroTipo" id="filtroTipo" [(ngModel)]="parametro.TIPO">
                       <option value="ALFANUMERICO" selected>Alfanumérico</option>
                       <option value="FECHA">Fecha</option>
+                      <option value="NOMBRE">Nombre de Tabla</option>
                       <option value="NUMERICO">Numérico</option>
                     </select>
                   </div>
-                  <hr [ngClass]="{'oculto': parametro.TIPO!=='ALFANUMERICO'}">
+                  <hr [ngClass]="{'oculto': parametro.TIPO==='FECHA'}">
                   <!-- #section:plugins/input.limiter -->
-                  <div [ngClass]="{'oculto': parametro.TIPO!=='ALFANUMERICO'}">
+                  <div [ngClass]="{'oculto': parametro.TIPO==='FECHA'}">
                     <label for="filtroQuery">Consulta del Filtro:</label>
 
                     <textarea class="form-control limited" id="filtroQuery" [(ngModel)]="parametro.QUERY" maxlength="8000"></textarea>
@@ -139,15 +150,15 @@
                       </div>
                       <div [ngClass]="{'oculto': !nuevoFiltro}">
                         Agregar filtro {{parametro.NOMBRE.toUpperCase()}} al reporte
-                          <i class="ace-icon fa fa-arrow-down icon-on-right bigger-110"></i>
+                        <i class="ace-icon fa fa-arrow-down icon-on-right bigger-110"></i>
                       </div>
-                      
+
                     </button>
                     <button id="btnCancelarEditarFiltro" type="button" class="btn btn-sm btn-danger" data-loading-text="Cargando..." [ngClass]="{'oculto': parametro.NOMBRE===''}"
-                    (click)="cancelarEditarFiltro()">
+                      (click)="cancelarEditarFiltro()">
                       Cancelar
-                        <i class="ace-icon fa fa-ban icon-on-right bigger-110"></i>
-                  </button>
+                      <i class="ace-icon fa fa-ban icon-on-right bigger-110"></i>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -158,7 +169,7 @@
             <div class="widget-box widget-color-red3">
               <div class="widget-body">
                 <div class="widget-main no-padding">
-                  <table class="table table-striped table-bordered table-hover">
+                  <table class="table table-striped table-bordered table-hover" id="tablaFiltros">
                     <thead class="thin-border-bottom">
                       <tr>
                         <th>Nombre</th>
@@ -239,7 +250,6 @@
 
 
 
-
           <div class="col-xs-12 col-sm-12 widget-container-col ui-sortable" id="widget-container-col-2">
             <div class="widget-box widget-color-blue2" id="widget-box-2">
 
@@ -285,16 +295,13 @@
           </div>
           <br />
         </div>
-        <div class="center oculto">
-          <button id="btnAgregarEditarFiltro" type="button" class="btn btn-sm btn-success" data-loading-text="Cargando..." [ngClass]="{'oculto': !reporte.NOMBRE}"
-            (click)="ejecutarConsulta()">
-            Probar Consulta
-            <i class="ace-icon fa fa-arrow-down icon-on-right bigger-110"></i>
-          </button>
-        </div>
+
       </div>
     </div>
 
     <!-- /section:elements.tab -->
   </div>
 </div>
+
+
+<!-- <button id="btnExport" (click)="generarExcel();"> EXPORT </button> -->

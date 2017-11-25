@@ -182,4 +182,138 @@ export class Helper {
   public Sonido(audioName: string = 'branch_break') {
     ion.sound.play(audioName);
   }
+
+
+  public ExportarExcel2(data: any) {
+    // console.log(data);
+    let columnas: string[] = [];
+    for (var i = 0; i < 1; i++) {
+      for (let key in data[i]) {
+        columnas.push(key);
+      }
+    }
+    // console.log(columnas);
+
+    // let tab: any;
+    // var textRange; 
+    var j = 0;
+    // tab = document.getElementById('tablaFiltros'); // id of table
+
+    var tab_text = "<table border='2px'>";
+    // var tab_text = "<table border='2px'><tr bgcolor='#87AFC6'>";
+    // for (j = 0; j < tab.rows.length; j++) {
+    //   tab_text = tab_text + tab.rows[j].innerHTML + "</tr>";
+    //   //tab_text=tab_text+"</tr>";
+    // }
+    tab_text = tab_text + "<tr bgcolor='#87AFC6'>";
+    columnas.forEach(titulo => {
+      tab_text = tab_text + "<td>" + titulo + "</td>";
+    });
+    tab_text = tab_text + "</tr>";
+
+
+    tab_text = tab_text + "</table>";
+    // // tab_text = tab_text.replace(/<A[^>]*>|<\/A>/g, "");//remove if u want links in your table
+    // // tab_text = tab_text.replace(/<img[^>]*>/gi, ""); // remove if u want images in your table
+    // // tab_text = tab_text.replace(/<input[^>]*>|<\/input>/gi, ""); // reomves input params
+    console.log(tab_text);
+    var ua = window.navigator.userAgent;
+    var msie = ua.indexOf("MSIE ");
+    let sa: any;
+    if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))      // If Internet Explorer
+    {
+      let txtArea1 = $('#txtAreaExportExcel');
+      txtArea1.document.open("txt/html", "replace");
+      txtArea1.document.write(tab_text);
+      txtArea1.document.close();
+      txtArea1.focus();
+      sa = txtArea1.document.execCommand("SaveAs", true, "Say Thanks to Submit");
+    }
+    else                 //other browser not tested on IE 11
+    {
+      sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));
+    }
+
+    return (sa);
+  }
+
+  public ExportarExcelBAD(e, data) {
+    console.log(e);
+    var dt = new Date();
+    var day = dt.getDate();
+    var month = dt.getMonth() + 1;
+    var year = dt.getFullYear();
+    var hour = dt.getHours();
+    var mins = dt.getMinutes();
+    var postfix = day + "." + month + "." + year + "_" + hour + "." + mins;
+    //creating a temporary HTML link element (they support setting file names)
+    var a = document.createElement('a');
+    //getting data from our div that contains the HTML table
+    var data_type = 'data:application/vnd.ms-excel';
+
+
+    // var table_div = document.getElementById('dvData');
+    // var table_html = table_div.outerHTML.replace(/ /g, '%20');
+
+    /******************************************************* */
+    let columnas: string[] = [];
+    for (var i = 0; i < 1; i++) {
+      for (let key in data[i]) {
+        columnas.push(key);
+      }
+    }
+    var j = 0;
+    var tab_text = "<table border='2px'>";
+    tab_text = tab_text + "<tr bgcolor='#87AFC6'>";
+    columnas.forEach(titulo => {
+      tab_text = tab_text + "<td>" + titulo + "</td>";
+    });
+    tab_text = tab_text + "</tr>";
+    tab_text = tab_text + "</table>";
+    var table_html = tab_text;
+    /******************************************************** */
+    a.href = data_type + ', ' + table_html;
+    //setting the file name
+    a.download = 'exported_table_' + postfix + '.xls';
+    //triggering the function
+    a.click();
+    //just in case, prevent default behaviour
+    e.preventDefault();
+
+  }
+
+  public ExportarExcel(data) {
+    console.log(data);
+    /******************************************************* */
+    // #region Columnas
+    let columnas: string[] = [];
+    for (var i = 0; i < 1; i++) {
+      for (let key in data[i]) {
+        columnas.push(key);
+      }
+    }
+    var j = 0;
+    var tab_text = "<table border='2px'>";
+    tab_text = tab_text + "<tr bgcolor='#87AFC6'>";
+    columnas.forEach(titulo => {
+      tab_text = tab_text + "<th>" + titulo + "</th>";
+    });
+    tab_text = tab_text + "</tr>";
+    // #endregion
+    for (var i = 0; i < data.length; i++) {
+      tab_text = tab_text + "<tr>";
+      columnas.forEach(columna => {
+        tab_text = tab_text + "<td>";
+        tab_text = tab_text + data[i][columna];
+        tab_text = tab_text + "</td>";
+      });
+      tab_text = tab_text + "</tr>";
+    }
+    tab_text = tab_text + "</table>";
+    var table_html = tab_text;
+    /******************************************************** */
+    window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));
+  }
+
+
 }

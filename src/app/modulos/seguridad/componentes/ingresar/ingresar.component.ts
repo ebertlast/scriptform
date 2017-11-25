@@ -140,7 +140,8 @@ export class IngresarComponent implements OnInit {
         // this._helper.Notificacion('Bienvenido...');
         // this._router.navigate(['/']);
         // this._router.navigate(['/escritorio/principal']);
-        window.location.href = '/escritorio/principal';
+        // window.location.href = 'escritorio/principal';
+        window.location.href = '';
         // location.reload();
       } else {
         this._helper.Notificacion('Ups! No te reconozco, vuelve a intentarlo.', 'error');

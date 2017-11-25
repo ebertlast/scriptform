@@ -9,14 +9,15 @@ import { NavbarLeftComponent } from './componentes/navbar-left/navbar-left.compo
 import { SedComponent } from './componentes/sed/sed.component';
 import { TidService } from './servicios/tid.service';
 import { FiltrarPipe } from './pipes/filtrar.pipe';
+import { MyLinkDirective } from './directivas/my-link.directive';
 
 @NgModule({
   imports: [
     CommonModule,
     GeneralRoutingModule
   ],
-  exports: [NavbarTopComponent, NavbarLeftComponent, CapitalizarPipe, SedComponent, FiltrarPipe],
-  declarations: [NavbarTopComponent, CapitalizarPipe, NavbarLeftComponent, SedComponent, FiltrarPipe],
+  exports: [NavbarTopComponent, NavbarLeftComponent, CapitalizarPipe, SedComponent, FiltrarPipe, MyLinkDirective],
+  declarations: [NavbarTopComponent, CapitalizarPipe, NavbarLeftComponent, SedComponent, FiltrarPipe, MyLinkDirective],
   providers: [SedService, TidService]
 })
 export class GeneralModule { }

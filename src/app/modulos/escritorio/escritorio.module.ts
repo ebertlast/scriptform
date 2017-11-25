@@ -12,7 +12,7 @@ import { ReportesModule } from '../reportes/reportes.module';
     EscritorioRoutingModule,
     GeneralModule,
     FormsModule,
-    ReportesModule
+    ReportesModule,
   ],
   declarations: [PrincipalComponent, ConsultasComponent]
 })

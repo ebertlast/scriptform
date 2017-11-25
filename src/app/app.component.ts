@@ -39,7 +39,7 @@ export class AppComponent implements OnInit {
         // }
       ],
       volume: 0.5,
-      path: "../assets/components/ion.sound/sounds/",
+      path: "assets/components/ion.sound/sounds/",
       preload: true
     });
 
