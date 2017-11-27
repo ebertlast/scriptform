@@ -15,6 +15,7 @@ declare var ace: any;
 })
 export class PrincipalComponent implements OnInit {
   environment = environment;
+  public marquesina = '';
   constructor(private _authService: AuthService, private _router: Router) { }
 
   private _usuario: Usu;
@@ -32,7 +33,17 @@ export class PrincipalComponent implements OnInit {
     // <!-- inline scripts related to this page -->
     // this._router.navigate(['/consultas']);
 
+    this.msjMarquesina();
   }
+  private msjMarquesina() {
+    // console.log("Supervisar Sesión " + Date());
+    this.marquesina = this._authService.MsjBienvenida();
+    const _me = this;
+    setTimeout(function () {
+      _me.msjMarquesina();
+    },60000);
+  }
+
   passTheSalt() {
     return false;
   }

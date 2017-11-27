@@ -17,8 +17,8 @@ export class Helper {
    * @param type Tipo de notificación: success [default] (verde), error (rojo), warning (amarillo), info (azul))
    * @param divId Identificador del control
    * @param autoHide Destruir automáticamente el mensaje
-   * @param position Posición de la pantalla donde se desplegará la notificación: top-right, bottom-right, bottom-left,
-   * top-full-width (Default), bottom-full-width, top-center, bottom-center
+   * @param position Posición de la pantalla donde se desplegará la notificación: top-right, bottom-right  (Default), bottom-left,
+   * top-full-width, bottom-full-width, top-center, bottom-center
    */
   public Notificacion(message: string, type = 'success', divId = '', autoHide = true, position = 'top right'): void {
     let options = {

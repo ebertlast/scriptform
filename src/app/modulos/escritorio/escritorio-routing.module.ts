@@ -5,13 +5,15 @@ import { PrincipalComponent } from './componentes/principal/principal.component'
 import { ConsultasComponent } from './componentes/consultas/consultas.component';
 import { DinamicReportComponent } from '../reportes/componentes/dinamic-report/dinamic-report.component';
 import { DinamicReportConfiguracionComponent } from '../reportes/componentes/dinamic-report-configuracion/dinamic-report-configuracion.component';
+import { ArchivosComponent } from '../archivo/componentes/archivos/archivos.component';
 const routes: Routes = [
   { path: '', redirectTo: 'principal', pathMatch: 'full' },
   {
     path: 'principal', component: PrincipalComponent, canActivate: [AuthGuard], children: [
       // { path: 'consultas', component: ConsultasComponent, canActivate: [AuthGuard] }
       { path: 'consultas', component: DinamicReportComponent, canActivate: [AuthGuard] },
-      { path: 'confconsultas', component: DinamicReportConfiguracionComponent, canActivate: [AuthGuard] }
+      { path: 'confconsultas', component: DinamicReportConfiguracionComponent, canActivate: [AuthGuard] },
+      { path: 'archivos', component: ArchivosComponent, canActivate: [AuthGuard] },
       // { path: 'versiones', component: VersionesComponent, canActivate: [AuthGuard] }
     ],
   },

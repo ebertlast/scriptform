@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from './modulos/seguridad/servicios/auth.service';
 declare var ion: any;
 @Component({
   selector: 'app-root',
@@ -6,8 +7,9 @@ declare var ion: any;
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'app';
-  ngOnInit(){
+  segSupervisarSesion = 60 * 5 * 1000;
+  constructor(private _authService: AuthService){}
+  ngOnInit() {
     ion.sound({
       sounds: [
         {
@@ -43,6 +45,15 @@ export class AppComponent implements OnInit {
       preload: true
     });
 
-    // ion.sound.play('button_tiny');
+    this.supervisarSesion();
+  }
+
+  private supervisarSesion() {
+    console.log("Supervisar Sesión " + Date());
+    this._authService.SupervisarSesion();
+    const _me = this;
+    setTimeout(function () {
+      _me.supervisarSesion();
+    }, _me.segSupervisarSesion);
   }
 }

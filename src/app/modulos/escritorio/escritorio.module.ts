@@ -6,6 +6,7 @@ import { PrincipalComponent } from './componentes/principal/principal.component'
 import { GeneralModule } from '../general/general.module';
 import { ConsultasComponent } from './componentes/consultas/consultas.component';
 import { ReportesModule } from '../reportes/reportes.module';
+import { ArchivoModule } from '../archivo/archivo.module';
 @NgModule({
   imports: [
     CommonModule,
@@ -13,6 +14,7 @@ import { ReportesModule } from '../reportes/reportes.module';
     GeneralModule,
     FormsModule,
     ReportesModule,
+    ArchivoModule
   ],
   declarations: [PrincipalComponent, ConsultasComponent]
 })

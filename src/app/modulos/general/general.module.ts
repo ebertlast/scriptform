@@ -10,6 +10,8 @@ import { SedComponent } from './componentes/sed/sed.component';
 import { TidService } from './servicios/tid.service';
 import { FiltrarPipe } from './pipes/filtrar.pipe';
 import { MyLinkDirective } from './directivas/my-link.directive';
+import { AfiService } from './servicios/afi.service';
+import { MunService } from './servicios/mun.service';
 
 @NgModule({
   imports: [
@@ -18,6 +20,6 @@ import { MyLinkDirective } from './directivas/my-link.directive';
   ],
   exports: [NavbarTopComponent, NavbarLeftComponent, CapitalizarPipe, SedComponent, FiltrarPipe, MyLinkDirective],
   declarations: [NavbarTopComponent, CapitalizarPipe, NavbarLeftComponent, SedComponent, FiltrarPipe, MyLinkDirective],
-  providers: [SedService, TidService]
+  providers: [SedService, TidService, AfiService, MunService]
 })
 export class GeneralModule { }

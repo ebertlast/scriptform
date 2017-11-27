@@ -1,0 +1,269 @@
+<div class="page-header">
+  <h1>
+    Administrativo
+    <small>
+      <i class="ace-icon fa fa-angle-double-right"></i>
+      Radicaciones
+    </small>
+    <small>
+      <i class="ace-icon fa fa-angle-double-right"></i>
+      Nueva Radicación
+    </small>
+  </h1>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <!-- PAGE CONTENT BEGINS -->
+    <h4 class="lighter hide">
+      <i class="ace-icon fa fa-hand-o-right icon-animated-hand-pointer blue"></i>
+      <a href="#modal-wizard" data-toggle="modal" class="pink"> Wizard Inside a Modal Box </a>
+    </h4>
+
+    <div class="hr hr-18 hr-double dotted hide"></div>
+
+    <div class="widget-box">
+      <div class="widget-header widget-header-blue widget-header-flat">
+        <h4 class="widget-title lighter">Nueva Radicación</h4>
+
+        <div class="widget-toolbar" [ngClass]="{'hide': !cargando}">
+          <label>
+            <small class="green">
+              <b>Pensando...</b>
+            </small>
+
+            <span class="lbl middle"></span>
+            <img src="assets/images/loading/pinwheel40x40.gif" alt="">
+          </label>
+        </div>
+      </div>
+
+      <div class="widget-body">
+        <div class="widget-main">
+          <!-- #section:plugins/fuelux.wizard -->
+          <div id="fuelux-wizard-container" class="no-steps-container">
+            <div>
+              <!-- #section:plugins/fuelux.wizard.steps -->
+              <ul class="steps" style="margin-left: 0">
+                <li data-step="1" class="active">
+                  <span class="step">1</span>
+                  <span class="title">Cotizante</span>
+                </li>
+
+                <li data-step="2" class="">
+                  <span class="step">2</span>
+                  <span class="title">Formulario</span>
+                </li>
+
+                <li data-step="3" class="">
+                  <span class="step">3</span>
+                  <span class="title">Archivos</span>
+                </li>
+
+                <li data-step="4">
+                  <span class="step">4</span>
+                  <span class="title">Nueva Radicación</span>
+                </li>
+              </ul>
+
+              <!-- /section:plugins/fuelux.wizard.steps -->
+            </div>
+
+            <hr>
+
+            <!-- #section:plugins/fuelux.wizard.container -->
+            <div class="step-content pos-rel">
+              <div class="step-pane active" data-step="1">
+                <h3 class="lighter block green">Identifica al cotizante
+                  <small *ngIf="afiliado.PrimerNombre!==''">
+                    <i class="ace-icon fa fa-angle-double-right"></i>
+                    {{afiliado.PrimerNombre}} {{afiliado.SegundoNombre}} {{afiliado.PrimerApellido}} {{afiliado.SegundoApellido}}
+                  </small>
+                </h3>
+                <form class="form-horizontal" id="sample-form" style="display: block;">
+
+
+                  <!-- #section:elements.form.input-state -->
+                  <div class="form-group" [ngClass]="{'has-error': tipoDocumento.TipoID === '','has-success': afiliado.NumeroIdentificacion!==''}">
+                    <label for="tipoDocumento" class="col-xs-12 col-sm-3 control-label no-padding-right">Tipo de Identificación:</label>
+                    <div class="col-xs-12 col-sm-5">
+                      <span class="block input-icon input-icon-right">
+                        <select class="form-control" id="tipoDocumento" name="tipoDocumento" [(ngModel)]="tipoDocumento" (change)="consultarDocumento()">
+                          <option [ngValue]="item" *ngFor="let item of tiposDocumentos">{{item.DescripcionID}}</option>
+                        </select>
+
+                        <i class="ace-icon fa " [ngClass]="{'fa-id-card-o': afiliado.NumeroIdentificacion === '','fa-check-circle': afiliado.NumeroIdentificacion!==''}"></i>
+                        <!-- <i class="ace-icon fa fa-id-card-o" [ngClass]="{'hide': afiliado.PrimerNombre!==''}"></i> -->
+                        <!-- <i class="ace-icon fa fa-check-circle" [ngClass]="{'hide': afiliado.PrimerNombre===''}"></i> -->
+                      </span>
+                    </div>
+                    <div class="help-block col-xs-12 col-sm-reset inline" *ngIf="tipoDocumento.TipoID === ''"> Selecciona un tipo de identificación! </div>
+                  </div>
+
+                  <!-- /section:elements.form.input-state -->
+                  <div class="form-group" [ngClass]="{'has-error': archivo.NUMEROIDENTIFICACION === '','has-success': afiliado.NumeroIdentificacion!==''}">
+                    <label for="numeroDocumento" class="col-xs-12 col-sm-3 col-md-3 control-label no-padding-right">Número de Documento:</label>
+
+                    <div class="col-xs-12 col-sm-5">
+                      <span class="block input-icon input-icon-right">
+                        <input type="text" id="numeroDocumento" name="numeroDocumento" [(ngModel)]="archivo.NUMEROIDENTIFICACION" (keyup)="consultarDocumento()"
+                          (change)="consultarDocumento()" class="width-100">
+                        <i class="ace-icon fa " [ngClass]="{'fa-user-o': afiliado.NumeroIdentificacion==='','fa-check-circle': afiliado.NumeroIdentificacion!==''}"></i>
+                        <!-- <i class="ace-icon fa fa-user-o" [ngClass]="{'hide': 'afiliado.NumeroIdentificacion'}"></i> -->
+                        <!-- <i class="ace-icon fa fa-check-circle"></i> -->
+                      </span>
+                    </div>
+                    <div class="help-block col-xs-12 col-sm-reset inline" *ngIf="archivo.NUMEROIDENTIFICACION===''"> Ingresa el número de documento! </div>
+
+                  </div>
+
+                  <div class="form-group" id="ebert">
+                    <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right">¿Cotizante Registrado?</label>
+
+                    <div class="col-xs-12 col-sm-5">
+                      <div class="checkbox">
+                        <label class="block">
+                          <input name="nuevoregistro" id="nuevoregistro" type="checkbox" class="ace input-lg" [(ngModel)]="archivo.NUEVOREGISTRO">
+                          <span class="lbl bigger-120"> Es una nueva afiliación</span>
+                        </label>
+                      </div>
+                    </div>
+                    <!-- <div class="help-block col-xs-12 col-sm-reset inline"> Success tip help! </div> -->
+                  </div>
+
+                  <div class="form-group">
+                    <label for="inputInfo" class="col-xs-12 col-sm-3 control-label no-padding-right">Cantidad de Beneficiarios</label>
+
+                    <div class="col-xs-12 col-sm-5">
+                      <div class="ace-spinner middle" style="width: 125px;">
+                        <div class="input-group">
+                          <input type="text" id="spinner1" class="spinbox-input form-control text-center">
+                        </div>
+                      </div>
+                    </div>
+                    <!-- <div class="help-block col-xs-12 col-sm-reset inline"> Info tip help! </div> -->
+                  </div>
+
+                  <div class="form-group" *ngIf="false">
+                    <label for="inputError2" class="col-xs-12 col-sm-3 control-label no-padding-right">Input with error</label>
+
+                    <div class="col-xs-12 col-sm-5">
+                      <span class="input-icon block">
+                        <input type="text" id="inputError2" class="width-100">
+                        <i class="ace-icon fa fa-times-circle red"></i>
+                      </span>
+                    </div>
+                    <div class="help-block col-xs-12 col-sm-reset inline"> Error tip help! </div>
+                  </div>
+                </form>
+
+
+              </div>
+
+              <div class="step-pane" data-step="2">
+                <div>
+                  <form class="form-horizontal " id="validation-form" method="get" novalidate="novalidate">
+                    <div class="form-group">
+                      <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="formularioid">Nro. Formulario:</label>
+
+                      <div class="col-xs-12 col-sm-9">
+                        <div class="clearfix">
+                          <input [(ngModel)]="archivo.FORMULARIOID" type="text" name="formularioid" id="formularioid" class="col-xs-12 col-sm-6">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="space-2"></div>
+
+
+                    <div class="form-group">
+                      <label for="municipioId" class="col-xs-12 col-sm-3 control-label no-padding-right">Ubicación:</label>
+                      <div class="col-xs-12 col-sm-5">
+                        <span class="block input-icon input-icon-right">
+                          <select class="form-control" id="municipioId" name="municipioId" [(ngModel)]="municipio">
+                            <option [ngValue]="item" *ngFor="let item of municipios">{{item.DescripcionMunicipio}} - {{item.DescripcionDepartamento}}</option>
+                          </select>
+
+                          <i class="ace-icon fa fa-map-marker"></i>
+                        </span>
+                      </div>
+                      <div class="help-block col-xs-12 col-sm-reset inline" *ngIf="tipoDocumento.TipoID === ''"> Selecciona un tipo de identificación! </div>
+                    </div>
+
+
+                    <!-- <div class="hr hr-dotted"></div> -->
+
+
+                  </form>
+                </div>
+              </div>
+
+              <div class="step-pane" data-step="3">
+                <div class="center">
+                  <div class="col-xs-12 ">
+                    <label class="ace-file-input ace-file-multiple">
+                      <input multiple="" type="file" id="archivos">
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="step-pane" data-step="4">
+                <div class="center">
+                  <label [ngClass]="{'hide': !cargando}">
+                    <small class="green">
+                      <b>Radicando...</b>
+                    </small>
+                    <span class="lbl middle"></span>
+                    <img src="assets/images/loading/pinwheel40x40.gif" alt="">
+                  </label>
+                  <h3 class="green" [ngClass]="{'hide': cargando}">¡Documento Radicado!</h3>
+                  <p [ngClass]="{'hide': cargando}">
+                    ¡Otro documento radicado! Has Click en finalizar para continuar!
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- /section:plugins/fuelux.wizard.container -->
+          </div>
+
+          <hr>
+
+
+          <div class="wizard-actions">
+            <label [ngClass]="{'hide': !cargando}">
+              <small class="green">
+                <b>Pensando...</b>
+              </small>
+
+              <span class="lbl middle"></span>
+              <img src="assets/images/loading/pinwheel40x40.gif" alt="">
+            </label>
+            <!-- #section:plugins/fuelux.wizard.buttons -->
+            <button class="btn btn-prev" disabled="disabled" (click)="actualizarPaso()" [ngClass]="{'hide': cargando || paso>1}">
+              <i class="ace-icon fa fa-arrow-left"></i>
+              Paso Previo
+            </button>
+
+            <button class="btn btn-success btn-next" (click)="actualizarPaso()" data-last="Finalizar" [ngClass]="{'hide': cargando}">
+              Siguiente Paso
+
+              <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
+            </button>
+
+            <!-- /section:plugins/fuelux.wizard.buttons -->
+          </div>
+
+          <!-- /section:plugins/fuelux.wizard -->
+        </div>
+        <!-- /.widget-main -->
+      </div>
+      <!-- /.widget-body -->
+    </div>
+
+
+    <!-- PAGE CONTENT ENDS -->
+  </div>
+  <!-- /.col -->
+</div>

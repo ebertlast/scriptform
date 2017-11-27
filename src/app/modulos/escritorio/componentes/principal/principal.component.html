@@ -349,9 +349,9 @@
 
     <div class="sidebar-shortcuts" id="sidebar-shortcuts">
       <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
-        <button class="btn btn-success">
+        <a routerLink="/escritorio/principal/consultas" class="btn btn-success">
           <i class="ace-icon fa fa-signal"></i>
-        </button>
+        </a>
 
         <button class="btn btn-info">
           <i class="ace-icon fa fa-pencil"></i>
@@ -362,9 +362,9 @@
           <i class="ace-icon fa fa-users"></i>
         </button>
 
-        <button class="btn btn-danger">
-          <i class="ace-icon fa fa-cogs"></i>
-        </button>
+        <a routerLink="/escritorio/principal/archivos" class="btn btn-danger">
+          <i class="ace-icon fa fa-cloud-upload"></i>
+        </a>
 
         <!-- /section:basics/sidebar.layout.shortcuts -->
       </div>
@@ -392,8 +392,8 @@
       </li>
 
       <li class="" routerLinkActive="active">
-        
-        <a href="#" id="menuAdministrativo" class="dropdown-toggle" >
+
+        <a href="#" id="menuAdministrativo" class="dropdown-toggle">
           <i class="menu-icon fa fa-pencil-square-o"></i>
           <!-- <i class="menu-icon fa fa-desktop"></i> -->
           <span class="menu-text">
@@ -421,6 +421,38 @@
                 <a routerLink="/escritorio/principal/consultas">
                   <i class="menu-icon fa fa-caret-right"></i>
                   Reportes Dinámicos
+                </a>
+                <!-- <b class="arrow"></b> -->
+              </li>
+            </ul>
+          </li>
+
+          <li class="" *ngIf="false">
+            <a href="typography.html">
+              <i class="menu-icon fa fa-caret-right"></i>
+              Typography
+            </a>
+
+            <b class="arrow"></b>
+          </li>
+
+        </ul>
+        <ul class="submenu">
+          <li class="" routerLinkActive="active">
+            <a href="#" id="menuRadicacion" class="dropdown-toggle">
+              <i class="menu-icon fa fa-caret-right"></i>
+
+              Radicaciones
+              <b class="arrow fa fa-angle-down"></b>
+            </a>
+
+            <b class="arrow"></b>
+
+            <ul class="submenu">
+              <li class="" routerLinkActive="active">
+                <a routerLink="/escritorio/principal/archivos">
+                  <i class="menu-icon fa fa-caret-right"></i>
+                  Nueva Radicación
                 </a>
                 <!-- <b class="arrow"></b> -->
               </li>
@@ -728,11 +760,11 @@
   </div>
 
   <!-- /section:basics/sidebar -->
-  <div class="main-content">
+  <div class="main-content ">
     <div class="main-content-inner">
       <!-- #section:basics/content.breadcrumbs -->
       <div class="breadcrumbs ace-save-state breadcrumbs-fixed" id="breadcrumbs">
-        <ul class="breadcrumb">
+        <ul class="breadcrumb hide">
           <li>
             <i class="ace-icon fa fa-home home-icon"></i>
             <a href="#">Home</a>
@@ -742,7 +774,7 @@
         <!-- /.breadcrumb -->
 
         <!-- #section:basics/content.searchbox -->
-        <div class="nav-search" id="nav-search">
+        <div class="nav-search hide" id="nav-search">
           <form class="form-search">
             <span class="input-icon">
               <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
@@ -750,6 +782,9 @@
             </span>
           </form>
         </div>
+        <marquee class="pull-right col-xs-12 col-xs-12">
+          {{marquesina}}
+        </marquee>
         <!-- /.nav-search -->
 
         <!-- /section:basics/content.searchbox -->

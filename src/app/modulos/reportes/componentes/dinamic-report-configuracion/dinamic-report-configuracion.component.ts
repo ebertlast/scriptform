@@ -53,7 +53,7 @@ export class DinamicReportConfiguracionComponent implements OnInit {
     this._reportes = v;
   }
 
-  private _reporte: Rep = new Rep();;
+  private _reporte: Rep = new Rep();
   public get reporte(): Rep {
     if (!this._reporte) { this._reporte = new Rep(); }
     // console.log('REPORTEID: ' + this._reporte.REPORTEID.valueOf());

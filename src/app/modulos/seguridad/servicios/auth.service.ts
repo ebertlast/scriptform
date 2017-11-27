@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Helper } from '../../../app-helper';
 import { Router } from '@angular/router';
-import { Http, Response, Headers } from '@angular/http';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Usu as Model } from '../modelos/usu';
 import { environment } from '../../../../environments/environment';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
 // import { Observable } from 'rxjs';
 // import 'rxjs/add/operator/map';
+import { MSJBIENVENIDA } from './mock.msjsbienvenida';
 
 @Injectable()
 export class AuthService {
@@ -33,19 +34,22 @@ export class AuthService {
     // console.log('global.service.ExtraerResultados');
     // console.log(res.json());
     if (!body.response && body.message && mostrarError) {
-      this._helper.Notificacion(body.message || body.statusText, 'Excepción', 'error');
+      // this._helper.Notificacion(body.message || body.statusText, 'Excepción', 'error');
+      this._helper.Notificacion(body.message || body.statusText, 'error', '', false);
       if (body.logout === true) {
         this._router.navigate(['/ingresar']);
       }
     }
-    
+
     this.usuario = this.Usuario();
     // console.log(body);
     // console.log('body.TOKEN: ', body.TOKEN);
     // console.log('body.token: ', body.token);
     this.usuario.TOKEN = (typeof (body.TOKEN) === 'undefined') ? '' : body.TOKEN;
     if (this.usuario.TOKEN === '') { this.usuario.TOKEN = (typeof (body.token) === 'undefined') ? '' : body.token; }
+    if ((typeof (this.usuario.TOKEN) === 'undefined') || this.usuario.TOKEN === '' || !this.usuario.TOKEN) { this.usuario.TOKEN = this.Usuario().TOKEN; }
     // console.log(this.usuario);
+    // console.log(this.usuario.TOKEN);
 
     localStorage.removeItem(environment.currentuser);
     localStorage.setItem(environment.currentuser, JSON.stringify({ usuario: this.usuario }));
@@ -78,7 +82,8 @@ export class AuthService {
       } else {
         errMsg = error.message ? error.message : error.toString();
       }
-      this._helper.Notificacion(errMsg, 'Excepción', 'error');
+      // this._helper.Notificacion(errMsg, 'Excepción', 'error');
+      this._helper.Notificacion(errMsg,'error','',false);
     }
     return Observable.throw(errMsg);
   }
@@ -121,5 +126,28 @@ export class AuthService {
     }
   }
 
+  public SupervisarSesion() {
+    if (this.Usuario().USUARIOID === '') {
+      return;
+    }
+    const _headers = new Headers({ 'Authorization': 'Bearer ' + this.Usuario().TOKEN });
+    const _options = new RequestOptions({ headers: _headers });
+    const _url = environment.apiurl + '/sesion/supervisar/';
+    return this._http.get(_url, _options)
+      .map((response: Response) => {
+        const data = this.ExtraerResultados(response);
+      })
+      .catch(err => this.CapturarError(err));
+  }
 
+  public MsjBienvenida(): string {
+    const MSJID = Math.floor(Math.random() * 57) + 1;
+    let _msj = '';
+    MSJBIENVENIDA.forEach(msj => {
+      if (MSJID === msj.msjid) {
+        _msj = msj.msj;
+      }
+    });
+    return _msj;
+  }
 }
