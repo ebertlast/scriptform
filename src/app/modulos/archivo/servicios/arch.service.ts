@@ -10,10 +10,10 @@ export class ArchService {
 
   constructor(private _http: Http, private _authService: AuthService) { }
 
-  upload(postData: any, files: File[] ) {
+  upload(postData: any, files: File[]) {
     const _headers = new Headers({ 'Authorization': 'Bearer ' + this._authService.Usuario().TOKEN });
     const _url = environment.apiurl + '/archivos_up_do/upload';
-    let _formData: FormData = new FormData();
+    const _formData: FormData = new FormData();
     // console.log(files[0]);
     _formData.append('files', files[0], files[0].name);
     // Para multiples subidas
@@ -52,7 +52,7 @@ export class ArchService {
     return returnReponse;
   }
 
-  public archivos(archivoid: string=''): Observable<Model[]> {
+  public archivos(archivoid: string = ''): Observable<Model[]> {
     const _headers = new Headers({ 'Authorization': 'Bearer ' + this._authService.Usuario().TOKEN });
     const _options = new RequestOptions({ headers: _headers });
     const _url = environment.apiurl + '/archivos_up_do/' + archivoid;

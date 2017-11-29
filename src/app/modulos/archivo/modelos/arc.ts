@@ -1,3 +1,5 @@
+import { Arch } from './arch';
+
 export class Arc {
     constructor(
         public ARCHIVOID: string = '',
@@ -12,6 +14,7 @@ export class Arc {
         public CANTIDADBENEFICIARIOS: number = 0,
         public TIPODOCUMENTO: string = '',
         public MUNICIPIO: string = '',
-        public USAURIO: string = ''
+        public USAURIO: string = '',
+        public URLARCHIVO: string = ''
     ) { }
 }

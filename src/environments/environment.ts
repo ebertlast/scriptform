@@ -11,7 +11,7 @@ export const environment = {
   yearscopyrigth: '2017-2018',
   currentuser: 'scriptformswebuser',
   apiurl: 'http://localhost:8082/scriptform.api/public',
-  urlFilesDownload: 'http://localhost:8082/scriptform.api/public/files/',
+  urlFilesDownload: 'http://localhost:8082/scriptform.api/public/files/uploads/',
   urlfacebook: 'https://www.facebook.com/ebert.zerpa',
   urltwitter: 'https://twitter.com/ebertzerpa'
 };

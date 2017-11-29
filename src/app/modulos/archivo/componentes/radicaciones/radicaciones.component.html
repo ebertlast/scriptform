@@ -1,0 +1,296 @@
+<div class="page-header">
+  <h1>
+    Administrativo
+    <small>
+      <i class="ace-icon fa fa-angle-double-right"></i>
+      Radicaciones
+    </small>
+    <small>
+      <i class="ace-icon fa fa-angle-double-right"></i>
+      Listado
+    </small>
+  </h1>
+</div>
+
+<img alt="Barcoded value 1234567890"
+src="http://bwipjs-api.metafloor.com/?bcid=code128&text=1234567890&includetext">
+
+<div class="">
+  <div class="row search-page" id="search-page-1">
+    <div class="col-xs-12">
+      <div class="row">
+
+
+        <div class="col-xs-12 col-sm-12">
+          <div class="row">
+            <div class="search-area well col-xs-12">
+              <div class="pull-left">
+                <b class="text-primary">Display</b>
+
+                &nbsp;
+                <div id="toggle-result-format" class="btn-group btn-overlap" data-toggle="buttons">
+                  <label title="" class="btn btn-lg btn-white btn-success active" data-class="btn-success" aria-pressed="true" data-original-title="Thumbnail view">
+                    <input type="radio" value="2" autocomplete="off">
+                    <i class="icon-only ace-icon fa fa-th"></i>
+                  </label>
+
+                  <label title="" class="btn btn-lg btn-white btn-grey" data-class="btn-primary" data-original-title="List view">
+                    <input type="radio" value="1" checked="" autocomplete="off">
+                    <i class="icon-only ace-icon fa fa-list"></i>
+                  </label>
+
+                  <label title="" class="btn btn-lg btn-white btn-grey" data-class="btn-warning" data-original-title="Map view">
+                    <input type="radio" value="3" autocomplete="off">
+                    <i class="icon-only ace-icon fa fa-crosshairs"></i>
+                  </label>
+                </div>
+              </div>
+
+              <div class="pull-right">
+                <b class="text-primary">Order</b>
+
+                &nbsp;
+                <select>
+                  <option>Relevance</option>
+                  <option>Newest First</option>
+                  <option>Rating</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-6 col-sm-4 col-md-3" *ngFor="let archivo of archivos">
+              <!-- #section:pages/search.thumb -->
+              <div class="thumbnail search-thumbnail">
+                <span class="search-promotion label label-success arrowed-in arrowed-in-right">Nuevo</span>
+                <iframe width="100%" height="200px" [src]="archivo.URLARCHIVO | safe"></iframe>
+                <div class="caption">
+                  <div class="clearfix">
+                    <span class="pull-right label label-grey info-label">{{archivo.MUNICIPIO}}</span>
+
+
+                  </div>
+
+                  <h4 class="search-title">
+                    <a href="#" class="blue">{{archivo.TIPOID}} {{archivo.NUMEROIDENTIFICACION}}</a>
+                  </h4>
+                  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam ...</p>
+                </div>
+              </div>
+
+              <!-- /section:pages/search.thumb -->
+            </div>
+
+            <div class="col-xs-6 col-sm-4 col-md-3">
+              <!-- #section:pages/search.thumb -->
+              <div class="thumbnail search-thumbnail">
+                <img class="media-object" data-src="holder.js/100px200?theme=gray" alt="100%x200" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22198%22%20height%3D%22200%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20198%20200%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_1600448a2e8%20text%20%7B%20fill%3A%23AAAAAA%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A10pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_1600448a2e8%22%3E%3Crect%20width%3D%22198%22%20height%3D%22200%22%20fill%3D%22%23EEEEEE%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2273.0546875%22%20y%3D%22104.5%22%3E198x200%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E"
+                  data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
+                <div class="caption">
+                  <div class="clearfix">
+                    <span class="pull-right label label-grey info-label">Tokyo</span>
+                  </div>
+
+                  <h3 class="search-title">
+                    <a href="#" class="blue">Thumbnail label</a>
+                  </h3>
+                  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam ...</p>
+                </div>
+              </div>
+
+              <!-- /section:pages/search.thumb -->
+            </div>
+
+            <div class="col-xs-6 col-sm-4 col-md-3">
+              <!-- #section:pages/search.thumb -->
+              <div class="thumbnail search-thumbnail">
+                <img class="media-object" data-src="holder.js/100px200?theme=gray" alt="100%x200" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22198%22%20height%3D%22200%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20198%20200%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_1600448a2e9%20text%20%7B%20fill%3A%23AAAAAA%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A10pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_1600448a2e9%22%3E%3Crect%20width%3D%22198%22%20height%3D%22200%22%20fill%3D%22%23EEEEEE%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2273.0546875%22%20y%3D%22104.5%22%3E198x200%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E"
+                  data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
+                <div class="caption">
+                  <div class="clearfix">
+                    <span class="pull-right label label-grey info-label">Istanbul</span>
+                  </div>
+
+                  <h3 class="search-title">
+                    <a href="#" class="blue">Thumbnail label</a>
+                  </h3>
+                  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam ...</p>
+                </div>
+              </div>
+
+              <!-- /section:pages/search.thumb -->
+            </div>
+
+            <div class="col-xs-6 col-sm-4 col-md-3">
+              <!-- #section:pages/search.thumb -->
+              <div class="thumbnail search-thumbnail">
+                <img class="media-object" data-src="holder.js/100px200?theme=social" alt="100%x200" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22198%22%20height%3D%22200%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20198%20200%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_1600448a2ea%20text%20%7B%20fill%3A%23FFFFFF%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A10pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_1600448a2ea%22%3E%3Crect%20width%3D%22198%22%20height%3D%22200%22%20fill%3D%22%233a5a97%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2273.0546875%22%20y%3D%22104.5%22%3E198x200%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E"
+                  data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
+                <div class="caption">
+                  <div class="clearfix">
+                    <span class="pull-right label label-grey info-label">Chicago</span>
+                  </div>
+
+                  <h3 class="search-title">
+                    <a href="#" class="blue">Thumbnail label</a>
+                  </h3>
+                  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam ...</p>
+                </div>
+              </div>
+
+              <!-- /section:pages/search.thumb -->
+            </div>
+          </div>
+
+          <div class="space-12"></div>
+
+          <div class="row">
+            <div class="col-xs-12">
+              <!-- #section:pages/search.media -->
+              <div class="media search-media">
+                <div class="media-left">
+                  <a href="#">
+                    <img class="media-object" data-src="holder.js/72x72" alt="72x72" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2272%22%20height%3D%2272%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2072%2072%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_160043bd500%20text%20%7B%20fill%3A%23AAAAAA%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A10pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_160043bd500%22%3E%3Crect%20width%3D%2272%22%20height%3D%2272%22%20fill%3D%22%23EEEEEE%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2217.46875%22%20y%3D%2240.5%22%3E72x72%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E"
+                      data-holder-rendered="true" style="width: 72px; height: 72px;">
+                  </a>
+                </div>
+
+                <div class="media-body">
+                  <div>
+                    <h4 class="media-heading">
+                      <a href="#" class="blue">Media heading</a>
+                    </h4>
+                  </div>
+                  <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras
+                    purus odio, vestibulum in vulputate at, tempus viverra turpis ...</p>
+
+                  <!-- #section:pages/search.media.buttons -->
+                  <div class="search-actions text-center">
+                    <span class="text-info">$</span>
+
+                    <span class="blue bolder bigger-150">300</span>
+
+                    monthly
+                    <div class="action-buttons bigger-125">
+                      <a href="#">
+                        <i class="ace-icon fa fa-phone green"></i>
+                      </a>
+
+                      <a href="#">
+                        <i class="ace-icon fa fa-heart red"></i>
+                      </a>
+
+                      <a href="#">
+                        <i class="ace-icon fa fa-star orange2"></i>
+                      </a>
+                    </div>
+                    <a class="search-btn-action btn btn-sm btn-block btn-info">Book it!</a>
+                  </div>
+
+                  <!-- /section:pages/search.media.buttons -->
+                </div>
+              </div>
+
+              <!-- /section:pages/search.media -->
+
+              <!-- #section:pages/search.media -->
+              <div class="media search-media disabled">
+                <div class="media-left">
+                  <a href="#">
+                    <img class="media-object" data-src="holder.js/72x72" alt="72x72" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2272%22%20height%3D%2272%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2072%2072%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_160043bd502%20text%20%7B%20fill%3A%23AAAAAA%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A10pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_160043bd502%22%3E%3Crect%20width%3D%2272%22%20height%3D%2272%22%20fill%3D%22%23EEEEEE%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2217.46875%22%20y%3D%2240.5%22%3E72x72%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E"
+                      data-holder-rendered="true" style="width: 72px; height: 72px;">
+                  </a>
+                </div>
+
+                <div class="media-body">
+                  <div>
+                    <h4 class="media-heading">
+                      <a href="#" class="blue">Media heading</a>
+                    </h4>
+                  </div>
+                  <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras
+                    purus odio, vestibulum in vulputate at, tempus viverra turpis ...</p>
+
+                  <!-- #section:pages/search.media.buttons -->
+                  <div class="search-actions text-center">
+                    <span class="grey">$</span>
+
+                    <span class="grey bolder bigger-125">250</span>
+
+                    monthly
+                    <div class="action-buttons bigger-125">
+                      <a href="#">
+                        <i class="ace-icon fa fa-phone green"></i>
+                      </a>
+
+                      <a href="#">
+                        <i class="ace-icon fa fa-heart red"></i>
+                      </a>
+
+                      <a href="#">
+                        <i class="ace-icon fa fa-star orange2"></i>
+                      </a>
+                    </div>
+                    <a class="search-btn-action btn btn-sm btn-block btn-grey disabled">Unavailable!</a>
+                  </div>
+
+                  <!-- /section:pages/search.media.buttons -->
+                </div>
+              </div>
+
+              <!-- /section:pages/search.media -->
+
+              <!-- #section:pages/search.media -->
+              <div class="media search-media">
+                <div class="media-left">
+                  <a href="#">
+                    <img class="media-object" data-src="holder.js/72x72" alt="72x72" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2272%22%20height%3D%2272%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2072%2072%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_160043bd503%20text%20%7B%20fill%3A%23AAAAAA%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A10pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_160043bd503%22%3E%3Crect%20width%3D%2272%22%20height%3D%2272%22%20fill%3D%22%23EEEEEE%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2217.46875%22%20y%3D%2240.5%22%3E72x72%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E"
+                      data-holder-rendered="true" style="width: 72px; height: 72px;">
+                  </a>
+                </div>
+
+                <div class="media-body">
+                  <div>
+                    <h4 class="media-heading">
+                      <a href="#" class="blue">Media heading</a>
+                    </h4>
+                  </div>
+                  <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras
+                    purus odio, vestibulum in vulputate at, tempus viverra turpis ...</p>
+
+                  <!-- #section:pages/search.media.buttons -->
+                  <div class="search-actions text-center">
+                    <span class="text-info">$</span>
+
+                    <span class="blue bolder bigger-150">220</span>
+
+                    monthly
+                    <div class="action-buttons bigger-125">
+                      <a href="#">
+                        <i class="ace-icon fa fa-phone green"></i>
+                      </a>
+
+                      <a href="#">
+                        <i class="ace-icon fa fa-heart red"></i>
+                      </a>
+
+                      <a href="#">
+                        <i class="ace-icon fa fa-star orange2"></i>
+                      </a>
+                    </div>
+                    <a class="search-btn-action btn btn-sm btn-block btn-info">Book it!</a>
+                  </div>
+
+                  <!-- /section:pages/search.media.buttons -->
+                </div>
+              </div>
+
+              <!-- /section:pages/search.media -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

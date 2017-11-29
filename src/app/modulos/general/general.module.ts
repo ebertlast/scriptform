@@ -12,14 +12,15 @@ import { FiltrarPipe } from './pipes/filtrar.pipe';
 import { MyLinkDirective } from './directivas/my-link.directive';
 import { AfiService } from './servicios/afi.service';
 import { MunService } from './servicios/mun.service';
+import { SafePipe } from './pipes/safe.pipe';
 
 @NgModule({
   imports: [
     CommonModule,
     GeneralRoutingModule
   ],
-  exports: [NavbarTopComponent, NavbarLeftComponent, CapitalizarPipe, SedComponent, FiltrarPipe, MyLinkDirective],
-  declarations: [NavbarTopComponent, CapitalizarPipe, NavbarLeftComponent, SedComponent, FiltrarPipe, MyLinkDirective],
+  exports: [NavbarTopComponent, NavbarLeftComponent, CapitalizarPipe, SedComponent, FiltrarPipe, MyLinkDirective, SafePipe],
+  declarations: [NavbarTopComponent, CapitalizarPipe, NavbarLeftComponent, SedComponent, FiltrarPipe, MyLinkDirective, SafePipe],
   providers: [SedService, TidService, AfiService, MunService]
 })
 export class GeneralModule { }

@@ -23,7 +23,7 @@ declare var bootbox: any;
 export class ArchivosComponent implements OnInit {
   public cargando = false;
   private documentoConsultado = '';
-  private paso = 1;
+  public paso = 1;
   constructor(
     private _tidService: TidService,
     private _helper: Helper,
@@ -59,7 +59,7 @@ export class ArchivosComponent implements OnInit {
     this._tipoDocumento = v;
   }
 
-  private _totalTiempo: number = 0;
+  private _totalTiempo = 0;
   public get totalTiempo(): number {
     return this._totalTiempo;
   }
@@ -94,15 +94,15 @@ export class ArchivosComponent implements OnInit {
     this._municipio = v;
   }
 
-  
-  private _pdf : Arch = new Arch();
-  public get pdf() : Arch {
+
+  private _pdf: Arch = new Arch();
+  public get pdf(): Arch {
     return this._pdf;
   }
-  public set pdf(v : Arch) {
+  public set pdf(v: Arch) {
     this._pdf = v;
   }
-  
+
 
   // #endregion
   ngOnInit() {
@@ -116,20 +116,20 @@ export class ArchivosComponent implements OnInit {
       });
 
 
-    var $validation = false;
+    let $validation = false;
     $('#fuelux-wizard-container')
       .ace_wizard({
-        //step: 2 //optional argument. wizard will jump to step "2" at first
-        //buttons: '.wizard-actions:eq(0)'
+        // step: 2 //optional argument. wizard will jump to step "2" at first
+        // buttons: '.wizard-actions:eq(0)'
       })
       .on('actionclicked.fu.wizard', function (e, info) {
         _me.validar(e);
-        if (info.step == 1 && $validation) {
-          if (!$('#validation-form').valid()) e.preventDefault();
+        if (info.step === 1 && $validation) {
+          if (!$('#validation-form').valid()) { e.preventDefault(); }
         }
       })
-      //.on('changed.fu.wizard', function() {
-      //})
+      // .on('changed.fu.wizard', function() {
+      // })
       .on('finished.fu.wizard', function (e) {
         // bootbox.dialog({
         //   message: "Thank you! Your information was successfully saved!",
@@ -140,66 +140,65 @@ export class ArchivosComponent implements OnInit {
         //     }
         //   }
         // });
-        _me.afiliado=new Afi();
-        _me.archivo= new Arc();
-        _me.municipio=new Mun();
-        _me.tipoDocumento=new Tid();
-        _me.paso=1;
-        _me.documentoConsultado='';
-        _me.pdf=new Arch();
+        _me.afiliado = new Afi();
+        _me.archivo = new Arc();
+        _me.municipio = new Mun();
+        _me.tipoDocumento = new Tid();
+        _me.paso = 1;
+        _me.documentoConsultado = '';
+        _me.pdf = new Arch();
         const wizard = $('#fuelux-wizard-container').data('fu.wizard');
         wizard.currentStep = _me.paso;
         wizard.setState();
         e.preventDefault();
 
       }).on('stepclick.fu.wizard', function (e) {
-        //e.preventDefault();//this will prevent clicking and selecting steps
+        // e.preventDefault();//this will prevent clicking and selecting steps
       });
 
 
-    //jump to a step
+    // jump to a step
     /**
     var wizard = $('#fuelux-wizard-container').data('fu.wizard')
     wizard.currentStep = 3;
     wizard.setState();
     */
 
-    //determine selected step
-    //wizard.selectedItem().step
+    // determine selected step
+    // wizard.selectedItem().step
 
 
 
-    //hide or show the other form which requires validation
-    //this is for demo only, you usullay want just one form in your application
+    // hide or show the other form which requires validation
+    // this is for demo only, you usullay want just one form in your application
     $('#skip-validation').removeAttr('checked').on('click', function () {
       $validation = this.checked;
       if (this.checked) {
         $('#sample-form').hide();
         $('#validation-form').removeClass('hide');
-      }
-      else {
+      } else {
         $('#validation-form').addClass('hide');
         $('#sample-form').show();
       }
-    })
+    });
 
 
 
-    //documentation : http://docs.jquery.com/Plugins/Validation/validate
+    // documentation : http://docs.jquery.com/Plugins/Validation/validate
 
 
     $.mask.definitions['~'] = '[+-]';
     $('#phone').mask('(999) 999-9999');
 
-    jQuery.validator.addMethod("phone", function (value, element) {
+    jQuery.validator.addMethod('phone', function (value, element) {
       return this.optional(element) || /^\(\d{3}\) \d{3}\-\d{4}( x\d{1,6})?$/.test(value);
-    }, "Enter a valid phone number.");
+    }, 'Enter a valid phone number.');
 
     $('#validation-form').validate({
       errorElement: 'div',
       errorClass: 'help-block',
       focusInvalid: false,
-      ignore: "",
+      ignore: '',
       rules: {
         email: {
           required: true,
@@ -212,7 +211,7 @@ export class ArchivosComponent implements OnInit {
         password2: {
           required: true,
           minlength: 5,
-          equalTo: "#password"
+          equalTo: '#password'
         },
         name: {
           required: true
@@ -247,17 +246,17 @@ export class ArchivosComponent implements OnInit {
 
       messages: {
         email: {
-          required: "Please provide a valid email.",
-          email: "Please provide a valid email."
+          required: 'Please provide a valid email.',
+          email: 'Please provide a valid email.'
         },
         password: {
-          required: "Please specify a password.",
-          minlength: "Please specify a secure password."
+          required: 'Please specify a password.',
+          minlength: 'Please specify a secure password.'
         },
-        state: "Please choose state",
-        subscription: "Please choose at least one option",
-        gender: "Please choose gender",
-        agree: "Please accept our policy"
+        state: 'Please choose state',
+        subscription: 'Please choose at least one option',
+        gender: 'Please choose gender',
+        agree: 'Please accept our policy'
       },
 
 
@@ -302,7 +301,7 @@ export class ArchivosComponent implements OnInit {
     $('#date').datepicker({autoclose:true}).on('changeDate', function(ev) {
       $(this).closest('form').validate().element($(this));
     });
-    
+
     $('#mychosen').chosen().on('change', function(ev) {
       $(this).closest('form').validate().element($(this));
     });
@@ -310,7 +309,7 @@ export class ArchivosComponent implements OnInit {
 
 
     $(document).one('ajaxloadstart.page', function (e) {
-      //in ajax mode, remove remaining elements before leaving page
+      // in ajax mode, remove remaining elements before leaving page
       $('[class*=select2]').remove();
     });
     // #endregion
@@ -323,15 +322,15 @@ export class ArchivosComponent implements OnInit {
         // console.log(cantBeneficiarios);
         _me.archivo.CANTIDADBENEFICIARIOS = cantBeneficiarios;
       });
-    //$('#spinner1').ace_spinner('disable').ace_spinner('value', 11);
-    //or
-    //$('#spinner1').closest('.ace-spinner').spinner('disable').spinner('enable').spinner('value', 11);//disable, enable or change value
-    //$('#spinner1').closest('.ace-spinner').spinner('value', 0);//reset to 0
+    // $('#spinner1').ace_spinner('disable').ace_spinner('value', 11);
+    // or
+    // $('#spinner1').closest('.ace-spinner').spinner('disable').spinner('enable').spinner('value', 11);//disable, enable or change value
+    // $('#spinner1').closest('.ace-spinner').spinner('value', 0);//reset to 0
     // #endregion
 
     // #region Seleccionar archivos para cargarlos
-    const whitelist_ext = ["jpeg", "jpg", "png", "gif", "bmp", "pdf"];
-    const whitelist_mime = ["image/jpg", "image/jpeg", "image/png", "image/gif", "image/bmp", "application/pdf"];
+    const whitelist_ext = ['jpeg', 'jpg', 'png', 'gif', 'bmp', 'pdf'];
+    const whitelist_mime = ['image/jpg', 'image/jpeg', 'image/png', 'image/gif', 'image/bmp', 'application/pdf'];
 
     $('#archivos').ace_file_input({
       style: 'well',
@@ -342,8 +341,8 @@ export class ArchivosComponent implements OnInit {
       allowExt: whitelist_ext,
       allowMime: whitelist_mime,
       // thumbnail: 'small'//large | fit
-      thumbnail: 'large'//large | fit
-      //,icon_remove:null//set null, to hide remove/reset button
+      thumbnail: 'large'// large | fit
+      // ,icon_remove:null// set null, to hide remove/reset button
       /**,before_change:function(files, dropped) {
         //Check an example below
         //or examples/file-upload.html
@@ -354,25 +353,25 @@ export class ArchivosComponent implements OnInit {
       }*/
       ,
       preview_error: function (filename, error_code) {
-        //name of the file that failed
-        //error_code values
-        //1 = 'FILE_LOAD_FAILED',
-        //2 = 'IMAGE_LOAD_FAILED',
-        //3 = 'THUMBNAIL_FAILED'
-        //alert(error_code);
+        // name of the file that failed
+        // error_code values
+        // 1 = 'FILE_LOAD_FAILED',
+        // 2 = 'IMAGE_LOAD_FAILED',
+        // 3 = 'THUMBNAIL_FAILED'
+        // alert(error_code);
       }
 
     }).on('change', function () {
-      //console.log($(this).data('ace_input_files'));
-      //console.log($(this).data('ace_input_method'));
+      // console.log($(this).data('ace_input_files'));
+      // console.log($(this).data('ace_input_method'));
     });
 
 
-    //$('#archivos')
-    //.ace_file_input('show_file_list', [
-    //{type: 'image', name: 'name of image', path: 'http://path/to/image/for/preview'},
-    //{type: 'file', name: 'hello.txt'}
-    //]);
+    // $('#archivos')
+    // .ace_file_input('show_file_list', [
+    // {type: 'image', name: 'name of image', path: 'http://path/to/image/for/preview'},
+    // {type: 'file', name: 'hello.txt'}
+    // ]);
 
 
 
@@ -383,14 +382,14 @@ export class ArchivosComponent implements OnInit {
     // #endregion
     this._tidService.tiposIdentificacion().subscribe(tiposDocumentos => {
       this.tiposDocumentos = tiposDocumentos;
-    })
+    });
 
     this._munService.municipios().subscribe(municipios => {
       this.municipios = municipios;
-    })
+    });
   }
 
-  actualizarPaso(){
+  actualizarPaso() {
     const wizard = $('#fuelux-wizard-container').data('fu.wizard');
     this.paso = wizard.selectedItem().step;
   }
@@ -419,36 +418,36 @@ export class ArchivosComponent implements OnInit {
           this._helper.Notificacion('Debes indicar el número del formulario', 'error', 'formularioid', false);
           valido = false;
         }
-        if (this.archivo.MUNICIPIOID == '') {
+        if (this.archivo.MUNICIPIOID === '') {
           this._helper.Notificacion('Debes seleccionar la ubicación donde donde proviene la radicación', 'error', 'municipioId', false);
           valido = false;
         }
         break;
       case 3:
 
-        var files = $('#archivos').prop('files');
+        const files = $('#archivos').prop('files');
         if (files.length <= 0) {
           this._helper.Notificacion('Debes seleccionar al menos un archivo', 'error', 'archivos', false, 'top-full-width');
           // console.log(files);
           valido = false;
-        }else{
+        } else {
           // console.log(names);
-          var names = $.map(files, function (val) { return val.name; });
+          const names = $.map(files, function (val) { return val.name; });
           const postData = { field1: 'field1', field2: 'field2' }; // Put your form data variable. This is only example.
-          this.cargando=true;
-          if(this.pdf.ARCHIVOID===''){
+          this.cargando = true;
+          if (this.pdf.ARCHIVOID === '') {
             this._archService.upload(postData, files).then(archivosRegistrados => {
               let archivos: any;
-              archivos=archivosRegistrados;
+              archivos = archivosRegistrados;
               archivos.forEach(archivo => {
                 this.pdf = archivo;
               });
               // console.log(this.pdf);
-              if(this.pdf.ARCHIVOID!==''){
-                this.archivo.ARCHIVOID=this.pdf.ARCHIVOID;
+              if (this.pdf.ARCHIVOID !== '') {
+                this.archivo.ARCHIVOID = this.pdf.ARCHIVOID;
                 // console.log(this.archivo);
-                this._arcService.nuevoArchivo(this.archivo).subscribe(radicado=>{
-                  this.cargando=false;
+                this._arcService.nuevoArchivo(this.archivo).subscribe(radicado => {
+                  this.cargando = false;
                 });
                 // this._arcService.nuevoArchivo()
               }
@@ -457,6 +456,7 @@ export class ArchivosComponent implements OnInit {
           }
           break;
         }
+        break;
       default:
         break;
     }
@@ -508,7 +508,9 @@ export class ArchivosComponent implements OnInit {
           // this._helper.Notificacion('Cotizante fue encontrado en nuestra base de datos', 'success', 'numeroDocumento');
           this._helper.Notificacion('Cotizante fue encontrado en nuestra base de datos', 'success');
         } else {
-          this._helper.Notificacion('Cotizante no fue encontrado en nuestra base de datos.\nRecuerda indicar si es o no una nueva afiliación', 'info', 'nuevoregistro', false, 'top-full-wifth');
+          let msj = 'Cotizante no fue encontrado en nuestra base de datos.';
+          msj += '\nRecuerda indicar si es o no una nueva afiliación';
+          this._helper.Notificacion(msj, 'info', 'nuevoregistro', false, 'top-full-wifth');
         }
         // console.log(this.afiliado);
         this.cargando = false;

@@ -17,10 +17,22 @@ export class ArcService {
       'Authorization': 'Bearer ' + this._authService.Usuario().TOKEN
     });
     const _options = new RequestOptions({ headers: _headers });
-    const _json = "json=" + JSON.stringify({ model });
+    const _json = 'json=' + JSON.stringify({ model });
     // console.log(_json);
     const _url = environment.apiurl + '/archivos/nuevo';
     return this._http.put(_url, _json, _options)
+      .map((response: Response) => {
+        const data = this._authService.ExtraerResultados(response);
+        return data;
+      })
+      .catch(err => this._authService.CapturarError(err));
+  }
+
+  public archivos(archivoid: string = ''): Observable<Model[]> {
+    const _headers = new Headers({ 'Authorization': 'Bearer ' + this._authService.Usuario().TOKEN });
+    const _options = new RequestOptions({ headers: _headers });
+    const _url = environment.apiurl + '/archivos/' + archivoid;
+    return this._http.get(_url, _options)
       .map((response: Response) => {
         const data = this._authService.ExtraerResultados(response);
         return data;

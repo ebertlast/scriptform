@@ -7,6 +7,7 @@ import { ArchService } from './servicios/arch.service';
 import { ArchivosComponent } from './componentes/archivos/archivos.component';
 import { GeneralModule } from '../general/general.module';
 import { FormsModule } from '@angular/forms';
+import { RadicacionesComponent } from './componentes/radicaciones/radicaciones.component';
 
 @NgModule({
   imports: [
@@ -15,8 +16,8 @@ import { FormsModule } from '@angular/forms';
     GeneralModule,
     FormsModule
   ],
-  exports: [ArchivosComponent],
-  declarations: [ArchivosComponent],
+  exports: [ArchivosComponent, RadicacionesComponent],
+  declarations: [ArchivosComponent, RadicacionesComponent],
   providers: [ArcService, ArchService]
 })
 export class ArchivoModule { }
