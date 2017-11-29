@@ -21,7 +21,7 @@ export class Helper {
    * top-full-width, bottom-full-width, top-center, bottom-center
    */
   public Notificacion(message: string, type = 'success', divId = '', autoHide = true, position = 'top right'): void {
-    let options = {
+    const options = {
       // whether to hide the notification on click
       clickToHide: true,
       // whether to auto-hide the notification
@@ -148,7 +148,7 @@ export class Helper {
 
     for (j = 0; j < tab.rows.length; j++) {
       tab_text = tab_text + tab.rows[j].innerHTML + "</tr>";
-      //tab_text=tab_text+"</tr>";
+      // tab_text=tab_text+"</tr>";
     }
 
     tab_text = tab_text + "</table>";
@@ -195,7 +195,7 @@ export class Helper {
     // console.log(columnas);
 
     // let tab: any;
-    // var textRange; 
+    // var textRange;
     var j = 0;
     // tab = document.getElementById('tablaFiltros'); // id of table
 
@@ -239,25 +239,25 @@ export class Helper {
 
   public ExportarExcelBAD(e, data) {
     console.log(e);
-    var dt = new Date();
-    var day = dt.getDate();
-    var month = dt.getMonth() + 1;
-    var year = dt.getFullYear();
-    var hour = dt.getHours();
-    var mins = dt.getMinutes();
-    var postfix = day + "." + month + "." + year + "_" + hour + "." + mins;
-    //creating a temporary HTML link element (they support setting file names)
-    var a = document.createElement('a');
-    //getting data from our div that contains the HTML table
-    var data_type = 'data:application/vnd.ms-excel';
+    const dt = new Date();
+    const day = dt.getDate();
+    const month = dt.getMonth() + 1;
+    const year = dt.getFullYear();
+    const hour = dt.getHours();
+    const mins = dt.getMinutes();
+    const postfix = day + '.' + month + '.' + year + '_' + hour + '.' + mins;
+    // creating a temporary HTML link element (they support setting file names)
+    const a = document.createElement('a');
+    // getting data from our div that contains the HTML table
+    const data_type = 'data:application/vnd.ms-excel';
 
 
     // var table_div = document.getElementById('dvData');
     // var table_html = table_div.outerHTML.replace(/ /g, '%20');
 
     /******************************************************* */
-    let columnas: string[] = [];
-    for (var i = 0; i < 1; i++) {
+    const columnas: string[] = [];
+    for (let i = 0; i < 1; i++) {
       for (let key in data[i]) {
         columnas.push(key);
       }
@@ -316,4 +316,16 @@ export class Helper {
   }
 
 
+  // $.fn.delayPasteKeyUp = function (fn, ms) {
+  //   let timer = 0;
+  //   $(this).on('propertychange input', function () {
+  //     clearTimeout(timer);
+  //     timer = setTimeout(fn, ms);
+  //   });
+  // };
+
+  // $('#serialsticker').delayPasteKeyUp(function () {
+  //   // $('#respuesta').append('Producto registrado: ' + $('#serialsticker').val() + '');
+  //   $('#serialsticker').val('');
+  //   }, 200);
 }

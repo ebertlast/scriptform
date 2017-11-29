@@ -24,6 +24,10 @@ export class ArchivosComponent implements OnInit {
   public cargando = false;
   private documentoConsultado = '';
   public paso = 1;
+  public formularioID = '';
+  public codebar = '';
+  public srcCodebar = '';
+  public codigoBarrasHabilitado = false;
   constructor(
     private _tidService: TidService,
     private _helper: Helper,
@@ -92,6 +96,11 @@ export class ArchivosComponent implements OnInit {
   }
   public set municipio(v: Mun) {
     this._municipio = v;
+    this.codigoBarrasHabilitado = false;
+    if (this._municipio.CodigoMunicipio !== '') {
+      this.codigoBarrasHabilitado = true;
+      // console.log(this.municipio);
+    }
   }
 
 
@@ -387,6 +396,19 @@ export class ArchivosComponent implements OnInit {
     this._munService.municipios().subscribe(municipios => {
       this.municipios = municipios;
     });
+
+    // $.fn.delayPasteKeyUp = function (fn, ms) {
+    //   let timer = 0;
+    //   $(this).on('propertychange input', function () {
+    //     clearTimeout(timer);
+    //     timer = setTimeout(fn, ms);
+    //   });
+    // };
+
+    // $('#serialsticker').delayPasteKeyUp(function () {
+    //   // $('#respuesta').append('Producto registrado: ' + $('#serialsticker').val() + '');
+    //   $('#serialsticker').val('');
+    //   }, 200);
   }
 
   actualizarPaso() {
@@ -411,11 +433,17 @@ export class ArchivosComponent implements OnInit {
           valido = false;
         }
         this.consultarDocumento();
+        // console.log(this.municipio.MunicipioID);
         break;
       case 2:
         this.archivo.MUNICIPIOID = this.municipio.MunicipioID;
         if (this.archivo.FORMULARIOID === '') {
           this._helper.Notificacion('Debes indicar el número del formulario', 'error', 'formularioid', false);
+          valido = false;
+        }
+        // serialsticker
+        if (this.archivo.SERIALSTICKER === '') {
+          this._helper.Notificacion('Debes ingresar el código del sticker pegado al formulario', 'error', 'serialsticker', false);
           valido = false;
         }
         if (this.archivo.MUNICIPIOID === '') {
@@ -506,11 +534,11 @@ export class ArchivosComponent implements OnInit {
         if (this.afiliado.NumeroIdentificacion !== '') {
           this.archivo.NUEVOREGISTRO = false;
           // this._helper.Notificacion('Cotizante fue encontrado en nuestra base de datos', 'success', 'numeroDocumento');
-          this._helper.Notificacion('Cotizante fue encontrado en nuestra base de datos', 'success');
+          // this._helper.Notificacion('Cotizante fue encontrado en nuestra base de datos', 'success');
         } else {
           let msj = 'Cotizante no fue encontrado en nuestra base de datos.';
           msj += '\nRecuerda indicar si es o no una nueva afiliación';
-          this._helper.Notificacion(msj, 'info', 'nuevoregistro', false, 'top-full-wifth');
+          this._helper.Notificacion(msj, 'info', 'nuevoregistro', false, 'top-left');
         }
         // console.log(this.afiliado);
         this.cargando = false;
@@ -524,6 +552,37 @@ export class ArchivosComponent implements OnInit {
         this.consultaDemorada();
       });
     }
+  }
+
+  public generarCodigoBarras() {
+    // this.codebar='<img alt="Barcoded value 1234567890"
+    // src="http://bwipjs-api.metafloor.com/?bcid=code128&text=1234567890&includetext">'
+    this._arcService.sticker(this.municipio.MunicipioID).subscribe(codebar => {
+      // this.codebar = '1100130453950';
+      this.codebar = codebar;
+      this.srcCodebar = 'http://bwipjs-api.metafloor.com/?bcid=code128&text=' + this.codebar + '&includetext';
+      $('#imgCodebar')
+        .attr('src', this.srcCodebar)
+        .attr('alt', 'Sticker ' + this.codebar);
+      this.imprimirCodigoBarras();
+      $('#serialsticker').focus();
+    });
+    return false;
+  }
+
+  public imprimirCodigoBarras() {
+    const image = '<html><head><script>function step1(){\n' +
+      'setTimeout("step2()", 10);}\n' +
+      'function step2(){window.print();window.close()}\n' +
+      '</scri' + 'pt></head><body onload="step1()">\n' +
+      '<center><img src="' + this.srcCodebar + '" /></center></body></html>';
+
+    const Pagelink = 'about:blank';
+    const pwa = window.open(Pagelink, '_new');
+    pwa.document.open();
+    pwa.document.write(image);
+    pwa.document.close();
+    return false;
   }
 
 }

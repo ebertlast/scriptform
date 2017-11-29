@@ -190,6 +190,22 @@
                       <div class="help-block col-xs-12 col-sm-reset inline" *ngIf="tipoDocumento.TipoID === ''"> Selecciona un tipo de identificación! </div>
                     </div>
 
+                    <div class="space-2"  [ngClass]="{'hide': !codigoBarrasHabilitado}"></div>
+
+                    <div class="form-group" [ngClass]="{'hide': !codigoBarrasHabilitado}">
+                      <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="serialsticker">Código Sticker:</label>
+
+                      <div class="col-xs-12 col-sm-9">
+                        <div class="clearfix">
+                          <input [(ngModel)]="archivo.SERIALSTICKER" type="text" name="serialsticker" id="serialsticker" class="col-xs-12 col-sm-6" autofocus="">
+                        </div>
+                        <a href="#" (click)="generarCodigoBarras()">Generar Sticker</a>
+                        <!-- <img id="imgCodebar" alt="" src="" onclick="newWindow = window.open(this.src);
+                        newWindow.print();"> -->
+                        <img class="hide" id="imgCodebar" alt="" src="" (click)="imprimirCodigoBarras()">
+                      </div>
+                    </div>
+
 
                     <!-- <div class="hr hr-dotted"></div> -->
 
