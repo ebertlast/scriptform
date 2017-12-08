@@ -19,7 +19,7 @@ declare var bootbox: any;
 export class DinamicReportConfiguracionComponent implements OnInit {
   private btnAgregarUsuario: any;
   public nuevoFiltro = true;
-  public nombreReporteNuevo: string = '';
+  public nombreReporteNuevo = '';
   constructor(
     private _repService: RepService,
     private _reppService: ReppService,
@@ -80,7 +80,7 @@ export class DinamicReportConfiguracionComponent implements OnInit {
   private _parametro: Repp = new Repp();
   public get parametro(): Repp {
     if (!this._parametro) { this._parametro = new Repp(); }
-    if (this._parametro.TIPO === '') { this._parametro.TIPO = "ALFANUMERICO"; }
+    if (this._parametro.TIPO === '') { this._parametro.TIPO = 'ALFANUMERICO'; }
     if (this._parametro.REPORTEID === '') { this._parametro.REPORTEID = this.reporte.REPORTEID; }
     return this._parametro;
   }
@@ -155,7 +155,7 @@ export class DinamicReportConfiguracionComponent implements OnInit {
   }
 
   /**
-   * Obtiene los usuarios que tienen el permiso 
+   * Obtiene los usuarios que tienen el permiso
    */
   getUsuarios() {
     this.usuarios = [];
@@ -189,7 +189,9 @@ export class DinamicReportConfiguracionComponent implements OnInit {
         this.reporte.QUERY = this.query;
         this._helper.Notificacion('Consulta del reporte actualizada en la base de datos');
       } else {
-        this._helper.Notificacion('La consulta no ha podido ser actualizada en la base de datos. Si el problema persiste, contacta por favor al departamento de tecnología', 'error', '', false);
+        let msj = 'La consulta no ha podido ser actualizada en la base de datos. ';
+        msj += 'Si el problema persiste, contacta por favor al departamento de tecnología';
+        this._helper.Notificacion(msj, 'error', '', false);
       }
     });
   }
@@ -197,7 +199,7 @@ export class DinamicReportConfiguracionComponent implements OnInit {
   eliminarUsuario(usuarioid: string, sedeid: string) {
     const me = this;
 
-    bootbox.confirm("¿Confirma que realmente desea eliminar el usuario del reporte?", function (result) {
+    bootbox.confirm('¿Confirma que realmente desea eliminar el usuario del reporte?', function (result) {
       if (result) {
         // console.log('Eliminar Usuario (' + me.reporte.REPORTEID + ' - ' + sedeid + ' - ' + usuarioid + ')');
         me._repuService.quitarUsuario(me.reporte.REPORTEID, usuarioid, sedeid).subscribe(eliminado => {

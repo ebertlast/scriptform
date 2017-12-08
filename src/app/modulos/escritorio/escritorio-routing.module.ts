@@ -7,6 +7,8 @@ import { DinamicReportComponent } from '../reportes/componentes/dinamic-report/d
 import { DinamicReportConfiguracionComponent } from '../reportes/componentes/dinamic-report-configuracion/dinamic-report-configuracion.component';
 import { ArchivosComponent } from '../archivo/componentes/archivos/archivos.component';
 import { RadicacionesComponent } from '../archivo/componentes/radicaciones/radicaciones.component';
+import { AfiliacionesNovedadesComponent } from '../formularios/componentes/afiliaciones-novedades/afiliaciones-novedades.component';
+import { TgenComponent } from '../general/componentes/tgen/tgen.component';
 const routes: Routes = [
   { path: '', redirectTo: 'principal', pathMatch: 'full' },
   {
@@ -16,7 +18,8 @@ const routes: Routes = [
       { path: 'confconsultas', component: DinamicReportConfiguracionComponent, canActivate: [AuthGuard] },
       { path: 'archivos', component: ArchivosComponent, canActivate: [AuthGuard] },
       { path: 'radicaciones', component: RadicacionesComponent, canActivate: [AuthGuard] },
-      // { path: 'versiones', component: VersionesComponent, canActivate: [AuthGuard] }
+      { path: 'formulariounico', component: AfiliacionesNovedadesComponent, canActivate: [AuthGuard] },
+      { path: 'tablasgenericas', component: TgenComponent, canActivate: [AuthGuard] },
     ],
   },
   { path: '**', redirectTo: 'principal' }

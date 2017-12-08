@@ -315,6 +315,23 @@ export class Helper {
     window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));
   }
 
+  /**
+   * Evita que se ingrese letras en una caja de texto
+   * @param event Objeto que dispara el evento
+   */
+  public SoloNumeros(event) {
+    const key = window.event ? event.keyCode : event.which;
+    // console.log(key);
+    if (key === 0) { return true; }
+    if (event.keyCode === 8 || event.keyCode === 46) {
+      return true;
+    } else if (key < 48 || key > 57) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
 
   // $.fn.delayPasteKeyUp = function (fn, ms) {
   //   let timer = 0;

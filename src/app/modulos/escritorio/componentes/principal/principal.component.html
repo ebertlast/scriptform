@@ -349,18 +349,18 @@
 
     <div class="sidebar-shortcuts" id="sidebar-shortcuts">
       <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+        <!-- #section:basics/sidebar.layout.shortcuts -->
         <a routerLink="/escritorio/principal/consultas" class="btn btn-success">
           <i class="ace-icon fa fa-signal"></i>
         </a>
 
-        <button class="btn btn-info">
+        <a routerLink="/escritorio/principal/formulariounico" class="btn btn-info">
           <i class="ace-icon fa fa-pencil"></i>
-        </button>
+        </a>
 
-        <!-- #section:basics/sidebar.layout.shortcuts -->
-        <button class="btn btn-warning">
-          <i class="ace-icon fa fa-users"></i>
-        </button>
+        <a routerLink="/escritorio/principal/radicaciones" class="btn btn-warning">
+          <i class="ace-icon fa fa-th"></i>
+        </a>
 
         <a routerLink="/escritorio/principal/archivos" class="btn btn-danger">
           <i class="ace-icon fa fa-cloud-upload"></i>
@@ -465,6 +465,7 @@
             </ul>
           </li>
 
+
           <li class="" *ngIf="false">
             <a href="typography.html">
               <i class="menu-icon fa fa-caret-right"></i>
@@ -473,6 +474,33 @@
 
             <b class="arrow"></b>
           </li>
+
+        </ul>
+
+        <ul class="submenu">
+          <li class="" routerLinkActive="active">
+            <a href="#" id="menuFormularios" class="dropdown-toggle">
+              <i class="menu-icon fa fa-caret-right"></i>
+
+              Formularios
+              <b class="arrow fa fa-angle-down"></b>
+            </a>
+
+            <b class="arrow"></b>
+
+            <ul class="submenu">
+              <li class="" routerLinkActive="active">
+                <a routerLink="/escritorio/principal/formulariounico">
+                  <i class="menu-icon fa fa-caret-right"></i>
+                  Formulario Único
+                </a>
+              </li>
+
+            </ul>
+          </li>
+
+
+
 
         </ul>
       </li>
@@ -489,7 +517,7 @@
 
         <ul class="submenu">
           <li routerLinkActive="active">
-            <a routerLink="confconsultas">
+            <a routerLink="/escritorio/principal/confconsultas">
               <i class="menu-icon fa fa-caret-right"></i>
               Reportes Dinamicos
             </a>
@@ -497,13 +525,11 @@
             <!-- <b class="arrow"></b> -->
           </li>
 
-          <li class="" *ngIf="false">
-            <a href="jqgrid.html">
+          <li routerLinkActive="active">
+            <a routerLink="/escritorio/principal/tablasgenericas">
               <i class="menu-icon fa fa-caret-right"></i>
-              jqGrid plugin
+              Tablas Genéricas
             </a>
-
-            <!-- <b class="arrow"></b> -->
           </li>
         </ul>
       </li>

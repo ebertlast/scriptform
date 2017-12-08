@@ -98,21 +98,21 @@ export class IngresarComponent implements OnInit {
 
     this._sedService.Sedes().subscribe(sedes => {
       this.sedes = sedes;
-    })
+    });
 
     // this._helper.Notificacion('Bienvenido a ' + this.environment.appname,'info');
-    //$.notify("Hello World");
+    // $.notify("Hello World");
     this._authService.CerrarSesion();
     const me = this;
     let aux = <HTMLElement>document.getElementById('USUARIOID');
     aux.addEventListener('keypress', function (e) {
-      if (e.keyCode == 13) {
+      if (e.keyCode === 13) {
         me.ingresar();
       }
     });
     aux = <HTMLElement>document.getElementById('CLAVE');
     aux.addEventListener('keypress', function (e) {
-      if (e.keyCode == 13) {
+      if (e.keyCode === 13) {
         me.ingresar();
       }
     });

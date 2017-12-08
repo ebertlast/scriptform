@@ -41,7 +41,7 @@ export class PrincipalComponent implements OnInit {
     const _me = this;
     setTimeout(function () {
       _me.msjMarquesina();
-    },60000);
+    }, 60000);
   }
 
   passTheSalt() {

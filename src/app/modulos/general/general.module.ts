@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 import { GeneralRoutingModule } from './general-routing.module';
 import { SedService } from './servicios/sed.service';
@@ -13,14 +14,25 @@ import { MyLinkDirective } from './directivas/my-link.directive';
 import { AfiService } from './servicios/afi.service';
 import { MunService } from './servicios/mun.service';
 import { SafePipe } from './pipes/safe.pipe';
+import { NovService } from './servicios/nov.service';
+import { TgenService } from './servicios/tgen.service';
+import { TgenComponent } from './componentes/tgen/tgen.component';
+import { GenService } from './servicios/gen.service';
+import { GpoService } from './servicios/gpo.service';
+import { TdiService } from './servicios/tdi.service';
+import { GdiService } from './servicios/gdi.service';
+import { GenerarDireccionComponent } from './componentes/generar-direccion/generar-direccion.component';
 
 @NgModule({
   imports: [
     CommonModule,
-    GeneralRoutingModule
+    GeneralRoutingModule,
+    FormsModule
   ],
-  exports: [NavbarTopComponent, NavbarLeftComponent, CapitalizarPipe, SedComponent, FiltrarPipe, MyLinkDirective, SafePipe],
-  declarations: [NavbarTopComponent, CapitalizarPipe, NavbarLeftComponent, SedComponent, FiltrarPipe, MyLinkDirective, SafePipe],
-  providers: [SedService, TidService, AfiService, MunService]
+  exports: [NavbarTopComponent, NavbarLeftComponent, CapitalizarPipe, SedComponent, FiltrarPipe, MyLinkDirective, SafePipe, TgenComponent,
+    GenerarDireccionComponent],
+  declarations: [NavbarTopComponent, CapitalizarPipe, NavbarLeftComponent, SedComponent, FiltrarPipe, MyLinkDirective, SafePipe,
+    TgenComponent, GenerarDireccionComponent],
+  providers: [SedService, TidService, AfiService, MunService, NovService, TgenService, GenService, GpoService, TdiService, GdiService]
 })
 export class GeneralModule { }

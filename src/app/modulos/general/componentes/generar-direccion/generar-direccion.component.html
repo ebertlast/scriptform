@@ -1,0 +1,308 @@
+<div class="col-xs-12 col-sm-12 widget-container-col ui-sortable" id="widget-container-col-1">
+  <!-- #section:custom/widget-box -->
+  <div class="widget-box ui-sortable-handle collapsed" id="widget-box-1" style="opacity: 1;">
+    <div class="widget-header">
+      <h5 class="widget-title">Asistente generador de direcciones</h5>
+
+      <!-- #section:custom/widget-box.toolbar -->
+      <div class="widget-toolbar">
+        <div class="widget-menu hide">
+          <a href="#" data-action="settings" data-toggle="dropdown" aria-expanded="false">
+            <i class="ace-icon fa fa-bars"></i>
+          </a>
+
+          <ul class="dropdown-menu dropdown-menu-right dropdown-light-blue dropdown-caret dropdown-closer">
+            <li>
+              <a data-toggle="tab" href="#dropdown1">Option#1</a>
+            </li>
+
+            <li>
+              <a data-toggle="tab" href="#dropdown2">Option#2</a>
+            </li>
+          </ul>
+        </div>
+
+        <a href="#" data-action="fullscreen" class="orange2">
+          <i class="ace-icon fa fa-expand"></i>
+        </a>
+
+        <!-- <a href="#" data-action="reload">
+          <i class="ace-icon fa fa-refresh"></i>
+        </a> -->
+
+        <a href="#" data-action="collapse">
+          <i class="ace-icon fa " [ngClass]="{'fa-chevron-down': !desplegado, 'fa-chevron-up': desplegado}" id="{{btnminimizar}}"></i>
+        </a>
+
+        <!-- <a href="#" data-action="close">
+          <i class="ace-icon fa fa-times"></i>
+        </a> -->
+      </div>
+
+      <!-- /section:custom/widget-box.toolbar -->
+    </div>
+
+    <div class="widget-body" [ngStyle]="{'display': desplegado ? 'block' : 'none'}">
+      <div class="widget-main ace-scroll" style="position: relative;">
+        <div class="scroll-track" style="display: none;">
+          <div class="scroll-bar" style="top: 0px;"></div>
+        </div>
+        <div class="scroll-content">
+          <p class="alert alert-info hide">
+            Ingrese la dirección (según el ejemplo) y de clic sobre el botón Aceptar.
+            <br />
+            <em>
+              (Diligencie los campos requeridos que identifiquen la dirección actual; los campos que no requiera los puede dejar en blanco.
+              Vaya verificando en el recuadro inferior "Direccion Generada" su dirección)
+            </em>
+          </p>
+          <div class="center">
+            <table id="tablaDireccion">
+              <tr>
+                <th colspan="6">Principal</th>
+                <th colspan="2">Secundaria</th>
+                <th colspan="3">Complemento</th>
+              </tr>
+              <tr>
+                <th>Dg(*)</th>
+                <th>84(*)</th>
+                <th>B</th>
+                <th>Bis</th>
+                <th>A</th>
+                <th>Sur</th>
+                <th>N° 8(*)</th>
+                <th>B</th>
+                <th></th>
+                <th>62</th>
+                <th>Este</th>
+              </tr>
+              <tr>
+                <td>
+                  <select size="1" title="" name="TipoViaPrincipal" id="TipoViaPrincipal" [(ngModel)]="direccionAux.TipoViaPrincipal">
+                    <option value="" selected>Escoja una opción</option>
+                    <option value="AC">Avenida Calle</option>
+                    <option value="AK">Avenida Carrera</option>
+                    <option value="CL">Calle</option>
+                    <option value="KR">Carrera</option>
+                    <option value="DG">Diagonal</option>
+                    <option value="TV">Transversal</option>
+                  </select>
+                </td>
+                <td>
+                  <input title="Acepta sólo números" style="text-align: center;" type="text" size="3" maxlength="3" name="NumeroViaPrincipal"
+                    id="NumeroViaPrincipal" [(ngModel)]="direccionAux.NumeroViaPrincipal">
+                </td>
+                <td>
+                  <select size="1" title="" name="LetraViaPrincipal" id="LetraViaPrincipal" [(ngModel)]="direccionAux.LetraViaPrincipal">
+                    <option value="" selected></option>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                    <option value="E">E</option>
+                    <option value="F">F</option>
+                    <option value="G">G</option>
+                    <option value="H">H</option>
+                    <option value="I">I</option>
+                    <option value="J">J</option>
+                    <option value="K">K</option>
+                    <option value="L">L</option>
+                    <option value="M">M</option>
+                    <option value="N">N</option>
+                    <option value="O">O</option>
+                    <option value="P">P</option>
+                    <option value="Q">Q</option>
+                    <option value="R">R</option>
+                    <option value="S">S</option>
+                    <option value="T">T</option>
+                    <option value="U">U</option>
+                    <option value="V">V</option>
+                    <option value="W">W</option>
+                    <option value="X">X</option>
+                    <option value="Y">Y</option>
+                    <option value="Z">Z</option>
+                  </select>
+                </td>
+                <td>
+                  <select name="Bis" id="Bis" size="1" [(ngModel)]="direccionAux.Bis">
+                    <option value="" selected="selected"></option>
+                    <option value="BIS">BIS</option>
+                  </select>
+                </td>
+                <td>
+                  <select size="1" title="" name="LetraBis" id="LetraBis" [(ngModel)]="direccionAux.LetraBis">
+                    <option value="" selected></option>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                    <option value="E">E</option>
+                    <option value="F">F</option>
+                    <option value="G">G</option>
+                    <option value="H">H</option>
+                    <option value="I">I</option>
+                    <option value="J">J</option>
+                    <option value="K">K</option>
+                    <option value="L">L</option>
+                    <option value="M">M</option>
+                    <option value="N">N</option>
+                    <option value="O">O</option>
+                    <option value="P">P</option>
+                    <option value="Q">Q</option>
+                    <option value="R">R</option>
+                    <option value="S">S</option>
+                    <option value="T">T</option>
+                    <option value="U">U</option>
+                    <option value="V">V</option>
+                    <option value="W">W</option>
+                    <option value="X">X</option>
+                    <option value="Y">Y</option>
+                    <option value="Z">Z</option>
+                  </select>
+                </td>
+                <td>
+                  <select size="1" title="" name="CuadranteViaPrincipal" id="CuadranteViaPrincipal" [(ngModel)]="direccionAux.CuadranteViaPrincipal">
+                    <option value="" selected></option>
+                    <option value="SUR">SUR</option>
+                    <option value="ESTE">ESTE</option>
+                  </select>
+                </td>
+                <td>N°
+                  <input type="text" title="Acepta solo números" id="NumeroViaSecundaria" size="3" maxlength="3" name="NumeroViaSecundaria"
+                    [(ngModel)]="direccionAux.NumeroViaSecundaria" />
+                </td>
+                <td>
+                  <select size="1" title="" name="LetraViaSecundaria" id="LetraViaSecundaria" [(ngModel)]="direccionAux.LetraViaSecundaria">
+                    <option value="" selected></option>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                    <option value="E">E</option>
+                    <option value="F">F</option>
+                    <option value="G">G</option>
+                    <option value="H">H</option>
+                    <option value="I">I</option>
+                    <option value="J">J</option>
+                    <option value="K">K</option>
+                    <option value="L">L</option>
+                    <option value="M">M</option>
+                    <option value="N">N</option>
+                    <option value="O">O</option>
+                    <option value="P">P</option>
+                    <option value="Q">Q</option>
+                    <option value="R">R</option>
+                    <option value="S">S</option>
+                    <option value="T">T</option>
+                    <option value="U">U</option>
+                    <option value="V">V</option>
+                    <option value="W">W</option>
+                    <option value="X">X</option>
+                    <option value="Y">Y</option>
+                    <option value="Z">Z</option>
+                  </select>
+                </td>
+                <td>-</td>
+                <td style="text-align:left;">
+                  <input type="text" title="Acepta solo números." size="3" maxlength="3" id="NumeroPlaca" name="NumeroPlaca" [(ngModel)]="direccionAux.NumeroPlaca"
+                  />
+                </td>
+                <td>
+                  <select size="1" title="" name="CuadranteViaSecundaria" id="CuadranteViaSecundaria" [(ngModel)]="direccionAux.CuadranteViaSecundaria">
+                    <option value="" selected></option>
+                    <option value="SUR">SUR</option>
+                    <option value="ESTE">ESTE</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="11" style="text-align: left">Asistente Para el ingreso de la Dirección Parte Complementaria (Ej. INT 2 AP 505):</td>
+              </tr>
+              <tr class="hide">
+                <td colspan="11" style="text-align: left">
+                  <i>(Seleccione el tipo en la lista desplegable inferior, escriba en el recuadro el detalle y pulse el botón
+                    "Adicionar otro complemento". Repita este proceso hasta tener toda la parte complementaria de la dirección
+                    y vaya verificando en el recuadro superior "Dirección Completa" su dirección)</i>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <select class="formlista" id="componenteComplemento" name="componenteComplemento" size="1">
+                    <option value="" selected="selected">Escoja una opción</option>
+                    <option value="AP">Apartamento</option>
+                    <option value="AG">Agrupación</option>
+                    <option value="BL">Bloque</option>
+                    <option value="BG">Bodega</option>
+                    <option value="CN">Camino</option>
+                    <option value="CT ">Carretera</option>
+                    <option value="CEL">Célula</option>
+                    <option value="CA">Casa</option>
+                    <option value="CONJ">Conjunto</option>
+                    <option value="CS ">Consultorio</option>
+                    <option value="DP">Depósito</option>
+                    <option value="ED ">Edificio</option>
+                    <option value="EN">Entrada</option>
+                    <option value="ESQ">Esquina</option>
+                    <option value="ET">Etapa</option>
+                    <option value="GJ">Garaje</option>
+                    <option value="IN">Interior</option>
+                    <option value="KM">Kilómetro</option>
+                    <option value="LC">Local</option>
+                    <option value="LT">Lote</option>
+                    <option value="MZ">Manzana</option>
+                    <option value="MN">Mezanine</option>
+                    <option value="MD">Módulo</option>
+                    <option value="OF">Oficina</option>
+                    <option value="PS">Paseo</option>
+                    <option value="PA">Parcela</option>
+                    <option value="PH">Penthouse</option>
+                    <option value="PI">Piso</option>
+                    <option value="PN">Puente</option>
+                    <option value="PD">Predio</option>
+                    <option value="SC">Salón comunal</option>
+                    <option value="SR">Sector</option>
+                    <option value="SL">Solar</option>
+                    <option value="SS">Semi sótano</option>
+                    <option value="SM">Super manzana</option>
+                    <option value="TO">Torre</option>
+                    <option value="UN">Unidad</option>
+                    <option value="UR">Unidad residencialc</option>
+                    <option value="URB">Urbanización</option>
+                    <option value="ZN">Zona</option>
+                  </select>
+                </td>
+                <td colspan="2">
+                  <input type="text" title="Acepta  números, espacios y letras mayúsculas." class="input-sm" id="valorComplemento" size="10"
+                  name="valorComplemento" />
+                </td>
+                    
+                <td colspan="3">
+                  <input type="button" (click)="agregarComplemento();" value="Adicionar otro complemento" title="Agregar a Complemento"
+                    id="btnAgregarComplemento" class="hide" />
+                    <button class="btn btn-xs btn-primary" title="Agregar a Complemento" (click)="agregarComplemento();">Adicionar otro complemento</button>
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>                
+              </tr>
+            </table>
+          </div>
+          <!-- <hr> -->
+          Dirección Generada:
+          <p class="alert alert-success">
+            {{direccion}}
+          </p>
+          <button (click)="sendDireccion($event)" class="hide">Aceptar</button>
+          <button class="btn btn-xs btn-success" title="Aceptar dirección" (click)="sendDireccion($event);">Aceptar</button>
+          <button class="btn btn-xs btn-yellow" title="Aceptar dirección" (click)="direccionComp=''">Limpiar Complemento</button>
+          <button class="btn btn-xs btn-danger" title="Aceptar dirección" (click)="limpiarDireccion();">Limpiar Todo</button>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- /section:custom/widget-box -->
+</div>

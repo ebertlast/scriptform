@@ -45,7 +45,7 @@ export class AppComponent implements OnInit {
       preload: true
     });
 
-    this.supervisarSesion();
+    // this.supervisarSesion();
   }
 
   private supervisarSesion() {

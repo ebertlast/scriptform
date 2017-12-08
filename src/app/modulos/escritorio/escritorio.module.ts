@@ -7,6 +7,7 @@ import { GeneralModule } from '../general/general.module';
 import { ConsultasComponent } from './componentes/consultas/consultas.component';
 import { ReportesModule } from '../reportes/reportes.module';
 import { ArchivoModule } from '../archivo/archivo.module';
+import { FormulariosModule } from '../formularios/formularios.module';
 @NgModule({
   imports: [
     CommonModule,
@@ -14,7 +15,8 @@ import { ArchivoModule } from '../archivo/archivo.module';
     GeneralModule,
     FormsModule,
     ReportesModule,
-    ArchivoModule
+    ArchivoModule,
+    FormulariosModule
   ],
   declarations: [PrincipalComponent, ConsultasComponent]
 })

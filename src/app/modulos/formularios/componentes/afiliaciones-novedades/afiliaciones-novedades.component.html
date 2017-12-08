@@ -1,0 +1,338 @@
+<div class="page-header">
+  <h1>
+    Administrativo
+    <small>
+      <i class="ace-icon fa fa-angle-double-right"></i>
+      Formularios
+    </small>
+    <small>
+      <i class="ace-icon fa fa-angle-double-right"></i>
+      Formulario Único de Afiliación y Registro de Novedades al SGSSS
+    </small>
+    <div class="pull-right">
+      <label [ngClass]="{'hide': !cargando}">
+        <small class="green">
+          <b>Pensando...</b>
+        </small>
+        <span class="lbl middle"></span>
+        <img src="assets/images/loading/pinwheel40x40.gif" alt="">
+      </label>
+    </div>
+  </h1>
+</div>
+
+<!-- I. DATOS DEL TRÁMITE -->
+<div class="col-sm-12">
+  <h3 class="header smaller lighter blue">I. DATOS DEL TRÁMITE</h3>
+  <form class="form-horizontal" role="form">
+    <!-- 1. Tipo de Trámite -->
+    <div class="form-group">
+      <label class="col-sm-3 control-label no-padding-right bolder blue" for="TipoTramite"> 1. Tipo de Trámite:</label>
+      <div class="col-sm-9">
+        <div class="control-group">
+          <div class="radio">
+            <label>
+              <input name="TipoTramite" type="radio" class="ace" value="A" [(ngModel)]="formulario.TipoTramite" (click)="refrescarFormulario()">
+              <span class="lbl"> Afiliación</span>
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input name="TipoTramite" type="radio" class="ace" value="B" [(ngModel)]="formulario.TipoTramite" (click)="refrescarFormulario()">
+              <span class="lbl"> Reporte de Novedades</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 2. Tipo de Afiliación -->
+    <div class="form-group">
+      <label class="col-sm-3 control-label no-padding-right bolder blue" for="TipoAfiliacion"> 2. Tipo de Afiliación:</label>
+      <div class="col-sm-9">
+        <div class="control-group">
+          <div class="radio">
+            <label>
+              <input name="TipoAfiliacion" type="radio" class="ace" value="A.1" [(ngModel)]="formulario.TipoAfiliacion" (click)="refrescarFormulario()">
+              <span class="lbl"> (Individual) Cotizante o Cabeza de Familia</span>
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input name="TipoAfiliacion" type="radio" class="ace" value="A.2" [(ngModel)]="formulario.TipoAfiliacion" (click)="refrescarFormulario()">
+              <span class="lbl"> (Individual) Beneficiario o Afiliado adicional</span>
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input name="TipoAfiliacion" type="radio" class="ace" value="B" [(ngModel)]="formulario.TipoAfiliacion" (click)="refrescarFormulario()">
+              <span class="lbl"> Colectiva</span>
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input name="TipoAfiliacion" type="radio" class="ace" value="C" [(ngModel)]="formulario.TipoAfiliacion" (click)="refrescarFormulario()">
+              <span class="lbl"> Institucional</span>
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input name="TipoAfiliacion" type="radio" class="ace" value="D" [(ngModel)]="formulario.TipoAfiliacion" (click)="refrescarFormulario()">
+              <span class="lbl"> De Oficio</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 3. Régimen -->
+    <div class="form-group">
+      <label class="col-sm-3 control-label no-padding-right bolder blue" for="Regimen"> 3. Régimen:</label>
+      <div class="col-sm-9">
+        <div class="control-group">
+          <div class="radio">
+            <label>
+              <input name="Regimen" type="radio" class="ace" value="A" [(ngModel)]="formulario.Regimen" (click)="refrescarFormulario()">
+              <span class="lbl"> Contributivo</span>
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input name="Regimen" type="radio" class="ace" value="B" [(ngModel)]="formulario.Regimen" (click)="refrescarFormulario()">
+              <span class="lbl"> Subsidiado</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 4. Tipo de Afiliado -->
+    <div class="form-group">
+      <label class="col-sm-3 control-label no-padding-right bolder blue" for="TipoAfiliado"> 4. Tipo de Afiliado:</label>
+      <div class="col-sm-9">
+        <div class="control-group">
+          <div class="radio">
+            <label>
+              <input name="TipoAfiliado" type="radio" class="ace" value="A" [(ngModel)]="formulario.TipoAfiliado" (click)="refrescarFormulario()">
+              <span class="lbl"> Cotizante</span>
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input name="TipoAfiliado" type="radio" class="ace" value="B" [(ngModel)]="formulario.TipoAfiliado" (click)="refrescarFormulario()">
+              <span class="lbl"> Cabeza de Familia</span>
+            </label>
+          </div>
+        </div>
+        <div class="radio">
+          <label>
+            <input name="TipoAfiliado" type="radio" class="ace" value="C" [(ngModel)]="formulario.TipoAfiliado" (click)="refrescarFormulario()">
+            <span class="lbl"> Beneficiario</span>
+          </label>
+        </div>
+      </div>
+    </div>
+    <!-- 5. Tipo de Cotizante -->
+    <div class="form-group">
+      <label class="col-sm-3 control-label no-padding-right bolder blue" for="TipoCotizante"> 5. Tipo de Cotizante:</label>
+      <div class="col-sm-9">
+        <div class="control-group">
+          <div class="radio">
+            <label>
+              <input name="TipoCotizante" type="radio" class="ace" value="A" [(ngModel)]="formulario.TipoCotizante" (click)="refrescarFormulario()">
+              <span class="lbl"> Dependiente</span>
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input name="TipoCotizante" type="radio" class="ace" value="B" [(ngModel)]="formulario.TipoCotizante" (click)="refrescarFormulario()">
+              <span class="lbl"> Independiente</span>
+            </label>
+          </div>
+        </div>
+        <div class="radio">
+          <label>
+            <input name="TipoCotizante" type="radio" class="ace" value="C" [(ngModel)]="formulario.TipoCotizante" (click)="refrescarFormulario()">
+            <span class="lbl"> Pensionado</span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<!-- II. DATOS BÁSICOS DE IDENTIFICACIÓN -->
+<div class="col-sm-12">
+  <h3 class="header smaller lighter blue">II. DATOS BÁSICOS DE IDENTIFICACIÓN
+    <small>(Del cotizante o cabeza de familia)</small>
+  </h3>
+  <form class="form-horizontal" role="form">
+    <!-- 6. Apellidos y Nombres -->
+    <div class="form-group">
+      <label class="col-sm-3 control-label no-padding-right bolder blue" for="PrimerApellido"> 6. Apellidos y nombres:</label>
+      <div class="col-sm-9">
+        <input [(ngModel)]="formulario.PrimerApellido" type="text" id="PrimerApellido" name="PrimerApellido" placeholder="Primer Apellido"
+          class="form-control" (change)="refrescarFormulario()">
+        <input [(ngModel)]="formulario.SegundoApellido" type="text" id="SegundoApellido" name="SegundoApellido" placeholder="Segundo Apellido"
+          class="form-control" (change)="refrescarFormulario()">
+        <input [(ngModel)]="formulario.PrimerNombre" type="text" id="PrimerNombre" name="PrimerNombre" placeholder="Primer Nombre"
+          class="form-control" (change)="refrescarFormulario()">
+        <input [(ngModel)]="formulario.SegundoNombre" type="text" id="SegundoNombre" name="SegundoNombre" placeholder="Segundo Nombre"
+          class="form-control" (change)="refrescarFormulario()">
+      </div>
+    </div>
+    <!-- 7. Tipo de documento de identidad -->
+    <div class="form-group">
+      <label class="col-sm-3 control-label no-padding-right bolder blue" for="form-field-1-1"> 7. Tipo de documento de identidad:</label>
+      <div class="col-sm-9">
+        <div class="control-group">
+          <div class="radio" *ngFor="let tid of tiposDocumentos">
+            <label>
+              <input name="TipoDocumentoIdentidad" type="radio" class="ace" value="{{tid.TipoID}}" [(ngModel)]="formulario.TipoDocumentoIdentidad"
+                (click)="refrescarFormulario()">
+              <span class="lbl"> {{tid.DescripcionID}}</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 8. Número del documento de identidad -->
+    <div class="form-group">
+      <label class="col-sm-3 control-label no-padding-right bolder blue" for="DocumentoIdentidad"> 8. Número del documento de identidad:</label>
+      <div class="col-sm-9">
+        <br>
+        <input type="text" id="DocumentoIdentidad" name="DocumentoIdentidad" [(ngModel)]="formulario.DocumentoIdentidad" placeholder="Documento de Identidad"
+          class="col-xs-10 col-sm-5">
+      </div>
+    </div>
+    <!-- 9. Género -->
+    <div class="form-group">
+      <label class="col-sm-3 control-label no-padding-right bolder blue" for="genero"> 9. Género:</label>
+      <div class="col-sm-9">
+        <div class="control-group">
+          <div class="radio" *ngFor="let genero of generos">
+            <label>
+              <input name="genero" type="radio" class="ace" value="{{genero.GeneroID}}" [(ngModel)]="formulario.Sexo" (click)="refrescarFormulario()">
+              <span class="lbl"> {{genero.DescripcionGenero}}</span>
+            </label>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- 10. Fecha de Nacimiento -->
+    <div class="form-group">
+      <label class="col-sm-3 control-label no-padding-right bolder blue" for="FechaNacimiento"> 10. Fecha de Nacimiento:</label>
+      <div class="col-sm-9">
+        <div class="control-group">
+          <div class="input-group">
+            <input class="form-control input-mask-date" type="text" id="FechaNacimiento" name="FechaNacimiento" [(ngModel)]="formulario.FechaNacimiento">
+            <span class="input-group-btn hide">
+              <button class="btn btn-sm btn-default" type="button">
+                <i class="ace-icon fa fa-calendar bigger-110"></i>
+                Go!
+              </button>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<!-- III. DATOS COMPLEMENTARIOS -->
+<div class="col-sm-12">
+  <h3 class="header smaller lighter blue">III. DATOS COMPLEMENTARIOS
+    <small>Datos Personales</small>
+  </h3>
+  <form class="form-horizontal" role="form">
+    <!-- 11. Étnia -->
+    <div class="form-group">
+      <label class="col-sm-3 control-label no-padding-right bolder blue" for="Etnia"> 11. Étnia:</label>
+      <div class="col-sm-9">
+        <div class="control-group">
+          <div class="radio" *ngFor="let etnia of etnias">
+            <label>
+              <input name="Etnia" type="radio" class="ace" value="{{etnia.DATO1}}" [(ngModel)]="formulario.Etnia" (click)="refrescarFormulario()">
+              <span class="lbl"> {{etnia.DESCRIPCION}}</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 12. Discapacidad -->
+    <div class="form-group">
+      <label class="col-sm-3 control-label no-padding-right bolder blue" for="TipoDiscapacidad"> 12. Discapacidad:</label>
+      <div class="col-sm-9">
+        <small>Tipo Discapacidad</small>
+        <select class="form-control" placeholder="Tipo Discapacidad" id="TipoDiscapacidad" name="TipoDiscapacidad" [(ngModel)]="formulario.TipoDiscapacidad"
+          (change)="refrescarFormulario()">
+          <option [ngValue]="" selected></option>
+          <option [ngValue]="tipoDiscapacidad.TipoDiscapacidadId" *ngFor="let tipoDiscapacidad of tiposDiscapacidades">{{tipoDiscapacidad.DescripcionTipoDiscapacidad}}</option>
+        </select>
+        <small>Grado Discapacidad</small>
+        <select class="form-control" placeholder="Tipo Discapacidad" id="GradoDiscapacidad" name="GradoDiscapacidad" [(ngModel)]="formulario.GradoDiscapacidad"
+          [disabled]="formulario.TipoDiscapacidad==='' || !formulario.TipoDiscapacidad" (change)="refrescarFormulario()">
+          <option [ngValue]="" selected></option>
+          <option [ngValue]="gradoDiscapacidad.GradoDiscapacidadId" *ngFor="let gradoDiscapacidad of gradosDiscapacidades">{{gradoDiscapacidad.DescripcionGradoDiscapacidad}}</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- 13. Puntaje SISBEN -->
+    <div class="form-group">
+      <label class="col-sm-3 control-label no-padding-right bolder blue" for="PuntajeSISBEN"> 13. Puntaje SISBEN:</label>
+      <div class="col-sm-9">
+        <input type="number" id="PuntajeSISBEN" name="PuntajeSISBEN" [(ngModel)]="formulario.PuntajeSISBEN" placeholder="Puntaje SISBEN"
+          class="col-xs-10 col-sm-5">
+      </div>
+    </div>
+
+    <!-- 14. Grupo Poblacional Especial -->
+    <div class="form-group">
+      <label class="col-sm-3 control-label no-padding-right bolder blue" for="grupo"> 14. Grupo Poblacional Especial:</label>
+      <div class="col-sm-9">
+        <select class="form-control" placeholder="Grupo Poblacional Especial" id="grupo" name="grupo" [(ngModel)]="formulario.GrupoPoblacionalEspecial"
+          (change)="refrescarFormulario()">
+          <option [ngValue]="" selected></option>
+          <option [ngValue]="grupo.GrupoId" *ngFor="let grupo of gruposPoblacionales">{{grupo.DescripcionGrupo}}</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- 15. Administradora de Riesgos Laborales - ARL -->
+    <div class="form-group">
+      <label class="col-sm-3 control-label no-padding-right bolder blue" for="ARL"> 15. Administradora de Riesgos Laborales - ARL:</label>
+      <div class="col-sm-9">
+        <br>
+        <input [(ngModel)]="formulario.ARL" type="text" id="ARL" name="ARL" placeholder="Razón Social de la Institución" class="form-control"
+          (change)="refrescarFormulario()">
+      </div>
+    </div>
+
+    <!-- 16. Administradora de Pensiones -->
+    <div class="form-group">
+      <label class="col-sm-3 control-label no-padding-right bolder blue" for="AP"> 16. Administradora de Pensiones:</label>
+      <div class="col-sm-9">
+        <input [(ngModel)]="formulario.AP" type="text" id="AP" name="AP" placeholder="Razón Social de la Institución" class="form-control"
+          (change)="refrescarFormulario()">
+      </div>
+    </div>
+
+    <!-- 17. Ingreso base de cotización - IBC -->
+    <div class="form-group">
+      <label class="col-sm-3 control-label no-padding-right bolder blue" for="IBC"> 17. Ingreso base de cotización - IBC:</label>
+      <div class="col-sm-9">
+        <input type="number" id="IBC" name="IBC" [(ngModel)]="formulario.IBC" placeholder="Ingresos en Moneda" class="col-xs-10 col-sm-5">
+      </div>
+    </div>
+
+    <!-- 18. Residencia -->
+    <div class="form-group">
+      <label class="col-sm-3 control-label no-padding-right bolder blue" for="Direccion"> 18. Residencia:</label>
+      <div class="col-sm-9">
+        <app-generar-direccion [desplegado]="false" (EnviarDireccion)="setDireccion($event)"></app-generar-direccion>
+        <input [(ngModel)]="formulario.Direccion" type="text" id="Direccion" name="Direccion" placeholder="Dirección" class="form-control"
+          disabled>
+      </div>
+    </div>
+  </form>
+</div>
