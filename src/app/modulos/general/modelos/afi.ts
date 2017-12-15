@@ -50,5 +50,6 @@ export class Afi {
         public fecha_creacion: string = '',
         public usuario_modifica: string = '',
         public fecha_modificacion: string = '',
+        public Etnia: string = '',
     ) { }
 }

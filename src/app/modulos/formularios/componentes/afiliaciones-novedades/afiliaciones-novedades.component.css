@@ -2,3 +2,21 @@ select {
   -webkit-appearance: none;
   -webkit-border-radius: 0px;
 }
+
+table, td, th{
+  border: 1px solid black;
+  border-collapse: collapse;
+  text-align: center;
+  vertical-align: middle;
+}
+
+#modal-formConyugue .modal-body {
+  width: 80%;
+  max-width: 600px;
+}
+
+.someStyle .ui-dialog-content 
+{
+    height:auto !important;
+    display:block !important;
+}

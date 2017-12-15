@@ -1,6 +1,6 @@
-<div class="col-xs-12 col-sm-12 widget-container-col ui-sortable" id="widget-container-col-1">
+<div class="col-xs-12 col-sm-12 widget-container-col ui-sortable" id="{{divid}}" >
   <!-- #section:custom/widget-box -->
-  <div class="widget-box ui-sortable-handle collapsed" id="widget-box-1" style="opacity: 1;">
+  <div class="widget-box ui-sortable-handle collapsed widget-color-blue" id="widget-box-1" style="opacity: 1;">
     <div class="widget-header">
       <h5 class="widget-title">Asistente generador de direcciones</h5>
 
@@ -38,11 +38,10 @@
           <i class="ace-icon fa fa-times"></i>
         </a> -->
       </div>
-
       <!-- /section:custom/widget-box.toolbar -->
     </div>
 
-    <div class="widget-body" [ngStyle]="{'display': desplegado ? 'block' : 'none'}">
+    <div class="widget-body" [ngStyle]="{'display': desplegado ? 'block' : 'none'}" style="overflow-x: auto; white-space: nowrap;">
       <div class="widget-main ace-scroll" style="position: relative;">
         <div class="scroll-track" style="display: none;">
           <div class="scroll-bar" style="top: 0px;"></div>

@@ -47,7 +47,10 @@ export class AuthService {
     // console.log('body.token: ', body.token);
     this.usuario.TOKEN = (typeof (body.TOKEN) === 'undefined') ? '' : body.TOKEN;
     if (this.usuario.TOKEN === '') { this.usuario.TOKEN = (typeof (body.token) === 'undefined') ? '' : body.token; }
-    if ((typeof (this.usuario.TOKEN) === 'undefined') || this.usuario.TOKEN === '' || !this.usuario.TOKEN) { this.usuario.TOKEN = this.Usuario().TOKEN; }
+    if ((typeof (this.usuario.TOKEN) === 'undefined') ||
+      this.usuario.TOKEN === '' ||
+      !this.usuario.TOKEN
+    ) { this.usuario.TOKEN = this.Usuario().TOKEN; }
     // console.log(this.usuario);
     // console.log(this.usuario.TOKEN);
 
@@ -83,7 +86,7 @@ export class AuthService {
         errMsg = error.message ? error.message : error.toString();
       }
       // this._helper.Notificacion(errMsg, 'Excepción', 'error');
-      this._helper.Notificacion(errMsg,'error','',false);
+      this._helper.Notificacion(errMsg, 'error', '', false);
     }
     return Observable.throw(errMsg);
   }

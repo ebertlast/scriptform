@@ -1,3 +1,5 @@
+import { Ben } from '../../general/modelos/ben';
+
 export class Formulario {
     constructor(
         public FormularioID: string = '',
@@ -23,5 +25,13 @@ export class Formulario {
         public AP: string = '',
         public IBC: string = '',
         public Direccion: string = '',
+        public TelefinoFijo: string = '',
+        public TelefinoCelular: string = '',
+        public CorreoElectronico: string = '',
+        public Zona: string = '',
+        public Municipio: string = '',
+        public Localidad: string = '',
+        public Conyugue: Ben = new Ben(),
+        public Beneficiarios: Ben[] = [],
     ) { }
 }

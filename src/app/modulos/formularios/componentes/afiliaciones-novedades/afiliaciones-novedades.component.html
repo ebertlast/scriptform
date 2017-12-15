@@ -30,13 +30,11 @@
       <label class="col-sm-3 control-label no-padding-right bolder blue" for="TipoTramite"> 1. Tipo de Trámite:</label>
       <div class="col-sm-9">
         <div class="control-group">
-          <div class="radio">
+          <div class="radio inline">
             <label>
               <input name="TipoTramite" type="radio" class="ace" value="A" [(ngModel)]="formulario.TipoTramite" (click)="refrescarFormulario()">
               <span class="lbl"> Afiliación</span>
             </label>
-          </div>
-          <div class="radio">
             <label>
               <input name="TipoTramite" type="radio" class="ace" value="B" [(ngModel)]="formulario.TipoTramite" (click)="refrescarFormulario()">
               <span class="lbl"> Reporte de Novedades</span>
@@ -50,31 +48,23 @@
       <label class="col-sm-3 control-label no-padding-right bolder blue" for="TipoAfiliacion"> 2. Tipo de Afiliación:</label>
       <div class="col-sm-9">
         <div class="control-group">
-          <div class="radio">
+          <div class="radio inline">
             <label>
               <input name="TipoAfiliacion" type="radio" class="ace" value="A.1" [(ngModel)]="formulario.TipoAfiliacion" (click)="refrescarFormulario()">
               <span class="lbl"> (Individual) Cotizante o Cabeza de Familia</span>
             </label>
-          </div>
-          <div class="radio">
             <label>
               <input name="TipoAfiliacion" type="radio" class="ace" value="A.2" [(ngModel)]="formulario.TipoAfiliacion" (click)="refrescarFormulario()">
               <span class="lbl"> (Individual) Beneficiario o Afiliado adicional</span>
             </label>
-          </div>
-          <div class="radio">
             <label>
               <input name="TipoAfiliacion" type="radio" class="ace" value="B" [(ngModel)]="formulario.TipoAfiliacion" (click)="refrescarFormulario()">
               <span class="lbl"> Colectiva</span>
             </label>
-          </div>
-          <div class="radio">
             <label>
               <input name="TipoAfiliacion" type="radio" class="ace" value="C" [(ngModel)]="formulario.TipoAfiliacion" (click)="refrescarFormulario()">
               <span class="lbl"> Institucional</span>
             </label>
-          </div>
-          <div class="radio">
             <label>
               <input name="TipoAfiliacion" type="radio" class="ace" value="D" [(ngModel)]="formulario.TipoAfiliacion" (click)="refrescarFormulario()">
               <span class="lbl"> De Oficio</span>
@@ -88,13 +78,11 @@
       <label class="col-sm-3 control-label no-padding-right bolder blue" for="Regimen"> 3. Régimen:</label>
       <div class="col-sm-9">
         <div class="control-group">
-          <div class="radio">
+          <div class="radio inline">
             <label>
               <input name="Regimen" type="radio" class="ace" value="A" [(ngModel)]="formulario.Regimen" (click)="refrescarFormulario()">
               <span class="lbl"> Contributivo</span>
             </label>
-          </div>
-          <div class="radio">
             <label>
               <input name="Regimen" type="radio" class="ace" value="B" [(ngModel)]="formulario.Regimen" (click)="refrescarFormulario()">
               <span class="lbl"> Subsidiado</span>
@@ -108,20 +96,16 @@
       <label class="col-sm-3 control-label no-padding-right bolder blue" for="TipoAfiliado"> 4. Tipo de Afiliado:</label>
       <div class="col-sm-9">
         <div class="control-group">
-          <div class="radio">
+          <div class="radio inline">
             <label>
               <input name="TipoAfiliado" type="radio" class="ace" value="A" [(ngModel)]="formulario.TipoAfiliado" (click)="refrescarFormulario()">
               <span class="lbl"> Cotizante</span>
             </label>
-          </div>
-          <div class="radio">
             <label>
               <input name="TipoAfiliado" type="radio" class="ace" value="B" [(ngModel)]="formulario.TipoAfiliado" (click)="refrescarFormulario()">
               <span class="lbl"> Cabeza de Familia</span>
             </label>
           </div>
-        </div>
-        <div class="radio">
           <label>
             <input name="TipoAfiliado" type="radio" class="ace" value="C" [(ngModel)]="formulario.TipoAfiliado" (click)="refrescarFormulario()">
             <span class="lbl"> Beneficiario</span>
@@ -134,20 +118,16 @@
       <label class="col-sm-3 control-label no-padding-right bolder blue" for="TipoCotizante"> 5. Tipo de Cotizante:</label>
       <div class="col-sm-9">
         <div class="control-group">
-          <div class="radio">
+          <div class="radio inline">
             <label>
               <input name="TipoCotizante" type="radio" class="ace" value="A" [(ngModel)]="formulario.TipoCotizante" (click)="refrescarFormulario()">
               <span class="lbl"> Dependiente</span>
             </label>
-          </div>
-          <div class="radio">
             <label>
               <input name="TipoCotizante" type="radio" class="ace" value="B" [(ngModel)]="formulario.TipoCotizante" (click)="refrescarFormulario()">
               <span class="lbl"> Independiente</span>
             </label>
           </div>
-        </div>
-        <div class="radio">
           <label>
             <input name="TipoCotizante" type="radio" class="ace" value="C" [(ngModel)]="formulario.TipoCotizante" (click)="refrescarFormulario()">
             <span class="lbl"> Pensionado</span>
@@ -183,13 +163,18 @@
       <label class="col-sm-3 control-label no-padding-right bolder blue" for="form-field-1-1"> 7. Tipo de documento de identidad:</label>
       <div class="col-sm-9">
         <div class="control-group">
-          <div class="radio" *ngFor="let tid of tiposDocumentos">
+          <div class="radio hide" *ngFor="let tid of tiposDocumentos">
             <label>
               <input name="TipoDocumentoIdentidad" type="radio" class="ace" value="{{tid.TipoID}}" [(ngModel)]="formulario.TipoDocumentoIdentidad"
                 (click)="refrescarFormulario()">
               <span class="lbl"> {{tid.DescripcionID}}</span>
             </label>
           </div>
+          <select class="form-control" placeholder="Tipo Discapacidad" id="TipoDocumentoIdentidad" name="TipoDocumentoIdentidad" [(ngModel)]="formulario.TipoDocumentoIdentidad"
+            (change)="refrescarFormulario()">
+            <option [ngValue]="" selected></option>
+            <option [ngValue]="tid.TipoID" *ngFor="let tid of tiposDocumentos">{{tid.DescripcionID}}</option>
+          </select>
         </div>
       </div>
     </div>
@@ -207,7 +192,7 @@
       <label class="col-sm-3 control-label no-padding-right bolder blue" for="genero"> 9. Género:</label>
       <div class="col-sm-9">
         <div class="control-group">
-          <div class="radio" *ngFor="let genero of generos">
+          <div class="radio inline" *ngFor="let genero of generos">
             <label>
               <input name="genero" type="radio" class="ace" value="{{genero.GeneroID}}" [(ngModel)]="formulario.Sexo" (click)="refrescarFormulario()">
               <span class="lbl"> {{genero.DescripcionGenero}}</span>
@@ -247,7 +232,11 @@
     <div class="form-group">
       <label class="col-sm-3 control-label no-padding-right bolder blue" for="Etnia"> 11. Étnia:</label>
       <div class="col-sm-9">
-        <div class="control-group">
+        <select name="etnia" id="etnia" [(ngModel)]="formulario.Etnia" (change)="refrescarFormulario()">
+          <option value=""></option>
+          <option value="{{etnia.DATO1}}" *ngFor="let etnia of etnias">{{etnia.DESCRIPCION}}</option>
+        </select>
+        <div class="control-group hide">
           <div class="radio" *ngFor="let etnia of etnias">
             <label>
               <input name="Etnia" type="radio" class="ace" value="{{etnia.DATO1}}" [(ngModel)]="formulario.Etnia" (click)="refrescarFormulario()">
@@ -321,7 +310,8 @@
     <div class="form-group">
       <label class="col-sm-3 control-label no-padding-right bolder blue" for="IBC"> 17. Ingreso base de cotización - IBC:</label>
       <div class="col-sm-9">
-        <input type="number" id="IBC" name="IBC" [(ngModel)]="formulario.IBC" placeholder="Ingresos en Moneda" class="col-xs-10 col-sm-5">
+        <input type="number" id="IBC" name="IBC" [(ngModel)]="formulario.IBC" placeholder="Ingresos en Moneda" (change)="refrescarFormulario()"
+          class="col-xs-10 col-sm-5">
       </div>
     </div>
 
@@ -329,9 +319,491 @@
     <div class="form-group">
       <label class="col-sm-3 control-label no-padding-right bolder blue" for="Direccion"> 18. Residencia:</label>
       <div class="col-sm-9">
+        <div class="control-group">
+          <label class="inline" for="Zona">
+            Zona:
+          </label>
+          <div class="radio inline">
+            <label *ngFor="let zona of zonas">
+              <input name="Zona" type="radio" class="ace" value="{{zona.ZonaID}}" [(ngModel)]="formulario.Zona" (click)="refrescarFormulario()">
+              <span class="lbl"> {{zona.DescripcionZona}}</span>
+            </label>
+
+          </div>
+        </div>
+        <div class="form-inline">
+          <label class="inline" for="Municipio">
+            Municipio:
+          </label>
+          <select name="Municipio" id="Municipio" [(ngModel)]="formulario.Municipio" (change)="refrescarFormulario()">
+            <option [ngValue]="municipio.MunicipioID" *ngFor="let municipio of municipios">{{municipio.MunicipioID}}</option>
+          </select>
+          <select name="Nombre" id="Nombre" [(ngModel)]="formulario.Municipio" (change)="refrescarFormulario()">
+            <option [ngValue]="municipio.MunicipioID" *ngFor="let municipio of municipios">{{municipio.DescripcionMunicipio}} - {{municipio.DescripcionDepartamento}}</option>
+          </select>
+        </div>
+        <div class="col-sm-9">
+          <input [(ngModel)]="formulario.Localidad" title="Sector local donde la residencia" type="text" id="Localidad" name="Localidad"
+            placeholder="Localidad / Comuna" class="form-control" (change)="refrescarFormulario()">
+        </div>
         <app-generar-direccion [desplegado]="false" (EnviarDireccion)="setDireccion($event)"></app-generar-direccion>
         <input [(ngModel)]="formulario.Direccion" type="text" id="Direccion" name="Direccion" placeholder="Dirección" class="form-control"
           disabled>
+        <br>
+        <div class="form-inline">
+          <label class="inline" for="TelefonoFijo">
+            Teléfono Fijo:
+            <small class="text-warning">(999) 999-9999</small>
+          </label>
+          <input id="TelefonoFijo" name="TelefonoFijo" [(ngModel)]="formulario.TelefonoFijo" title="Número telefónico de domicilio"
+            class="input-medium input-mask-phone" placeholder="Teléfono Fijo" type="text" (change)="refrescarFormulario()"> &nbsp;&nbsp;&nbsp;
+          <label class="inline" for="TelefonoCelular">
+            Teléfono Celular:
+            <small class="text-warning">(999) 999-9999</small>
+          </label>
+          <input id="TelefonoCelular" name="TelefonoCelular" [(ngModel)]="formulario.TelefonoCelular" title="Número telefónico móvil personal"
+            class="input-medium input-mask-phone" placeholder="Teléfono Móvil" type="text" (change)="refrescarFormulario()">
+        </div>
+        <div>
+          <label for="CorreoElectronico">
+            Correo Electrónico:
+          </label>
+          <br>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <!-- <i class="ace-icon fa fa-phone"></i> -->
+              @
+            </span>
+
+            <input class="form-control input-mask-email input-small" id="CorreoElectronico" name="CorreoElectronico" [(ngModel)]="formulario.CorreoElectronico"
+              type="email" (change)="refrescarFormulario()">
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </form>
+</div>
+
+<!-- IV. DATOS DE IDENTIFICACIÓN DEL NÚCLEO FAMILIAR -->
+<div class="col-sm-12">
+  <h3 class="header smaller lighter blue">IV. DATOS DE IDENTIFICACIÓN DEL NÚCLEO FAMILIAR
+    <!-- <small>(Del cotizante o cabeza de familia)</small> -->
+    <!-- <a href="#modal-formConyugue" role="button" class="bigger-125 bg-primary white" data-toggle="modal">
+      &nbsp; Content Slider inside Modal Box &nbsp;
+    </a> -->
+
+  </h3>
+  <form class="form-horizontal" role="form">
+    <!-- 19-23. Conyugue -->
+    <div class="form-group">
+      <label class="col-sm-3 control-label no-padding-right bolder blue" for="PrimerApellido"> 19-23. Conyugue:</label>
+      <div class="col-sm-9">
+        <div class="widget-box widget-color-blue" id="widget-box-2">
+          <!-- #section:custom/widget-box.options -->
+          <div class="widget-header">
+            <h5 class="widget-title bigger lighter" (click)="lanzarVentanaConyugue()" style="cursor: pointer">
+              <i class="ace-icon fa fa-user hide"></i>
+              Datos básicos de identificación del cónyugue o compañero(a) permanente cotizante
+            </h5>
+            <!-- #section:custom/widget-box.toolbar -->
+            <div class="widget-toolbar">
+              <a href="#" data-action="fullscreen" class="orange2 hide">
+                <i class="ace-icon fa fa-expand"></i>
+              </a>
+              <!-- <a href="#" href="#modal-formConyugue" data-toggle="modal">
+                <i class="ace-icon fa fa-user"></i>
+              </a> -->
+              <!-- <a href="#modal-formConyugue" class="orange2" data-toggle="modal">
+                  <i class="ace-icon fa fa-user"></i>
+                </a> -->
+              <!-- <a href="#modal-formConyugue" role="button" class="bigger-125 bg-primary white" data-toggle="modal">
+                &nbsp; Content Slider inside Modal Box &nbsp;
+              </a> -->
+
+              <a href="#" data-action="collapse">
+                <i class="ace-icon fa fa-chevron-up" id="{{btnminimizar}}"></i>
+              </a>
+
+              <!-- <a href="#" data-action="close">
+            <i class="ace-icon fa fa-times"></i>
+          </a> -->
+            </div>
+            <!-- /section:custom/widget-box.toolbar -->
+          </div>
+
+          <!-- /section:custom/widget-box.options -->
+          <div class="widget-body">
+            <div class="widget-main no-padding">
+              <table class="table table-striped table-bordered table-hover">
+                <thead class="thin-border-bottom">
+                  <tr>
+                    <th colspan="4">
+                      19. Apellidos y nombres
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="hide">
+                    <th>Primer Apellido</th>
+
+                    <th class="hidden-480">
+                      Segundo Apellido
+                    </th>
+
+                    <th>
+                      Primer Nombre
+                    </th>
+                    <th class="hidden-480">
+                      Segundo Nombre
+                    </th>
+                  </tr>
+                  <tr>
+                    <td>{{formulario.Conyugue.PrimerApellido}}</td>
+
+                    <td class="hidden-480">
+                      {{formulario.Conyugue.SegundoApellido}}
+                    </td>
+
+                    <td>
+                      {{formulario.Conyugue.PrimerNombre}}
+                    </td>
+                    <td class="hidden-480">
+                      {{formulario.Conyugue.SegundoNombre}}
+                    </td>
+                  </tr>
+                </tbody>
+                <thead class="thin-border-bottom">
+                  <tr>
+                    <th class="hidden-480">
+                      20. Tipo de Documento de Identidad
+                    </th>
+                    <th>
+                      21. Número de Documento de Identidad
+                    </th>
+                    <th class="hidden-480">
+                      22. Sexo
+                    </th>
+                    <th class="hidden-480">
+                      23. Fecha de Nacimiento
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="hidden-480">
+                      <div *ngFor="let tid of tiposDocumentos | filtrar: 'TipoID' : formulario.Conyugue.TipoId">{{tid.DescripcionID}}</div>
+                    </td>
+                    <td>
+                      {{formulario.Conyugue.NumeroIdentificacion}}
+                    </td>
+                    <td class="hidden-480">
+                      <div *ngFor="let gen of generos | filtrar: 'GeneroID' : formulario.Conyugue.Sexo">{{gen.DescripcionGenero}}</div>
+                    </td>
+                    <td class="hidden-480">
+                      {{formulario.Conyugue.FechaNacimiento}}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <app-modal-afi [modalid]="'modal-formConyugue'" [direccion]="formulario.Direccion" (EnviarAfiliado)="setConyugue($event)"></app-modal-afi>
+
+        </div>
+      </div>
+    </div>
+    <!-- 25-34. Beneficiarios -->
+    <div class="form-group">
+      <label class="col-sm-3 control-label no-padding-right bolder blue" for="PrimerApellido"> 25-34. Beneficiarios:</label>
+      <div class="col-sm-9">
+        <div class="widget-box widget-color-blue" id="widget-box-2">
+          <!-- #section:custom/widget-box.options -->
+          <div class="widget-header">
+            <h5 class="widget-title bigger lighter" (click)="lanzarVentanaBeneficiarios()" style="cursor: pointer">
+              <i class="ace-icon fa fa-user hide"></i>
+              Datos básicos de identificación de los beneficiarios y de los afiliados adicionales
+            </h5>
+            <!-- #section:custom/widget-box.toolbar -->
+            <div class="widget-toolbar">
+              <a href="#" data-action="collapse">
+                <i class="ace-icon fa fa-chevron-up"></i>
+              </a>
+
+              <!-- <a href="#" data-action="close">
+              <i class="ace-icon fa fa-times"></i>
+            </a> -->
+            </div>
+            <!-- /section:custom/widget-box.toolbar -->
+          </div>
+
+          <!-- /section:custom/widget-box.options -->
+          <div class="widget-body">
+            <div class="widget-main no-padding">
+              <table class="table table-striped table-bordered table-hover">
+                <thead class="thin-border-bottom">
+                  <tr>
+                    <th class="hidden-480">
+                      25-26. Identificación
+                    </th>
+                    <th>
+                      24. Apellidos y Nombres
+                    </th>
+                    <th class="hidden-480">
+                      27. Sexo
+                    </th>
+                    <th class="hidden-480">
+                      28. Fecha de Nacimiento
+                    </th>
+                    <th class="hidden-480">
+                      29. Parentesco
+                    </th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let ben of formulario.Beneficiarios">
+                    <td class="hidden-480">
+                      {{ben.TipoId}} {{ben.NumeroIdentificacion}}
+                    </td>
+                    <td>
+                      {{ben.PrimerApellido}} {{ben.SegundoApellido}} {{ben.PrimerNombre}} {{ben.SegundoNombre}}
+                    </td>
+                    <td class="hidden-480">
+                      <div *ngFor="let gen of generos | filtrar: 'GeneroID' : ben.Sexo">{{gen.DescripcionGenero}}</div>
+                    </td>
+                    <td class="hidden-480">
+                      {{ben.FechaNacimiento}}
+                    </td>
+                    <td class="hidden-480">
+                      {{ben.Parentesco.DescripcionTipoRelacion}}
+                    </td>
+                    <td>
+                      <button class="label label-danger label-white middle" (click)="delBeneficiario(ben.TipoId, ben.NumeroIdentificacion)">Quitar</button>
+                    </td>
+                  </tr>
+                </tbody>
+
+              </table>
+            </div>
+          </div>
+
+          <app-modal-afi [modalid]="'modal-formBeneficiarios'" [direccion]="formulario.Direccion" (EnviarAfiliado)="addBeneficiario($event)"></app-modal-afi>
+
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<!-- V. DATOS DE IDENTIFICACIÓN DEL EMPLEADOR Y OTROS APORTANTES DE LAS ENTIDADES RESPONSABLES DE LA AFILIACIÓN COLECTIVA INSTITUCIONAL O DE OFICIO -->
+<div class="col-sm-12">
+  <h3 class="header smaller lighter blue">V. DATOS DE IDENTIFICACIÓN DEL EMPLEADOR Y OTROS APORTANTES DE LAS ENTIDADES RESPONSABLES DE LA AFILIACIÓN COLECTIVA INSTITUCIONAL O DE OFICIO
+    <!-- <small>(Del cotizante o cabeza de familia)</small> -->
+    <!-- <a href="#modal-formConyugue" role="button" class="bigger-125 bg-primary white" data-toggle="modal">
+      &nbsp; Content Slider inside Modal Box &nbsp;
+    </a> -->
+
+  </h3>
+  <form class="form-horizontal" role="form">
+    <!-- 19-23. Conyugue -->
+    <div class="form-group">
+      <label class="col-sm-3 control-label no-padding-right bolder blue" for="PrimerApellido"> 19-23. Conyugue:</label>
+      <div class="col-sm-9">
+        <div class="widget-box widget-color-blue" id="widget-box-2">
+          <!-- #section:custom/widget-box.options -->
+          <div class="widget-header">
+            <h5 class="widget-title bigger lighter" (click)="lanzarVentanaConyugue()" style="cursor: pointer">
+              <i class="ace-icon fa fa-user hide"></i>
+              Datos básicos de identificación del cónyugue o compañero(a) permanente cotizante
+            </h5>
+            <!-- #section:custom/widget-box.toolbar -->
+            <div class="widget-toolbar">
+              <a href="#" data-action="fullscreen" class="orange2 hide">
+                <i class="ace-icon fa fa-expand"></i>
+              </a>
+              <!-- <a href="#" href="#modal-formConyugue" data-toggle="modal">
+                <i class="ace-icon fa fa-user"></i>
+              </a> -->
+              <!-- <a href="#modal-formConyugue" class="orange2" data-toggle="modal">
+                  <i class="ace-icon fa fa-user"></i>
+                </a> -->
+              <!-- <a href="#modal-formConyugue" role="button" class="bigger-125 bg-primary white" data-toggle="modal">
+                &nbsp; Content Slider inside Modal Box &nbsp;
+              </a> -->
+
+              <a href="#" data-action="collapse">
+                <i class="ace-icon fa fa-chevron-up" id="{{btnminimizar}}"></i>
+              </a>
+
+              <!-- <a href="#" data-action="close">
+            <i class="ace-icon fa fa-times"></i>
+          </a> -->
+            </div>
+            <!-- /section:custom/widget-box.toolbar -->
+          </div>
+
+          <!-- /section:custom/widget-box.options -->
+          <div class="widget-body">
+            <div class="widget-main no-padding">
+              <table class="table table-striped table-bordered table-hover">
+                <thead class="thin-border-bottom">
+                  <tr>
+                    <th colspan="4">
+                      19. Apellidos y nombres
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="hide">
+                    <th>Primer Apellido</th>
+
+                    <th class="hidden-480">
+                      Segundo Apellido
+                    </th>
+
+                    <th>
+                      Primer Nombre
+                    </th>
+                    <th class="hidden-480">
+                      Segundo Nombre
+                    </th>
+                  </tr>
+                  <tr>
+                    <td>{{formulario.Conyugue.PrimerApellido}}</td>
+
+                    <td class="hidden-480">
+                      {{formulario.Conyugue.SegundoApellido}}
+                    </td>
+
+                    <td>
+                      {{formulario.Conyugue.PrimerNombre}}
+                    </td>
+                    <td class="hidden-480">
+                      {{formulario.Conyugue.SegundoNombre}}
+                    </td>
+                  </tr>
+                </tbody>
+                <thead class="thin-border-bottom">
+                  <tr>
+                    <th class="hidden-480">
+                      20. Tipo de Documento de Identidad
+                    </th>
+                    <th>
+                      21. Número de Documento de Identidad
+                    </th>
+                    <th class="hidden-480">
+                      22. Sexo
+                    </th>
+                    <th class="hidden-480">
+                      23. Fecha de Nacimiento
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="hidden-480">
+                      <div *ngFor="let tid of tiposDocumentos | filtrar: 'TipoID' : formulario.Conyugue.TipoId">{{tid.DescripcionID}}</div>
+                    </td>
+                    <td>
+                      {{formulario.Conyugue.NumeroIdentificacion}}
+                    </td>
+                    <td class="hidden-480">
+                      <div *ngFor="let gen of generos | filtrar: 'GeneroID' : formulario.Conyugue.Sexo">{{gen.DescripcionGenero}}</div>
+                    </td>
+                    <td class="hidden-480">
+                      {{formulario.Conyugue.FechaNacimiento}}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <app-modal-afi [modalid]="'modal-formConyugue'" [direccion]="formulario.Direccion" (EnviarAfiliado)="setConyugue($event)"></app-modal-afi>
+
+        </div>
+      </div>
+    </div>
+    <!-- 25-34. Beneficiarios -->
+    <div class="form-group">
+      <label class="col-sm-3 control-label no-padding-right bolder blue" for="PrimerApellido"> 25-34. Beneficiarios:</label>
+      <div class="col-sm-9">
+        <div class="widget-box widget-color-blue" id="widget-box-2">
+          <!-- #section:custom/widget-box.options -->
+          <div class="widget-header">
+            <h5 class="widget-title bigger lighter" (click)="lanzarVentanaBeneficiarios()" style="cursor: pointer">
+              <i class="ace-icon fa fa-user hide"></i>
+              Datos básicos de identificación de los beneficiarios y de los afiliados adicionales
+            </h5>
+            <!-- #section:custom/widget-box.toolbar -->
+            <div class="widget-toolbar">
+              <a href="#" data-action="collapse">
+                <i class="ace-icon fa fa-chevron-up"></i>
+              </a>
+
+              <!-- <a href="#" data-action="close">
+              <i class="ace-icon fa fa-times"></i>
+            </a> -->
+            </div>
+            <!-- /section:custom/widget-box.toolbar -->
+          </div>
+
+          <!-- /section:custom/widget-box.options -->
+          <div class="widget-body">
+            <div class="widget-main no-padding">
+              <table class="table table-striped table-bordered table-hover">
+                <thead class="thin-border-bottom">
+                  <tr>
+                    <th class="hidden-480">
+                      25-26. Identificación
+                    </th>
+                    <th>
+                      24. Apellidos y Nombres
+                    </th>
+                    <th class="hidden-480">
+                      27. Sexo
+                    </th>
+                    <th class="hidden-480">
+                      28. Fecha de Nacimiento
+                    </th>
+                    <th class="hidden-480">
+                      29. Parentesco
+                    </th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let ben of formulario.Beneficiarios">
+                    <td class="hidden-480">
+                      {{ben.TipoId}} {{ben.NumeroIdentificacion}}
+                    </td>
+                    <td>
+                      {{ben.PrimerApellido}} {{ben.SegundoApellido}} {{ben.PrimerNombre}} {{ben.SegundoNombre}}
+                    </td>
+                    <td class="hidden-480">
+                      <div *ngFor="let gen of generos | filtrar: 'GeneroID' : ben.Sexo">{{gen.DescripcionGenero}}</div>
+                    </td>
+                    <td class="hidden-480">
+                      {{ben.FechaNacimiento}}
+                    </td>
+                    <td class="hidden-480">
+                      {{ben.Parentesco.DescripcionTipoRelacion}}
+                    </td>
+                    <td>
+                      <button class="label label-danger label-white middle" (click)="delBeneficiario(ben.TipoId, ben.NumeroIdentificacion)">Quitar</button>
+                    </td>
+                  </tr>
+                </tbody>
+
+              </table>
+            </div>
+          </div>
+
+          <app-modal-afi [modalid]="'modal-formBeneficiarios'" [direccion]="formulario.Direccion" (EnviarAfiliado)="addBeneficiario($event)"></app-modal-afi>
+
+        </div>
       </div>
     </div>
   </form>

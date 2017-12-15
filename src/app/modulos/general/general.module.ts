@@ -22,6 +22,10 @@ import { GpoService } from './servicios/gpo.service';
 import { TdiService } from './servicios/tdi.service';
 import { GdiService } from './servicios/gdi.service';
 import { GenerarDireccionComponent } from './componentes/generar-direccion/generar-direccion.component';
+import { ModalAfiComponent } from './componentes/modal-afi/modal-afi.component';
+import { TiprService } from './servicios/tipr.service';
+import { ZonService } from './servicios/zon.service';
+import { IpsService } from './servicios/ips.service';
 
 @NgModule({
   imports: [
@@ -30,9 +34,9 @@ import { GenerarDireccionComponent } from './componentes/generar-direccion/gener
     FormsModule
   ],
   exports: [NavbarTopComponent, NavbarLeftComponent, CapitalizarPipe, SedComponent, FiltrarPipe, MyLinkDirective, SafePipe, TgenComponent,
-    GenerarDireccionComponent],
+    GenerarDireccionComponent, ModalAfiComponent],
   declarations: [NavbarTopComponent, CapitalizarPipe, NavbarLeftComponent, SedComponent, FiltrarPipe, MyLinkDirective, SafePipe,
-    TgenComponent, GenerarDireccionComponent],
-  providers: [SedService, TidService, AfiService, MunService, NovService, TgenService, GenService, GpoService, TdiService, GdiService]
+    TgenComponent, GenerarDireccionComponent, ModalAfiComponent],
+  providers: [SedService, TidService, AfiService, MunService, NovService, TgenService, GenService, GpoService, TdiService, GdiService, TiprService, ZonService, IpsService]
 })
 export class GeneralModule { }

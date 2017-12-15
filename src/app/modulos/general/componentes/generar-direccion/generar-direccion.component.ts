@@ -1,15 +1,19 @@
 import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import { Helper } from '../../../../app-helper';
+import { Direccion } from '../../modelos/direccion';
+import { AfterViewInit } from '@angular/core/src/metadata/lifecycle_hooks';
 declare var $: any;
 @Component({
   selector: 'app-generar-direccion',
   templateUrl: './generar-direccion.component.html',
   styleUrls: ['./generar-direccion.component.css']
 })
-export class GenerarDireccionComponent implements OnInit {
+export class GenerarDireccionComponent implements OnInit, AfterViewInit {
   @Input() desplegado = false;
+  @Input() divid = 'widget-container-col-1';
   @Output() EnviarDireccion = new EventEmitter();
   public btnminimizar = '';
+  public div: any;
   //#region Direccion
   private _direccion = '';
   public get direccion(): string {
@@ -43,18 +47,18 @@ export class GenerarDireccionComponent implements OnInit {
 
   //#endregion
   private construirDireccion() {
-    this.direccion = this._direccionAux.TipoViaPrincipal + ' ';
-    this.direccion += this._direccionAux.NumeroViaPrincipal + ' ';
-    this.direccion += this._direccionAux.LetraViaPrincipal + ' ';
-    this.direccion += this._direccionAux.Bis + ' ';
-    this.direccion += this._direccionAux.LetraBis + ' ';
-    this.direccion += this._direccionAux.CuadranteViaPrincipal + ' ';
-    this.direccion += this._direccionAux.NumeroViaSecundaria + ' ';
-    this.direccion += this._direccionAux.LetraViaSecundaria + ' ';
-    this.direccion += this._direccionAux.NumeroPlaca + ' ';
-    this.direccion += this._direccionAux.CuadranteViaSecundaria + ' ';
-    this.direccion += this._direccionComp.toUpperCase() + ' ';
-    this.direccion.replace('  ', ' '); // .trim();
+    this.direccion = this._direccionAux.TipoViaPrincipal + (this._direccionAux.TipoViaPrincipal === '' ? '' : ' ');
+    this.direccion += this._direccionAux.NumeroViaPrincipal + (this._direccionAux.NumeroViaPrincipal === '' ? '' : ' ');
+    this.direccion += this._direccionAux.LetraViaPrincipal + (this._direccionAux.LetraViaPrincipal === '' ? '' : ' ');
+    this.direccion += this._direccionAux.Bis + (this._direccionAux.Bis === '' ? '' : ' ');
+    this.direccion += this._direccionAux.LetraBis + (this._direccionAux.LetraBis === '' ? '' : ' ');
+    this.direccion += this._direccionAux.CuadranteViaPrincipal + (this._direccionAux.CuadranteViaPrincipal === '' ? '' : ' ');
+    this.direccion += this._direccionAux.NumeroViaSecundaria + (this._direccionAux.NumeroViaSecundaria === '' ? '' : ' ');
+    this.direccion += this._direccionAux.LetraViaSecundaria + (this._direccionAux.LetraViaSecundaria === '' ? '' : ' ');
+    this.direccion += this._direccionAux.NumeroPlaca + (this._direccionAux.NumeroPlaca === '' ? '' : ' ');
+    this.direccion += this._direccionAux.CuadranteViaSecundaria + (this._direccionAux.CuadranteViaSecundaria === '' ? '' : ' ');
+    this.direccion += this._direccionComp.toUpperCase(); // + (this._direccionAux.TipoViaPrincipal === '' ? '' : ' ');
+    // this.direccion.replace('  ', ' '); // .trim();
   }
   constructor(
     private _helper: Helper
@@ -66,30 +70,41 @@ export class GenerarDireccionComponent implements OnInit {
     $('[id^=Cuadrante]').keypress(me._helper.SoloNumeros);
     this.btnminimizar = (Math.floor(Math.random() * 999999)).toString();
   }
-
+  ngAfterViewInit() {
+    this.div = $('#' + this.divid);
+  }
   sendDireccion(event) {
+    this.direccion =
+      this.direccion
+        // .trim()
+        // .replace(' ', '*')
+        // .replace('**', '*')
+        // .replace('**', '*')
+        // .replace('*', ' ')
+        .trim();
+    // console.log(this.direccion);
     this.EnviarDireccion.emit({ direccion: this.direccion });
     // this.desplegado = false;
     $('#' + this.btnminimizar).click();
   }
   agregarComplemento(): void {
-    const componenteComplemento = $('#componenteComplemento').val();
-    const valorComplemento = $('#valorComplemento').val();
+    const componenteComplemento = this.div.find('#componenteComplemento').val();
+    const valorComplemento = this.div.find('#valorComplemento').val();
     if (componenteComplemento === '') {
-      $('#componenteComplemento').focus();
+      this.div.find('#componenteComplemento').focus();
       return;
     }
     if (valorComplemento === '') {
-      $('#valorComplemento').focus();
+      this.div.find('#valorComplemento').focus();
       return;
     }
-    this.direccionComp += ' ' + componenteComplemento + ' ' + valorComplemento;
-    $('#componenteComplemento').val('');
-    $('#valorComplemento').val('');
+    this.direccionComp += componenteComplemento + ' ' + valorComplemento + ' ';
+    this.div.find('#componenteComplemento').val('');
+    this.div.find('#valorComplemento').val('');
     // console.log(this.direccionComp);
     this.construirDireccion();
     // this.direccionAuxComp = '';
-    $('#componenteComplemento').focus();
+    this.div.find('#componenteComplemento').focus();
   }
   public limpiarDireccion() {
     this.direccionComp = '';
@@ -98,7 +113,7 @@ export class GenerarDireccionComponent implements OnInit {
   }
 }
 
-class Direccion {
+class DireccionDEPRECATED {
   constructor(
     /**
      * 1.- Tipo de Vía
