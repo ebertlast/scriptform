@@ -36,7 +36,6 @@ export class PrincipalComponent implements OnInit {
     this.msjMarquesina();
   }
   private msjMarquesina() {
-    // console.log("Supervisar Sesión " + Date());
     this.marquesina = this._authService.MsjBienvenida();
     const _me = this;
     setTimeout(function () {

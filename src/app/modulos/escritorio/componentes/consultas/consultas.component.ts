@@ -252,7 +252,7 @@ export class ConsultasComponent implements OnInit {
         var w1 = $parent.width();
 
         var off2 = $source.offset();
-        //var w2 = $source.width();
+        // var w2 = $source.width();
         let x: number;
         x = w1/2;
         // x=parseInt(x);

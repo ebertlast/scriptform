@@ -4,3 +4,7 @@ table#tablaDireccion, td, th{
     text-align: center;
     vertical-align: middle;
 }
+
+#valorComplemento{
+    text-transform: uppercase;
+}

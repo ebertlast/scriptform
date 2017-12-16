@@ -1,0 +1,1506 @@
+<div class="page-header">
+  <h1>
+    Administrativo
+    <small>
+      <i class="ace-icon fa fa-angle-double-right"></i>
+      Registros
+    </small>
+    <small>
+      <i class="ace-icon fa fa-angle-double-right"></i>
+      Empleadores
+    </small>
+  </h1>
+</div>
+<div class="row">
+  <div class="col-xs-12 col-sm-12 widget-container-col ui-sortable" id="widget-container-col-1">
+    <!-- #section:custom/widget-box -->
+    <div class="widget-box ui-sortable-handle" id="widget-box-1">
+      <div class="widget-header">
+        <h5 class="widget-title">
+          Formulario de Registro
+        </h5>
+
+        <!-- #section:custom/widget-box.toolbar -->
+        <div class="pull-right">
+          <label [ngClass]="{'hide': !cargando}">
+            <small class="green">
+              <b>Pensando...</b>
+            </small>
+            <span class="lbl middle"></span>
+            <img src="assets/images/loading/pinwheel40x40.gif" alt="">
+          </label>
+        </div>
+        <div class="widget-toolbar" [ngClass]="{'hide': cargando}">
+          <div class="widget-menu">
+            <a href="#" data-action="settings" data-toggle="dropdown" class="hide">
+              <i class="ace-icon fa fa-bars"></i>
+            </a>
+
+            <ul class="dropdown-menu dropdown-menu-right dropdown-light-blue dropdown-caret dropdown-closer">
+              <li>
+                <a data-toggle="tab" href="#dropdown1">Option#1</a>
+              </li>
+
+              <li>
+                <a data-toggle="tab" href="#dropdown2">Option#2</a>
+              </li>
+            </ul>
+          </div>
+
+          <a href="#" data-action="fullscreen" class="orange2 hide">
+            <i class="ace-icon fa fa-expand"></i>
+          </a>
+
+          <a href="#" data-action="reload" class="hide">
+            <i class="ace-icon fa fa-refresh"></i>
+          </a>
+
+          <a href="#" data-action="collapse">
+            <i class="ace-icon fa fa-chevron-up"></i>
+          </a>
+
+          <a href="#" data-action="close">
+            <i class="ace-icon fa fa-times"></i>
+          </a>
+        </div>
+
+        <!-- /section:custom/widget-box.toolbar -->
+      </div>
+
+      <div class="widget-body" style="display: block;">
+        <div class="widget-main">
+
+          <p class="alert alert-info hide">
+            Nunc aliquam enim ut arcu aliquet adipiscing. Fusce dignissim volutpat justo non consectetur. Nulla fringilla eleifend consectetur.
+          </p>
+          <p class="alert alert-success hide">
+            Raw denim you probably haven't heard of them jean shorts Austin.
+          </p>
+
+
+          <div class="form-inline">
+            <label class="bolder blue" for="TipoID">Identificación:</label>
+            <!-- <label class="col-sm-1 control-label no-padding-right bolder blue" for="TipoID"> Identificación:</label> -->
+            <select name="TipoID" id="TipoID" [(ngModel)]="empl.TipoID" (change)="consultarEmpleador()">
+              <option [ngValue]="tid.TipoID" *ngFor="let tid of tids">{{tid.TipoID}}</option>
+            </select>
+            <select name="TipoIDDescripcion" id="TipoIDDescripcion" [(ngModel)]="empl.TipoID" (change)="consultarEmpleador()">
+              <option [ngValue]="tid.TipoID" *ngFor="let tid of tids">{{tid.DescripcionID}}</option>
+            </select>
+            <input class="input-medium" placeholder="Número" type="text" name="NumeroIdentificacion" id="NumeroIdentificacion" [(ngModel)]="empl.NumeroIdentificacion"
+              (change)="consultarEmpleador()">
+            <label class="bolder blue" for="TipoID">Razón Social:</label>
+            <input class="input-xlarge" placeholder="Nombre de la empresa empleadora" type="text" name="RazonSocial" id="RazonSocial"
+              [(ngModel)]="empl.RazonSocial" (change)="formatNombre()">
+          </div>
+
+          <div class="form-inline">
+            <label class="bolder blue" for="TipoID">Teléfono Fijo:</label>
+            <!-- <label class="col-sm-1 control-label no-padding-right bolder blue" for="TipoID"> Identificación:</label> -->
+            <input id="Telefono" name="Telefono" [(ngModel)]="empl.Telefono" title="Número telefónico" class="input-medium input-mask-phone"
+              placeholder="Teléfono Fijo" type="text"> &nbsp;&nbsp;&nbsp;
+
+            <label class="bolder blue" for="TipoID">Correo Electrónico:</label>
+            <input class="input-xlarge" title="Correo Electrónico" type="text" name="Email" id="Email" [(ngModel)]="empl.Email">
+          </div>
+
+          <div class="form-inline">
+            <label class="bolder blue" for="NaturalezaID">Naturaleza:</label>
+            <select title="Naturaleza de la empresa" name="NaturalezaID" id="NaturalezaID" [(ngModel)]="empl.NaturalezaID">
+              <option [ngValue]="nae.NaturalezaID" *ngFor="let nae of naes">{{nae.NaturalezaID}}</option>
+            </select>
+            <select name="Naturaleza" id="Naturaleza" title="Naturaleza de la empresa" [(ngModel)]="empl.NaturalezaID">
+              <option [ngValue]="nae.NaturalezaID" *ngFor="let nae of naes">{{nae.DescripcionNaturaleza}}</option>
+            </select>
+            <label class="bolder blue" for="RegimenEmpresaID">Régimen:</label>
+            <select title="Régimen de la empresa" name="RegimeEmpresaID" id="RegimeEmpresaID" [(ngModel)]="empl.RegimeEmpresaID">
+              <option [ngValue]="rem.RegimeEmpresaID" *ngFor="let rem of rems">{{rem.RegimeEmpresaID}}</option>
+            </select>
+            <select title="Régimen de la empresa" name="DescripcionRegimenEmpresa" id="DescripcionRegimenEmpresa" [(ngModel)]="empl.RegimeEmpresaID">
+              <option [ngValue]="rem.RegimeEmpresaID" *ngFor="let rem of rems">{{rem.DescripcionRegimenEmpresa}}</option>
+            </select>
+            <label class="bolder blue" for="TamanoID">Tamaño:</label>
+            <select title="Tamaño de la empresa" name="TamanoID" id="TamanoID" [(ngModel)]="empl.TamanoID">
+              <option [ngValue]="tae.TamanoID" *ngFor="let tae of taes">{{tae.TamanoID}}</option>
+            </select>
+            <select title="Tamaño de la empresa" name="DescripcionTamano" id="DescripcionTamano" [(ngModel)]="empl.TamanoID">
+              <option [ngValue]="tae.TamanoID" *ngFor="let tae of taes">{{tae.DescripcionTamano}}</option>
+            </select>
+          </div>
+          <div class="form-inline">
+            <label class="bolder blue" for="TipoEmpresaID">Tipo de Empresa:</label>
+            <select title="Tipo de Empresa" name="TipoEmpresaID" id="TipoEmpresaID" [(ngModel)]="empl.TipoEmpresaID">
+              <option [ngValue]="tem.TipoEmpresaID" *ngFor="let tem of tems">{{tem.TipoEmpresaID}}</option>
+            </select>
+            <select title="Tipo de Empresa" name="DescripcionTipoEmpresa" id="DescripcionTipoEmpresa" [(ngModel)]="empl.TipoEmpresaID">
+              <option [ngValue]="tem.TipoEmpresaID" *ngFor="let tem of tems">{{tem.DescripcionTipoEmpresa}}</option>
+            </select>
+          </div>
+          <div class="form-inline">
+            <label class="bolder blue" for="MunicipioID">Ciudad:</label>
+            <select name="MunicipioID" id="MunicipioID" [(ngModel)]="empl.MunicipioID">
+              <option [ngValue]="mun.MunicipioID" *ngFor="let mun of muns">{{mun.MunicipioID}}</option>
+            </select>
+            <select name="Municipio" id="Municipio" [(ngModel)]="empl.MunicipioID">
+              <option [ngValue]="mun.MunicipioID" *ngFor="let mun of muns">{{mun.DescripcionMunicipio}} - {{mun.DescripcionDepartamento}}</option>
+            </select>
+          </div>
+          <app-generar-direccion [desplegado]="false" (EnviarDireccion)="setDireccion($event)"></app-generar-direccion>
+          <div class="form-inline">
+            <label class="bolder blue" for="MunicipioID">Dirección Fiscal: </label>
+            {{empl.DireccionFiscal}}
+          </div>
+
+          <div class="form-horizontal hide" role="form">
+            <div class="form-group">
+              <div class="form-inline">
+                <label class="col-sm-1 control-label no-padding-right bolder blue" for="TipoID"> Identificación:</label>
+                <div class="col-sm-11">
+                  <select name="TipoID" id="TipoID" [(ngModel)]="empl.TipoId" (change)="consultarEmpleador()">
+                    <option [ngValue]="tid.TipoID" *ngFor="let tid of tids">{{tid.TipoID}}</option>
+                  </select>
+                  <select name="TipoIDDescripcion" id="TipoIDDescripcion" [(ngModel)]="empl.TipoId" (change)="consultarEmpleador()">
+                    <option [ngValue]="tid.TipoID" *ngFor="let tid of tids">{{tid.DescripcionID}}</option>
+                  </select>
+                  <label class="hide" for="NumeroIdentificacion">
+                    Número de Identificación:
+                  </label>
+                  <input [(ngModel)]="empl.NumeroIdentificacion" type="text" id="NumeroIdentificacion" name="NumeroIdentificacion" placeholder="Número de Identificación"
+                    class="form-control">
+                </div>
+                <!-- <div class="col-sm-9 form-inline">
+                      <input id="form-field-2" placeholder="Password" class="col-xs-10 col-sm-5" type="password">
+                      <span class="help-inline col-xs-12 col-sm-7">
+                        <span class="middle">Inline help text</span>
+                      </span>
+                    </div> -->
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label no-padding-right bolder blue" for="RazonSocial"> Razón Social:</label>
+              <div class="col-sm-10">
+                <input [(ngModel)]="empl.RazonSocial" type="text" id="RazonSocial" name="RazonSocial" placeholder="Razón Social" class="form-control">
+              </div>
+            </div>
+          </div>
+
+
+          <div class="clearfix form-actions">
+            <div class="col-md-offset-3 col-md-9">
+              <button class="btn btn-success" id="btnAceptar" type="button" (click)="aceptar()">
+                <i class="ace-icon fa fa-check bigger-110"></i>
+                Aceptar
+              </button> &nbsp; &nbsp; &nbsp;
+              <button class="btn btn-danger" id="btnCancelar" type="button" (click)="cancelar()">
+                <i class="ace-icon fa fa-ban bigger-110"></i>
+                Cancelar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- /section:custom/widget-box -->
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <h3 class="header smaller lighter blue hide">jQuery dataTables</h3>
+    <div class="clearfix">
+      <div class="pull-right tableTools-container">
+      </div>
+    </div>
+    <div class="table-header">
+      Registros en la tabla "EMPL"
+    </div>
+
+    <!-- div.table-responsive -->
+
+    <!-- div.dataTables_borderWrap -->
+    <div>
+      <div id="dynamic-table_wrapper" class="dataTables_wrapper form-inline no-footer">
+
+        <table id="dynamic-table" class="table table-striped table-bordered table-hover dataTable no-footer" role="grid" aria-describedby="dynamic-table_info">
+          <thead>
+            <tr role="row">
+              <th class="center sorting_disabled" rowspan="1" colspan="1" aria-label="">
+                <label class="pos-rel">
+                  <input class="ace" type="checkbox">
+                  <span class="lbl"></span>
+                </label>
+              </th>
+              <th class="sorting" tabindex="0" aria-controls="dynamic-table" rowspan="1" colspan="1" aria-label="Identificación: activar para ordenar la columna ascendente">Identificación</th>
+              <th class="sorting" tabindex="0" aria-controls="dynamic-table" rowspan="1" colspan="1" aria-label="Razón Social: activar para ordenar la columna ascendente">Razón Social</th>
+              <th class="hidden-480 sorting" tabindex="0" aria-controls="dynamic-table" rowspan="1" colspan="1" aria-label="Dirección Fiscal: activar para ordenar la columna ascendente">Dirección Fiscal</th>
+              <th class="sorting" tabindex="0" aria-controls="dynamic-table" rowspan="1" colspan="1" aria-label="Correo Electrónico: activar para ordenar la columna ascendente">
+                <!-- <i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i> -->
+                Correo Electrónico
+              </th>
+              <th class="hidden-480 sorting" tabindex="0" aria-controls="dynamic-table" rowspan="1" colspan="1" aria-label="Teléfono: activar para ordenar la columna ascendente">Teléfono</th>
+              <th class="sorting_disabled" rowspan="1" colspan="1" aria-label=""></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr role="row" [ngClass]="{'odd': i%2 === 0,'event': i%2 !== 0}" *ngFor="let empl of empls; let i = index">
+              <td class="center">
+                <label class="pos-rel">
+                  <input class="ace" type="checkbox">
+                  <span class="lbl"></span>
+                </label>
+              </td>
+
+              <td>
+                <a href="#">{{empl.TipoID}} {{empl.NumeroIdentificacion}}</a>
+              </td>
+              <td>{{empl.RazonSocial}}</td>
+              <td class="hidden-480">{{empl.DireccionFiscal}}</td>
+              <td>{{empl.Email}}</td>
+
+              <td class="hidden-480">
+                <!-- <span class="label label-sm label-warning">Expiring</span> -->
+                {{empl.Telefono}}
+              </td>
+
+              <td>
+                <div class="hidden-sm hidden-xs action-buttons">
+                  <a class="blue" href="#">
+                    <i class="ace-icon fa fa-search-plus bigger-130"></i>
+                  </a>
+
+                  <a class="green" href="#">
+                    <i class="ace-icon fa fa-pencil bigger-130"></i>
+                  </a>
+
+                  <a class="red" href="#">
+                    <i class="ace-icon fa fa-trash-o bigger-130"></i>
+                  </a>
+                </div>
+
+                <div class="hidden-md hidden-lg">
+                  <div class="inline pos-rel">
+                    <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown" data-position="auto">
+                      <i class="ace-icon fa fa-caret-down icon-only bigger-120"></i>
+                    </button>
+
+                    <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+                      <li>
+                        <a href="#" class="tooltip-info" data-rel="tooltip" title="" data-original-title="View">
+                          <span class="blue">
+                            <i class="ace-icon fa fa-search-plus bigger-120"></i>
+                          </span>
+                        </a>
+                      </li>
+
+                      <li>
+                        <a href="#" class="tooltip-success" data-rel="tooltip" title="" data-original-title="Edit">
+                          <span class="green">
+                            <i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
+                          </span>
+                        </a>
+                      </li>
+
+                      <li>
+                        <a href="#" class="tooltip-error" data-rel="tooltip" title="" data-original-title="Delete">
+                          <span class="red">
+                            <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                          </span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr role="row" class="even">
+              <td class="center">
+                <label class="pos-rel">
+                  <input class="ace" type="checkbox">
+                  <span class="lbl"></span>
+                </label>
+              </td>
+
+              <td>
+                <a href="#">base.com</a>
+              </td>
+              <td>$35</td>
+              <td class="hidden-480">2,595</td>
+              <td>Feb 18</td>
+
+              <td class="hidden-480">
+                <span class="label label-sm label-success">Registered</span>
+              </td>
+
+              <td>
+                <div class="hidden-sm hidden-xs action-buttons">
+                  <a class="blue" href="#">
+                    <i class="ace-icon fa fa-search-plus bigger-130"></i>
+                  </a>
+
+                  <a class="green" href="#">
+                    <i class="ace-icon fa fa-pencil bigger-130"></i>
+                  </a>
+
+                  <a class="red" href="#">
+                    <i class="ace-icon fa fa-trash-o bigger-130"></i>
+                  </a>
+                </div>
+
+                <div class="hidden-md hidden-lg">
+                  <div class="inline pos-rel">
+                    <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown" data-position="auto">
+                      <i class="ace-icon fa fa-caret-down icon-only bigger-120"></i>
+                    </button>
+
+                    <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+                      <li>
+                        <a href="#" class="tooltip-info" data-rel="tooltip" title="" data-original-title="View">
+                          <span class="blue">
+                            <i class="ace-icon fa fa-search-plus bigger-120"></i>
+                          </span>
+                        </a>
+                      </li>
+
+                      <li>
+                        <a href="#" class="tooltip-success" data-rel="tooltip" title="" data-original-title="Edit">
+                          <span class="green">
+                            <i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
+                          </span>
+                        </a>
+                      </li>
+
+                      <li>
+                        <a href="#" class="tooltip-error" data-rel="tooltip" title="" data-original-title="Delete">
+                          <span class="red">
+                            <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                          </span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr role="row" class="odd">
+              <td class="center">
+                <label class="pos-rel">
+                  <input class="ace" type="checkbox">
+                  <span class="lbl"></span>
+                </label>
+              </td>
+
+              <td>
+                <a href="#">max.com</a>
+              </td>
+              <td>$60</td>
+              <td class="hidden-480">4,400</td>
+              <td>Mar 11</td>
+
+              <td class="hidden-480">
+                <span class="label label-sm label-warning">Expiring</span>
+              </td>
+
+              <td>
+                <div class="hidden-sm hidden-xs action-buttons">
+                  <a class="blue" href="#">
+                    <i class="ace-icon fa fa-search-plus bigger-130"></i>
+                  </a>
+
+                  <a class="green" href="#">
+                    <i class="ace-icon fa fa-pencil bigger-130"></i>
+                  </a>
+
+                  <a class="red" href="#">
+                    <i class="ace-icon fa fa-trash-o bigger-130"></i>
+                  </a>
+                </div>
+
+                <div class="hidden-md hidden-lg">
+                  <div class="inline pos-rel">
+                    <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown" data-position="auto">
+                      <i class="ace-icon fa fa-caret-down icon-only bigger-120"></i>
+                    </button>
+
+                    <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+                      <li>
+                        <a href="#" class="tooltip-info" data-rel="tooltip" title="" data-original-title="View">
+                          <span class="blue">
+                            <i class="ace-icon fa fa-search-plus bigger-120"></i>
+                          </span>
+                        </a>
+                      </li>
+
+                      <li>
+                        <a href="#" class="tooltip-success" data-rel="tooltip" title="" data-original-title="Edit">
+                          <span class="green">
+                            <i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
+                          </span>
+                        </a>
+                      </li>
+
+                      <li>
+                        <a href="#" class="tooltip-error" data-rel="tooltip" title="" data-original-title="Delete">
+                          <span class="red">
+                            <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                          </span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr role="row" class="even">
+              <td class="center">
+                <label class="pos-rel">
+                  <input class="ace" type="checkbox">
+                  <span class="lbl"></span>
+                </label>
+              </td>
+
+              <td>
+                <a href="#">best.com</a>
+              </td>
+              <td>$75</td>
+              <td class="hidden-480">6,500</td>
+              <td>Apr 03</td>
+
+              <td class="hidden-480">
+                <span class="label label-sm label-inverse arrowed-in">Flagged</span>
+              </td>
+
+              <td>
+                <div class="hidden-sm hidden-xs action-buttons">
+                  <a class="blue" href="#">
+                    <i class="ace-icon fa fa-search-plus bigger-130"></i>
+                  </a>
+
+                  <a class="green" href="#">
+                    <i class="ace-icon fa fa-pencil bigger-130"></i>
+                  </a>
+
+                  <a class="red" href="#">
+                    <i class="ace-icon fa fa-trash-o bigger-130"></i>
+                  </a>
+                </div>
+
+                <div class="hidden-md hidden-lg">
+                  <div class="inline pos-rel">
+                    <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown" data-position="auto">
+                      <i class="ace-icon fa fa-caret-down icon-only bigger-120"></i>
+                    </button>
+
+                    <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+                      <li>
+                        <a href="#" class="tooltip-info" data-rel="tooltip" title="" data-original-title="View">
+                          <span class="blue">
+                            <i class="ace-icon fa fa-search-plus bigger-120"></i>
+                          </span>
+                        </a>
+                      </li>
+
+                      <li>
+                        <a href="#" class="tooltip-success" data-rel="tooltip" title="" data-original-title="Edit">
+                          <span class="green">
+                            <i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
+                          </span>
+                        </a>
+                      </li>
+
+                      <li>
+                        <a href="#" class="tooltip-error" data-rel="tooltip" title="" data-original-title="Delete">
+                          <span class="red">
+                            <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                          </span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr role="row" class="odd">
+              <td class="center">
+                <label class="pos-rel">
+                  <input class="ace" type="checkbox">
+                  <span class="lbl"></span>
+                </label>
+              </td>
+
+              <td>
+                <a href="#">pro.com</a>
+              </td>
+              <td>$55</td>
+              <td class="hidden-480">4,250</td>
+              <td>Jan 21</td>
+
+              <td class="hidden-480">
+                <span class="label label-sm label-success">Registered</span>
+              </td>
+
+              <td>
+                <div class="hidden-sm hidden-xs action-buttons">
+                  <a class="blue" href="#">
+                    <i class="ace-icon fa fa-search-plus bigger-130"></i>
+                  </a>
+
+                  <a class="green" href="#">
+                    <i class="ace-icon fa fa-pencil bigger-130"></i>
+                  </a>
+
+                  <a class="red" href="#">
+                    <i class="ace-icon fa fa-trash-o bigger-130"></i>
+                  </a>
+                </div>
+
+                <div class="hidden-md hidden-lg">
+                  <div class="inline pos-rel">
+                    <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown" data-position="auto">
+                      <i class="ace-icon fa fa-caret-down icon-only bigger-120"></i>
+                    </button>
+
+                    <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+                      <li>
+                        <a href="#" class="tooltip-info" data-rel="tooltip" title="" data-original-title="View">
+                          <span class="blue">
+                            <i class="ace-icon fa fa-search-plus bigger-120"></i>
+                          </span>
+                        </a>
+                      </li>
+
+                      <li>
+                        <a href="#" class="tooltip-success" data-rel="tooltip" title="" data-original-title="Edit">
+                          <span class="green">
+                            <i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
+                          </span>
+                        </a>
+                      </li>
+
+                      <li>
+                        <a href="#" class="tooltip-error" data-rel="tooltip" title="" data-original-title="Delete">
+                          <span class="red">
+                            <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                          </span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr role="row" class="even">
+              <td class="center">
+                <label class="pos-rel">
+                  <input class="ace" type="checkbox">
+                  <span class="lbl"></span>
+                </label>
+              </td>
+
+              <td>
+                <a href="#">team.com</a>
+              </td>
+              <td>$40</td>
+              <td class="hidden-480">3,200</td>
+              <td>Feb 09</td>
+
+              <td class="hidden-480">
+                <span class="label label-sm label-inverse arrowed-in">Flagged</span>
+              </td>
+
+              <td>
+                <div class="hidden-sm hidden-xs action-buttons">
+                  <a class="blue" href="#">
+                    <i class="ace-icon fa fa-search-plus bigger-130"></i>
+                  </a>
+
+                  <a class="green" href="#">
+                    <i class="ace-icon fa fa-pencil bigger-130"></i>
+                  </a>
+
+                  <a class="red" href="#">
+                    <i class="ace-icon fa fa-trash-o bigger-130"></i>
+                  </a>
+                </div>
+
+                <div class="hidden-md hidden-lg">
+                  <div class="inline pos-rel">
+                    <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown" data-position="auto">
+                      <i class="ace-icon fa fa-caret-down icon-only bigger-120"></i>
+                    </button>
+
+                    <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+                      <li>
+                        <a href="#" class="tooltip-info" data-rel="tooltip" title="" data-original-title="View">
+                          <span class="blue">
+                            <i class="ace-icon fa fa-search-plus bigger-120"></i>
+                          </span>
+                        </a>
+                      </li>
+
+                      <li>
+                        <a href="#" class="tooltip-success" data-rel="tooltip" title="" data-original-title="Edit">
+                          <span class="green">
+                            <i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
+                          </span>
+                        </a>
+                      </li>
+
+                      <li>
+                        <a href="#" class="tooltip-error" data-rel="tooltip" title="" data-original-title="Delete">
+                          <span class="red">
+                            <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                          </span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr role="row" class="odd">
+              <td class="center">
+                <label class="pos-rel">
+                  <input class="ace" type="checkbox">
+                  <span class="lbl"></span>
+                </label>
+              </td>
+
+              <td>
+                <a href="#">up.com</a>
+              </td>
+              <td>$95</td>
+              <td class="hidden-480">8,520</td>
+              <td>Feb 22</td>
+
+              <td class="hidden-480">
+                <span class="label label-sm label-info arrowed arrowed-righ">Sold</span>
+              </td>
+
+              <td>
+                <div class="hidden-sm hidden-xs action-buttons">
+                  <a class="blue" href="#">
+                    <i class="ace-icon fa fa-search-plus bigger-130"></i>
+                  </a>
+
+                  <a class="green" href="#">
+                    <i class="ace-icon fa fa-pencil bigger-130"></i>
+                  </a>
+
+                  <a class="red" href="#">
+                    <i class="ace-icon fa fa-trash-o bigger-130"></i>
+                  </a>
+                </div>
+
+                <div class="hidden-md hidden-lg">
+                  <div class="inline pos-rel">
+                    <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown" data-position="auto">
+                      <i class="ace-icon fa fa-caret-down icon-only bigger-120"></i>
+                    </button>
+
+                    <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+                      <li>
+                        <a href="#" class="tooltip-info" data-rel="tooltip" title="" data-original-title="View">
+                          <span class="blue">
+                            <i class="ace-icon fa fa-search-plus bigger-120"></i>
+                          </span>
+                        </a>
+                      </li>
+
+                      <li>
+                        <a href="#" class="tooltip-success" data-rel="tooltip" title="" data-original-title="Edit">
+                          <span class="green">
+                            <i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
+                          </span>
+                        </a>
+                      </li>
+
+                      <li>
+                        <a href="#" class="tooltip-error" data-rel="tooltip" title="" data-original-title="Delete">
+                          <span class="red">
+                            <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                          </span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr role="row" class="even">
+              <td class="center">
+                <label class="pos-rel">
+                  <input class="ace" type="checkbox">
+                  <span class="lbl"></span>
+                </label>
+              </td>
+
+              <td>
+                <a href="#">view.com</a>
+              </td>
+              <td>$45</td>
+              <td class="hidden-480">4,100</td>
+              <td>Mar 12</td>
+
+              <td class="hidden-480">
+                <span class="label label-sm label-success">Registered</span>
+              </td>
+
+              <td>
+                <div class="hidden-sm hidden-xs action-buttons">
+                  <a class="blue" href="#">
+                    <i class="ace-icon fa fa-search-plus bigger-130"></i>
+                  </a>
+
+                  <a class="green" href="#">
+                    <i class="ace-icon fa fa-pencil bigger-130"></i>
+                  </a>
+
+                  <a class="red" href="#">
+                    <i class="ace-icon fa fa-trash-o bigger-130"></i>
+                  </a>
+                </div>
+
+                <div class="hidden-md hidden-lg">
+                  <div class="inline pos-rel">
+                    <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown" data-position="auto">
+                      <i class="ace-icon fa fa-caret-down icon-only bigger-120"></i>
+                    </button>
+
+                    <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+                      <li>
+                        <a href="#" class="tooltip-info" data-rel="tooltip" title="" data-original-title="View">
+                          <span class="blue">
+                            <i class="ace-icon fa fa-search-plus bigger-120"></i>
+                          </span>
+                        </a>
+                      </li>
+
+                      <li>
+                        <a href="#" class="tooltip-success" data-rel="tooltip" title="" data-original-title="Edit">
+                          <span class="green">
+                            <i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
+                          </span>
+                        </a>
+                      </li>
+
+                      <li>
+                        <a href="#" class="tooltip-error" data-rel="tooltip" title="" data-original-title="Delete">
+                          <span class="red">
+                            <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                          </span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr role="row" class="odd">
+              <td class="center">
+                <label class="pos-rel">
+                  <input class="ace" type="checkbox">
+                  <span class="lbl"></span>
+                </label>
+              </td>
+
+              <td>
+                <a href="#">nice.com</a>
+              </td>
+              <td>$38</td>
+              <td class="hidden-480">3,940</td>
+              <td>Feb 12</td>
+
+              <td class="hidden-480">
+                <span class="label label-sm label-info arrowed arrowed-righ">Sold</span>
+              </td>
+
+              <td>
+                <div class="hidden-sm hidden-xs action-buttons">
+                  <a class="blue" href="#">
+                    <i class="ace-icon fa fa-search-plus bigger-130"></i>
+                  </a>
+
+                  <a class="green" href="#">
+                    <i class="ace-icon fa fa-pencil bigger-130"></i>
+                  </a>
+
+                  <a class="red" href="#">
+                    <i class="ace-icon fa fa-trash-o bigger-130"></i>
+                  </a>
+                </div>
+
+                <div class="hidden-md hidden-lg">
+                  <div class="inline pos-rel">
+                    <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown" data-position="auto">
+                      <i class="ace-icon fa fa-caret-down icon-only bigger-120"></i>
+                    </button>
+
+                    <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+                      <li>
+                        <a href="#" class="tooltip-info" data-rel="tooltip" title="" data-original-title="View">
+                          <span class="blue">
+                            <i class="ace-icon fa fa-search-plus bigger-120"></i>
+                          </span>
+                        </a>
+                      </li>
+
+                      <li>
+                        <a href="#" class="tooltip-success" data-rel="tooltip" title="" data-original-title="Edit">
+                          <span class="green">
+                            <i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
+                          </span>
+                        </a>
+                      </li>
+
+                      <li>
+                        <a href="#" class="tooltip-error" data-rel="tooltip" title="" data-original-title="Delete">
+                          <span class="red">
+                            <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                          </span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr role="row" class="even">
+              <td class="center">
+                <label class="pos-rel">
+                  <input class="ace" type="checkbox">
+                  <span class="lbl"></span>
+                </label>
+              </td>
+
+              <td>
+                <a href="#">fine.com</a>
+              </td>
+              <td>$25</td>
+              <td class="hidden-480">2,983</td>
+              <td>Apr 01</td>
+
+              <td class="hidden-480">
+                <span class="label label-sm label-warning">Expiring</span>
+              </td>
+
+              <td>
+                <div class="hidden-sm hidden-xs action-buttons">
+                  <a class="blue" href="#">
+                    <i class="ace-icon fa fa-search-plus bigger-130"></i>
+                  </a>
+
+                  <a class="green" href="#">
+                    <i class="ace-icon fa fa-pencil bigger-130"></i>
+                  </a>
+
+                  <a class="red" href="#">
+                    <i class="ace-icon fa fa-trash-o bigger-130"></i>
+                  </a>
+                </div>
+
+                <div class="hidden-md hidden-lg">
+                  <div class="inline pos-rel">
+                    <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown" data-position="auto">
+                      <i class="ace-icon fa fa-caret-down icon-only bigger-120"></i>
+                    </button>
+
+                    <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+                      <li>
+                        <a href="#" class="tooltip-info" data-rel="tooltip" title="" data-original-title="View">
+                          <span class="blue">
+                            <i class="ace-icon fa fa-search-plus bigger-120"></i>
+                          </span>
+                        </a>
+                      </li>
+
+                      <li>
+                        <a href="#" class="tooltip-success" data-rel="tooltip" title="" data-original-title="Edit">
+                          <span class="green">
+                            <i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
+                          </span>
+                        </a>
+                      </li>
+
+                      <li>
+                        <a href="#" class="tooltip-error" data-rel="tooltip" title="" data-original-title="Delete">
+                          <span class="red">
+                            <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                          </span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <h3 class="header smaller lighter blue hide">jQuery dataTables</h3>
+    <div class="clearfix">
+      <div class="pull-right tableTools-container">
+      </div>
+    </div>
+    <div class="table-header">
+      Registros en la tabla "EMPL"
+    </div>
+
+    <!-- div.table-responsive -->
+
+    <!-- div.dataTables_borderWrap -->
+    <div>
+      <!-- <table id="registros" class="display" cellspacing="0" width="100%"> -->
+      <table id="registros" class="table table-striped table-bordered table-hover dataTable no-footer" role="grid" aria-describedby="dynamic-table_info">
+        <thead>
+          <tr>
+            <th>Identificación</th>
+            <th>Razón Social</th>
+            <th>Dirección Fiscal</th>
+            <th>Correo Electrónico</th>
+            <th>Teléfono</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tfoot class="hide">
+          <tr>
+            <th>Identificación</th>
+            <th>Razón Social</th>
+            <th>Dirección Fiscal</th>
+            <th>Correo Electrónico</th>
+            <th>Teléfono</th>
+            <th></th>
+          </tr>
+        </tfoot>
+        <tbody>
+          <tr role="row" [ngClass]="{'odd': i%2 === 0,'event': i%2 !== 0}" *ngFor="let empl of empls; let i = index">
+            <td>
+              <a href="#">{{empl.TipoID}} {{empl.NumeroIdentificacion}}</a>
+            </td>
+            <td>{{empl.RazonSocial}}</td>
+            <td class="hidden-480">{{empl.DireccionFiscal}}</td>
+            <td>{{empl.Email}}</td>
+
+            <td class="hidden-480">
+              <!-- <span class="label label-sm label-warning">Expiring</span> -->
+              {{empl.Telefono}}
+            </td>
+
+            <td>
+              <div class="hidden-sm hidden-xs action-buttons">
+                <a class="blue" href="#">
+                  <i class="ace-icon fa fa-search-plus bigger-130"></i>
+                </a>
+
+                <a class="green" href="#">
+                  <i class="ace-icon fa fa-pencil bigger-130"></i>
+                </a>
+
+                <a class="red" href="#">
+                  <i class="ace-icon fa fa-trash-o bigger-130"></i>
+                </a>
+              </div>
+
+              <div class="hidden-md hidden-lg">
+                <div class="inline pos-rel">
+                  <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown" data-position="auto">
+                    <i class="ace-icon fa fa-caret-down icon-only bigger-120"></i>
+                  </button>
+
+                  <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+                    <li>
+                      <a href="#" class="tooltip-info" data-rel="tooltip" title="" data-original-title="View">
+                        <span class="blue">
+                          <i class="ace-icon fa fa-search-plus bigger-120"></i>
+                        </span>
+                      </a>
+                    </li>
+
+                    <li>
+                      <a href="#" class="tooltip-success" data-rel="tooltip" title="" data-original-title="Edit">
+                        <span class="green">
+                          <i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
+                        </span>
+                      </a>
+                    </li>
+
+                    <li>
+                      <a href="#" class="tooltip-error" data-rel="tooltip" title="" data-original-title="Delete">
+                        <span class="red">
+                          <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                        </span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>Tiger Nixon</td>
+            <td>System Architect</td>
+            <td>Edinburgh</td>
+            <td>61</td>
+            <td>2011/04/25</td>
+            <td>$320,800</td>
+          </tr>
+          <tr>
+            <td>Garrett Winters</td>
+            <td>Accountant</td>
+            <td>Tokyo</td>
+            <td>63</td>
+            <td>2011/07/25</td>
+            <td>$170,750</td>
+          </tr>
+          <tr>
+            <td>Ashton Cox</td>
+            <td>Junior Technical Author</td>
+            <td>San Francisco</td>
+            <td>66</td>
+            <td>2009/01/12</td>
+            <td>$86,000</td>
+          </tr>
+          <tr>
+            <td>Cedric Kelly</td>
+            <td>Senior Javascript Developer</td>
+            <td>Edinburgh</td>
+            <td>22</td>
+            <td>2012/03/29</td>
+            <td>$433,060</td>
+          </tr>
+          <tr>
+            <td>Airi Satou</td>
+            <td>Accountant</td>
+            <td>Tokyo</td>
+            <td>33</td>
+            <td>2008/11/28</td>
+            <td>$162,700</td>
+          </tr>
+          <tr>
+            <td>Brielle Williamson</td>
+            <td>Integration Specialist</td>
+            <td>New York</td>
+            <td>61</td>
+            <td>2012/12/02</td>
+            <td>$372,000</td>
+          </tr>
+          <tr>
+            <td>Herrod Chandler</td>
+            <td>Sales Assistant</td>
+            <td>San Francisco</td>
+            <td>59</td>
+            <td>2012/08/06</td>
+            <td>$137,500</td>
+          </tr>
+          <tr>
+            <td>Rhona Davidson</td>
+            <td>Integration Specialist</td>
+            <td>Tokyo</td>
+            <td>55</td>
+            <td>2010/10/14</td>
+            <td>$327,900</td>
+          </tr>
+          <tr>
+            <td>Colleen Hurst</td>
+            <td>Javascript Developer</td>
+            <td>San Francisco</td>
+            <td>39</td>
+            <td>2009/09/15</td>
+            <td>$205,500</td>
+          </tr>
+          <tr>
+            <td>Sonya Frost</td>
+            <td>Software Engineer</td>
+            <td>Edinburgh</td>
+            <td>23</td>
+            <td>2008/12/13</td>
+            <td>$103,600</td>
+          </tr>
+          <tr>
+            <td>Jena Gaines</td>
+            <td>Office Manager</td>
+            <td>London</td>
+            <td>30</td>
+            <td>2008/12/19</td>
+            <td>$90,560</td>
+          </tr>
+          <tr>
+            <td>Quinn Flynn</td>
+            <td>Support Lead</td>
+            <td>Edinburgh</td>
+            <td>22</td>
+            <td>2013/03/03</td>
+            <td>$342,000</td>
+          </tr>
+          <tr>
+            <td>Charde Marshall</td>
+            <td>Regional Director</td>
+            <td>San Francisco</td>
+            <td>36</td>
+            <td>2008/10/16</td>
+            <td>$470,600</td>
+          </tr>
+          <tr>
+            <td>Haley Kennedy</td>
+            <td>Senior Marketing Designer</td>
+            <td>London</td>
+            <td>43</td>
+            <td>2012/12/18</td>
+            <td>$313,500</td>
+          </tr>
+          <tr>
+            <td>Tatyana Fitzpatrick</td>
+            <td>Regional Director</td>
+            <td>London</td>
+            <td>19</td>
+            <td>2010/03/17</td>
+            <td>$385,750</td>
+          </tr>
+          <tr>
+            <td>Michael Silva</td>
+            <td>Marketing Designer</td>
+            <td>London</td>
+            <td>66</td>
+            <td>2012/11/27</td>
+            <td>$198,500</td>
+          </tr>
+          <tr>
+            <td>Paul Byrd</td>
+            <td>Chief Financial Officer (CFO)</td>
+            <td>New York</td>
+            <td>64</td>
+            <td>2010/06/09</td>
+            <td>$725,000</td>
+          </tr>
+          <tr>
+            <td>Gloria Little</td>
+            <td>Systems Administrator</td>
+            <td>New York</td>
+            <td>59</td>
+            <td>2009/04/10</td>
+            <td>$237,500</td>
+          </tr>
+          <tr>
+            <td>Bradley Greer</td>
+            <td>Software Engineer</td>
+            <td>London</td>
+            <td>41</td>
+            <td>2012/10/13</td>
+            <td>$132,000</td>
+          </tr>
+          <tr>
+            <td>Dai Rios</td>
+            <td>Personnel Lead</td>
+            <td>Edinburgh</td>
+            <td>35</td>
+            <td>2012/09/26</td>
+            <td>$217,500</td>
+          </tr>
+          <tr>
+            <td>Jenette Caldwell</td>
+            <td>Development Lead</td>
+            <td>New York</td>
+            <td>30</td>
+            <td>2011/09/03</td>
+            <td>$345,000</td>
+          </tr>
+          <tr>
+            <td>Yuri Berry</td>
+            <td>Chief Marketing Officer (CMO)</td>
+            <td>New York</td>
+            <td>40</td>
+            <td>2009/06/25</td>
+            <td>$675,000</td>
+          </tr>
+          <tr>
+            <td>Caesar Vance</td>
+            <td>Pre-Sales Support</td>
+            <td>New York</td>
+            <td>21</td>
+            <td>2011/12/12</td>
+            <td>$106,450</td>
+          </tr>
+          <tr>
+            <td>Doris Wilder</td>
+            <td>Sales Assistant</td>
+            <td>Sidney</td>
+            <td>23</td>
+            <td>2010/09/20</td>
+            <td>$85,600</td>
+          </tr>
+          <tr>
+            <td>Angelica Ramos</td>
+            <td>Chief Executive Officer (CEO)</td>
+            <td>London</td>
+            <td>47</td>
+            <td>2009/10/09</td>
+            <td>$1,200,000</td>
+          </tr>
+          <tr>
+            <td>Gavin Joyce</td>
+            <td>Developer</td>
+            <td>Edinburgh</td>
+            <td>42</td>
+            <td>2010/12/22</td>
+            <td>$92,575</td>
+          </tr>
+          <tr>
+            <td>Jennifer Chang</td>
+            <td>Regional Director</td>
+            <td>Singapore</td>
+            <td>28</td>
+            <td>2010/11/14</td>
+            <td>$357,650</td>
+          </tr>
+          <tr>
+            <td>Brenden Wagner</td>
+            <td>Software Engineer</td>
+            <td>San Francisco</td>
+            <td>28</td>
+            <td>2011/06/07</td>
+            <td>$206,850</td>
+          </tr>
+          <tr>
+            <td>Fiona Green</td>
+            <td>Chief Operating Officer (COO)</td>
+            <td>San Francisco</td>
+            <td>48</td>
+            <td>2010/03/11</td>
+            <td>$850,000</td>
+          </tr>
+          <tr>
+            <td>Shou Itou</td>
+            <td>Regional Marketing</td>
+            <td>Tokyo</td>
+            <td>20</td>
+            <td>2011/08/14</td>
+            <td>$163,000</td>
+          </tr>
+          <tr>
+            <td>Michelle House</td>
+            <td>Integration Specialist</td>
+            <td>Sidney</td>
+            <td>37</td>
+            <td>2011/06/02</td>
+            <td>$95,400</td>
+          </tr>
+          <tr>
+            <td>Suki Burks</td>
+            <td>Developer</td>
+            <td>London</td>
+            <td>53</td>
+            <td>2009/10/22</td>
+            <td>$114,500</td>
+          </tr>
+          <tr>
+            <td>Prescott Bartlett</td>
+            <td>Technical Author</td>
+            <td>London</td>
+            <td>27</td>
+            <td>2011/05/07</td>
+            <td>$145,000</td>
+          </tr>
+          <tr>
+            <td>Gavin Cortez</td>
+            <td>Team Leader</td>
+            <td>San Francisco</td>
+            <td>22</td>
+            <td>2008/10/26</td>
+            <td>$235,500</td>
+          </tr>
+          <tr>
+            <td>Martena Mccray</td>
+            <td>Post-Sales support</td>
+            <td>Edinburgh</td>
+            <td>46</td>
+            <td>2011/03/09</td>
+            <td>$324,050</td>
+          </tr>
+          <tr>
+            <td>Unity Butler</td>
+            <td>Marketing Designer</td>
+            <td>San Francisco</td>
+            <td>47</td>
+            <td>2009/12/09</td>
+            <td>$85,675</td>
+          </tr>
+          <tr>
+            <td>Howard Hatfield</td>
+            <td>Office Manager</td>
+            <td>San Francisco</td>
+            <td>51</td>
+            <td>2008/12/16</td>
+            <td>$164,500</td>
+          </tr>
+          <tr>
+            <td>Hope Fuentes</td>
+            <td>Secretary</td>
+            <td>San Francisco</td>
+            <td>41</td>
+            <td>2010/02/12</td>
+            <td>$109,850</td>
+          </tr>
+          <tr>
+            <td>Vivian Harrell</td>
+            <td>Financial Controller</td>
+            <td>San Francisco</td>
+            <td>62</td>
+            <td>2009/02/14</td>
+            <td>$452,500</td>
+          </tr>
+          <tr>
+            <td>Timothy Mooney</td>
+            <td>Office Manager</td>
+            <td>London</td>
+            <td>37</td>
+            <td>2008/12/11</td>
+            <td>$136,200</td>
+          </tr>
+          <tr>
+            <td>Jackson Bradshaw</td>
+            <td>Director</td>
+            <td>New York</td>
+            <td>65</td>
+            <td>2008/09/26</td>
+            <td>$645,750</td>
+          </tr>
+          <tr>
+            <td>Olivia Liang</td>
+            <td>Support Engineer</td>
+            <td>Singapore</td>
+            <td>64</td>
+            <td>2011/02/03</td>
+            <td>$234,500</td>
+          </tr>
+          <tr>
+            <td>Bruno Nash</td>
+            <td>Software Engineer</td>
+            <td>London</td>
+            <td>38</td>
+            <td>2011/05/03</td>
+            <td>$163,500</td>
+          </tr>
+          <tr>
+            <td>Sakura Yamamoto</td>
+            <td>Support Engineer</td>
+            <td>Tokyo</td>
+            <td>37</td>
+            <td>2009/08/19</td>
+            <td>$139,575</td>
+          </tr>
+          <tr>
+            <td>Thor Walton</td>
+            <td>Developer</td>
+            <td>New York</td>
+            <td>61</td>
+            <td>2013/08/11</td>
+            <td>$98,540</td>
+          </tr>
+          <tr>
+            <td>Finn Camacho</td>
+            <td>Support Engineer</td>
+            <td>San Francisco</td>
+            <td>47</td>
+            <td>2009/07/07</td>
+            <td>$87,500</td>
+          </tr>
+          <tr>
+            <td>Serge Baldwin</td>
+            <td>Data Coordinator</td>
+            <td>Singapore</td>
+            <td>64</td>
+            <td>2012/04/09</td>
+            <td>$138,575</td>
+          </tr>
+          <tr>
+            <td>Zenaida Frank</td>
+            <td>Software Engineer</td>
+            <td>New York</td>
+            <td>63</td>
+            <td>2010/01/04</td>
+            <td>$125,250</td>
+          </tr>
+          <tr>
+            <td>Zorita Serrano</td>
+            <td>Software Engineer</td>
+            <td>San Francisco</td>
+            <td>56</td>
+            <td>2012/06/01</td>
+            <td>$115,000</td>
+          </tr>
+          <tr>
+            <td>Jennifer Acosta</td>
+            <td>Junior Javascript Developer</td>
+            <td>Edinburgh</td>
+            <td>43</td>
+            <td>2013/02/01</td>
+            <td>$75,650</td>
+          </tr>
+          <tr>
+            <td>Cara Stevens</td>
+            <td>Sales Assistant</td>
+            <td>New York</td>
+            <td>46</td>
+            <td>2011/12/06</td>
+            <td>$145,600</td>
+          </tr>
+          <tr>
+            <td>Hermione Butler</td>
+            <td>Regional Director</td>
+            <td>London</td>
+            <td>47</td>
+            <td>2011/03/21</td>
+            <td>$356,250</td>
+          </tr>
+          <tr>
+            <td>Lael Greer</td>
+            <td>Systems Administrator</td>
+            <td>London</td>
+            <td>21</td>
+            <td>2009/02/27</td>
+            <td>$103,500</td>
+          </tr>
+          <tr>
+            <td>Jonas Alexander</td>
+            <td>Developer</td>
+            <td>San Francisco</td>
+            <td>30</td>
+            <td>2010/07/14</td>
+            <td>$86,500</td>
+          </tr>
+          <tr>
+            <td>Shad Decker</td>
+            <td>Regional Director</td>
+            <td>Edinburgh</td>
+            <td>51</td>
+            <td>2008/11/13</td>
+            <td>$183,000</td>
+          </tr>
+          <tr>
+            <td>Michael Bruce</td>
+            <td>Javascript Developer</td>
+            <td>Singapore</td>
+            <td>29</td>
+            <td>2011/06/27</td>
+            <td>$183,000</td>
+          </tr>
+          <tr>
+            <td>Donna Snider</td>
+            <td>Customer Support</td>
+            <td>New York</td>
+            <td>27</td>
+            <td>2011/01/25</td>
+            <td>$112,000</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

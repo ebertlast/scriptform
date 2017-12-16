@@ -14,6 +14,7 @@ import { ReportesModule } from './modulos/reportes/reportes.module';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { ArchivoModule } from './modulos/archivo/archivo.module';
 import { FormulariosModule } from './modulos/formularios/formularios.module';
+import { CrudModule } from './modulos/crud/crud.module';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { FormulariosModule } from './modulos/formularios/formularios.module';
     GeneralModule,
     ReportesModule,
     ArchivoModule,
-    FormulariosModule
+    FormulariosModule,
+    CrudModule
   ],
   providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }, Helper, AuthGuard],
   bootstrap: [AppComponent]

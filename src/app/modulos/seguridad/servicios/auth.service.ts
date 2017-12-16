@@ -5,6 +5,7 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Usu as Model } from '../modelos/usu';
 import { environment } from '../../../../environments/environment';
 import { Observable } from 'rxjs/Observable';
+// tslint:disable-next-line:import-blacklist
 import 'rxjs/Rx';
 // import { Observable } from 'rxjs';
 // import 'rxjs/add/operator/map';
@@ -129,21 +130,52 @@ export class AuthService {
     }
   }
 
-  public SupervisarSesion() {
+  public SupervisarSesionDEPRECATED(): Observable<any> {
     if (this.Usuario().USUARIOID === '') {
       return;
     }
     const _headers = new Headers({ 'Authorization': 'Bearer ' + this.Usuario().TOKEN });
     const _options = new RequestOptions({ headers: _headers });
-    const _url = environment.apiurl + '/sesion/supervisar/';
+    const _url = environment.apiurl + '/usuarios/sesion/supervisar/';
+    // const d = new Date();
+    // const h = d.getHours();
+    // const m = d.getMinutes();
+    // console.log('Supervisando Sesión ' + h + ':' + m);
+    // console.log(_url);
     return this._http.get(_url, _options)
       .map((response: Response) => {
+        console.log('Antes');
         const data = this.ExtraerResultados(response);
+        console.log('Despues');
+        console.log(data);
       })
       .catch(err => this.CapturarError(err));
   }
 
+  public SupervisarSesion(): Observable<boolean> {
+    if (this.Usuario().USUARIOID === '') {
+      return;
+    }
+    const d = new Date();
+    const h = d.getHours();
+    const m = d.getMinutes();
+    console.log('Supervisando Sesión ' + h + ':' + m);
+    // console.log(this.Usuario().TOKEN);
+    const _headers = new Headers({ 'Authorization': 'Bearer ' + this.Usuario().TOKEN });
+    const _options = new RequestOptions({ headers: _headers });
+    const _url = environment.apiurl + '/usuarios/sesion/supervisar';
+    return this._http.get(_url, _options).map((response: Response) => {
+      const data = this.ExtraerResultados(response);
+      // console.log(this.Usuario().TOKEN);
+      return true;
+    }).catch(err => this.CapturarError(err));
+  }
+
   public MsjBienvenida(): string {
+    // const sesion = this.SupervisarSesion();
+    this.SupervisarSesion().subscribe(response => {
+      // console.log(response);
+    });
     const MSJID = Math.floor(Math.random() * 57) + 1;
     let _msj = '';
     MSJBIENVENIDA.forEach(msj => {

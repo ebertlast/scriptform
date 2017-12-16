@@ -9,6 +9,7 @@ import { ArchivosComponent } from '../archivo/componentes/archivos/archivos.comp
 import { RadicacionesComponent } from '../archivo/componentes/radicaciones/radicaciones.component';
 import { AfiliacionesNovedadesComponent } from '../formularios/componentes/afiliaciones-novedades/afiliaciones-novedades.component';
 import { TgenComponent } from '../general/componentes/tgen/tgen.component';
+import { EmplComponent } from '../crud/componentes/empl/empl.component';
 const routes: Routes = [
   { path: '', redirectTo: 'principal', pathMatch: 'full' },
   {
@@ -20,6 +21,7 @@ const routes: Routes = [
       { path: 'radicaciones', component: RadicacionesComponent, canActivate: [AuthGuard] },
       { path: 'formulariounico', component: AfiliacionesNovedadesComponent, canActivate: [AuthGuard] },
       { path: 'tablasgenericas', component: TgenComponent, canActivate: [AuthGuard] },
+      { path: 'crudempl', component: EmplComponent, canActivate: [AuthGuard] },
     ],
   },
   { path: '**', redirectTo: 'principal' }

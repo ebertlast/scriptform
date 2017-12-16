@@ -69,6 +69,22 @@ export class GenerarDireccionComponent implements OnInit, AfterViewInit {
     $('[id^=Numero]').keypress(me._helper.SoloNumeros);
     $('[id^=Cuadrante]').keypress(me._helper.SoloNumeros);
     this.btnminimizar = (Math.floor(Math.random() * 999999)).toString();
+
+    $('#componenteComplemento').on('keypress', function (e) {
+      if (e.keyCode === 13) {
+        me.agregarComplemento();
+      }
+    });
+    $('#valorComplemento').on('keypress', function (e) {
+      if (e.keyCode === 13) {
+        me.agregarComplemento();
+      }
+    });
+    $('#btnAgregarComplemento').on('keypress', function (e) {
+      if (e.keyCode === 13) {
+        me.agregarComplemento();
+      }
+    });
   }
   ngAfterViewInit() {
     this.div = $('#' + this.divid);

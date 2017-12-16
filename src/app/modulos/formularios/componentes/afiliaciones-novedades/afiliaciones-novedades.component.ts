@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { NovService } from '../../../general/servicios/nov.service';
 import { Nov } from '../../../general/modelos/nov';
 import { Formulario } from '../../modelos/formulario';
@@ -19,13 +19,15 @@ import { MunService } from '../../../general/servicios/mun.service';
 import { Mun } from '../../../general/modelos/mun';
 import { ZonService } from '../../../general/servicios/zon.service';
 import { Zon } from '../../../general/modelos/zon';
+import { EmplService } from '../../../general/servicios/empl.service';
+import { Empl } from '../../../general/modelos/empl';
 declare var $: any;
 @Component({
   selector: 'app-afiliaciones-novedades',
   templateUrl: './afiliaciones-novedades.component.html',
   styleUrls: ['./afiliaciones-novedades.component.css']
 })
-export class AfiliacionesNovedadesComponent implements OnInit {
+export class AfiliacionesNovedadesComponent implements OnInit, AfterViewInit {
   public cargando = false;
   constructor(
     private _novService: NovService,
@@ -37,67 +39,11 @@ export class AfiliacionesNovedadesComponent implements OnInit {
     private _tdiService: TdiService,
     private _helper: Helper,
     private _munService: MunService,
-    private _zonService: ZonService
+    private _zonService: ZonService,
+    private _emplService: EmplService,
   ) { }
 
-  ngOnInit() {
-    const me = this;
-    this._novService.novedades().subscribe(novedades => { this.novedades = novedades; });
-    this._tidService.tiposIdentificacion().subscribe(tiposDocumentos => { this.tiposDocumentos = tiposDocumentos; });
-    this._genService.registros().subscribe(generos => { this.generos = generos; });
-    this._tgenService.registros('GENERAL', 'GRUPOETNICO').subscribe(etnias => { this.etnias = etnias; });
-    this._tgenService
-      .registros('GENERAL', 'GRUPOPOBESPECIAL').subscribe(poblacionEspecial => { this.poblacionEspecial = poblacionEspecial; });
-    this._gdiService.registros().subscribe(gradosDiscapacidades => { this.gradosDiscapacidades = gradosDiscapacidades; });
-    this._tdiService.registros().subscribe(tiposDiscapacidades => { this.tiposDiscapacidades = tiposDiscapacidades; });
-    this._gpoService.registros().subscribe(gruposPoblacionales => { this.gruposPoblacionales = gruposPoblacionales; });
-    this._munService.municipios().subscribe(municipios => { this.municipios = municipios; });
-    this._zonService.registros().subscribe(zonas => { this.zonas = zonas; });
-
-    $('input[name^="TipoTramite"]').focus();
-
-    $.mask.definitions['~'] = '[+-]';
-    $('.input-mask-date').mask('99/99/9999');
-    $('.input-mask-phone').mask('(999) 999-9999');
-    $('.input-mask-eyescript').mask('~9.99 ~9.99 999');
-    $('.input-mask-product').mask('a*-999-a999',
-      { placeholder: ' ', completed: function () { alert('Escribiste lo siguiente: ' + this.val()); } }
-    );
-    // $('.input-mask-email').mask('999.999.999.999.999,99', {reverse: true});
-
-    $('#FechaNacimiento').change(function () {
-      me.formulario.FechaNacimiento = $('#FechaNacimiento').val();
-      me.refrescarFormulario();
-    });
-
-    // #region Ventanas Modales
-    // $('.modal.aside').ace_aside();
-    // $('#aside-inside-modal').addClass('aside').ace_aside({ container: '#my-modal > .modal-dialog' });
-
-    // // $('#top-menu').modal('show')
-    // $(document).one('ajaxloadstart.page', function (e) {
-    //   // in ajax mode, remove before leaving page
-    //   $('.modal.aside').remove();
-    //   $(window).off('.aside');
-    // });
-
-    // make content sliders resizable using jQuery UI (you should include jquery ui files)
-    // $('#right-menu > .modal-dialog').resizable({handles: "w", grid: [ 20, 0 ], minWidth: 200, maxWidth: 600});
-
-    // $('#modal-formConyugue > .modal-dialog').resizable({ handles: 'w', grid: [20, 0], minWidth: 200, maxWidth: 600 });
-
-    // #endregion
-    if (!localStorage.getItem('formulario')) {
-      this.formulario = new Formulario();
-    } else {
-      this.formulario = JSON.parse(localStorage.getItem('formulario'))['formulario'];
-      // console.log(this.formulario.Conyugue);
-      console.log(this.formulario.Beneficiarios);
-    }
-  }
-
   // #region Métodos de obtención y establecimiento de valores
-
   private _novedades: Nov[] = [];
   public get novedades(): Nov[] {
     return this._novedades;
@@ -181,7 +127,6 @@ export class AfiliacionesNovedadesComponent implements OnInit {
     this._gradosDiscapacidades = v;
   }
 
-
   private _municipios: Mun[] = [];
   public get municipios(): Mun[] {
     return this._municipios;
@@ -198,15 +143,131 @@ export class AfiliacionesNovedadesComponent implements OnInit {
     this._zonas = v;
   }
 
+  private _empls: Empl[] = [];
+  public get empls(): Empl[] {
+    return this._empls;
+  }
+  public set empls(v: Empl[]) {
+    this._empls = v;
+  }
+
   // #endregion
 
+  private autoGuardado() {
+    let formulario = JSON.parse(localStorage.getItem('formulario'))['formulario'];
+    const a = JSON.stringify({ formulario });
+    formulario = this.formulario;
+    const b = JSON.stringify({ formulario });
+    const _me = this;
+    if (a === b) {
+    } else {
+      // console.log('Guardar Formulario');
+      localStorage.setItem('formulario', JSON.stringify({ formulario: this.formulario }));
+      this._helper.Notificacion('Autoguardado');
+    }
+    setTimeout(function () {
+      _me.autoGuardado();
+    }, 10000);
+
+  }
+
+  ngOnInit() {
+    const me = this;
+    this.cargando = true;
+    this._novService.novedades().subscribe(novedades => {
+      this.novedades = novedades;
+      this._tidService.tiposIdentificacion().subscribe(tiposDocumentos => {
+        this.tiposDocumentos = tiposDocumentos;
+        this._genService.registros().subscribe(generos => {
+          this.generos = generos;
+          this._tgenService.registros('GENERAL', 'GRUPOETNICO').subscribe(etnias => {
+            this.etnias = etnias;
+            this._tgenService.registros('GENERAL', 'GRUPOPOBESPECIAL').subscribe(poblacionEspecial => {
+              this.poblacionEspecial = poblacionEspecial;
+              this._gdiService.registros().subscribe(gradosDiscapacidades => {
+                this.gradosDiscapacidades = gradosDiscapacidades;
+                this._tdiService.registros().subscribe(tiposDiscapacidades => {
+                  this.tiposDiscapacidades = tiposDiscapacidades;
+                  this._gpoService.registros().subscribe(gruposPoblacionales => {
+                    this.gruposPoblacionales = gruposPoblacionales;
+                    this._munService.municipios().subscribe(municipios => {
+                      this.municipios = municipios;
+                      this._zonService.registros().subscribe(zonas => {
+                        this.zonas = zonas;
+                        this._emplService.registros().subscribe(empls => {
+                          this.empls = empls;
+                          console.log(this.empls);
+                          this.cargando = false;
+                        });
+                      });
+                    });
+                  });
+                });
+              });
+            });
+          });
+        });
+      });
+    });
+
+    $('input[name^="TipoTramite"]').focus();
+
+    $.mask.definitions['~'] = '[+-]';
+    $('.input-mask-date').mask('99/99/9999');
+    $('.input-mask-phone').mask('(999) 999-9999');
+    $('.input-mask-eyescript').mask('~9.99 ~9.99 999');
+    $('.input-mask-product').mask('a*-999-a999',
+      { placeholder: ' ', completed: function () { alert('Escribiste lo siguiente: ' + this.val()); } }
+    );
+    // $('.input-mask-email').mask('999.999.999.999.999,99', {reverse: true});
+
+    $('#FechaNacimiento').change(function () {
+      me.formulario.FechaNacimiento = $('#FechaNacimiento').val();
+      me.refrescarFormulario();
+    });
+
+    // #region Ventanas Modales
+    // $('.modal.aside').ace_aside();
+    // $('#aside-inside-modal').addClass('aside').ace_aside({ container: '#my-modal > .modal-dialog' });
+
+    // // $('#top-menu').modal('show')
+    // $(document).one('ajaxloadstart.page', function (e) {
+    //   // in ajax mode, remove before leaving page
+    //   $('.modal.aside').remove();
+    //   $(window).off('.aside');
+    // });
+
+    // make content sliders resizable using jQuery UI (you should include jquery ui files)
+    // $('#right-menu > .modal-dialog').resizable({handles: "w", grid: [ 20, 0 ], minWidth: 200, maxWidth: 600});
+
+    // $('#modal-formConyugue > .modal-dialog').resizable({ handles: 'w', grid: [20, 0], minWidth: 200, maxWidth: 600 });
+
+    // #endregion
+    if (!localStorage.getItem('formulario')) {
+      this.formulario = new Formulario();
+    } else {
+      this.formulario = JSON.parse(localStorage.getItem('formulario'))['formulario'];
+      // console.log(this.formulario.Conyugue);
+      // console.log(this.formulario.Beneficiarios);
+    }
+  }
+
+  ngAfterViewInit() {
+    this.autoGuardado();
+  }
+
+
   refrescarFormulario() {
+    this.formulario.PrimerApellido = this._helper.Capitalizar(this.formulario.PrimerApellido);
+    this.formulario.SegundoApellido = this._helper.Capitalizar(this.formulario.SegundoApellido);
+    this.formulario.PrimerNombre = this._helper.Capitalizar(this.formulario.PrimerNombre);
+    this.formulario.SegundoNombre = this._helper.Capitalizar(this.formulario.SegundoNombre);
     if (!this._helper.EmailValido(this.formulario.CorreoElectronico)) {
       this.formulario.CorreoElectronico = '';
     }
-    localStorage.setItem('formulario', JSON.stringify({ formulario: this.formulario }));
-    const formulario = JSON.parse(localStorage.getItem('formulario'))['formulario'];
-    console.log(formulario);
+    // localStorage.setItem('formulario', JSON.stringify({ formulario: this.formulario }));
+    // const formulario = JSON.parse(localStorage.getItem('formulario'))['formulario'];
+    // console.log(formulario);
   }
 
   setDireccion(event): void {

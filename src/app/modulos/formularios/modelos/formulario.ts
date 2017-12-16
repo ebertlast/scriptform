@@ -1,4 +1,5 @@
 import { Ben } from '../../general/modelos/ben';
+import { Empl } from '../../general/modelos/empl';
 
 export class Formulario {
     constructor(
@@ -33,5 +34,6 @@ export class Formulario {
         public Localidad: string = '',
         public Conyugue: Ben = new Ben(),
         public Beneficiarios: Ben[] = [],
+        public Empleador: Empl = new Empl()
     ) { }
 }

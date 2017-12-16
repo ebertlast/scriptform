@@ -8,6 +8,7 @@ import { ConsultasComponent } from './componentes/consultas/consultas.component'
 import { ReportesModule } from '../reportes/reportes.module';
 import { ArchivoModule } from '../archivo/archivo.module';
 import { FormulariosModule } from '../formularios/formularios.module';
+import { CrudModule } from '../crud/crud.module';
 @NgModule({
   imports: [
     CommonModule,
@@ -16,7 +17,8 @@ import { FormulariosModule } from '../formularios/formularios.module';
     FormsModule,
     ReportesModule,
     ArchivoModule,
-    FormulariosModule
+    FormulariosModule,
+    CrudModule
   ],
   declarations: [PrincipalComponent, ConsultasComponent]
 })

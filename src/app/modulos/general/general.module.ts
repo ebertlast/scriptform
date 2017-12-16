@@ -26,6 +26,11 @@ import { ModalAfiComponent } from './componentes/modal-afi/modal-afi.component';
 import { TiprService } from './servicios/tipr.service';
 import { ZonService } from './servicios/zon.service';
 import { IpsService } from './servicios/ips.service';
+import { EmplService } from './servicios/empl.service';
+import { NaeService } from './servicios/nae.service';
+import { RemService } from './servicios/rem.service';
+import { TaeService } from './servicios/tae.service';
+import { TemService } from './servicios/tem.service';
 
 @NgModule({
   imports: [
@@ -37,6 +42,6 @@ import { IpsService } from './servicios/ips.service';
     GenerarDireccionComponent, ModalAfiComponent],
   declarations: [NavbarTopComponent, CapitalizarPipe, NavbarLeftComponent, SedComponent, FiltrarPipe, MyLinkDirective, SafePipe,
     TgenComponent, GenerarDireccionComponent, ModalAfiComponent],
-  providers: [SedService, TidService, AfiService, MunService, NovService, TgenService, GenService, GpoService, TdiService, GdiService, TiprService, ZonService, IpsService]
+  providers: [SedService, TidService, AfiService, MunService, NovService, TgenService, GenService, GpoService, TdiService, GdiService, TiprService, ZonService, IpsService, EmplService, NaeService, RemService, TaeService, TemService]
 })
 export class GeneralModule { }

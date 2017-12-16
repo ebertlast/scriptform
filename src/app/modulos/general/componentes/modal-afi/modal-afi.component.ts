@@ -31,6 +31,10 @@ export class ModalAfiComponent implements OnInit, AfterViewInit {
 
   private _afiliado: any = new Afi();
   public get afiliado(): any {
+    this._afiliado.PrimerApellido = this._helper.Capitalizar(this._afiliado.PrimerApellido);
+    this._afiliado.PrimerNombre = this._helper.Capitalizar(this._afiliado.PrimerNombre);
+    this._afiliado.SegundoApellido = this._helper.Capitalizar(this._afiliado.SegundoApellido);
+    this._afiliado.SegundoNombre = this._helper.Capitalizar(this._afiliado.SegundoNombre);
     if (this._afiliado.DireccionResidencia === '') { this._afiliado.DireccionResidencia = this.direccion; }
     return this._afiliado;
   }

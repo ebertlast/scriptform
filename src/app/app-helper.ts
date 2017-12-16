@@ -116,7 +116,7 @@ export class Helper {
   }
 
   public Capitalizar(s) {
-    return s.toLowerCase().replace(/\b./g, function (a) { return a.toUpperCase(); });
+    return s.toLowerCase().replace(/(^|\s)[a-z]/g, function (a) { return a.toUpperCase(); });
   }
 
   public FechaMayorQue(fechaInicial: Date, fechaFinal: Date): boolean {

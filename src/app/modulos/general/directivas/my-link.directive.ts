@@ -23,7 +23,7 @@ export class MyLinkDirective {
             // var initialHeight = $('#' + event.target.id).scrollHeight;
             $('#' + event.target.id)
               .css({
-                // display: 'none', 
+                // display: 'none',
                 // overflow: '',
                 // height: '',
                 // 'transition-property': '',
@@ -41,15 +41,16 @@ export class MyLinkDirective {
                 overflow: 'hidden',
                 display: 'block'
               })
-              .removeClass('nav-hide').addClass('nav-show')//only for window < @grid-float-breakpoint and .navbar-collapse.menu-min
+              .removeClass('nav-hide').addClass('nav-show')// only for window < @grid-float-breakpoint and .navbar-collapse.menu-min
               .parent().addClass('open');
 
           }
           // }
         }
-
         event.preventDefault();
       }
+    } else {
+      // console.log("Hola");
     }
   }
 
