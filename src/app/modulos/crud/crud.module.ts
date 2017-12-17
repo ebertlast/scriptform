@@ -5,13 +5,14 @@ import { CrudRoutingModule } from './crud-routing.module';
 import { EmplComponent } from './componentes/empl/empl.component';
 import { FormsModule } from '@angular/forms';
 import { GeneralModule } from '../general/general.module';
-
+import { DataTablesModule } from 'angular-datatables';
 @NgModule({
   imports: [
     CommonModule,
     CrudRoutingModule,
     FormsModule,
-    GeneralModule
+    GeneralModule,
+    DataTablesModule
   ],
   exports: [
     EmplComponent

@@ -172,10 +172,9 @@ export class AuthService {
   }
 
   public MsjBienvenida(): string {
-    // const sesion = this.SupervisarSesion();
-    this.SupervisarSesion().subscribe(response => {
-      // console.log(response);
-    });
+    // this.SupervisarSesion().subscribe(response => {
+    //   // console.log(response);
+    // });
     const MSJID = Math.floor(Math.random() * 57) + 1;
     let _msj = '';
     MSJBIENVENIDA.forEach(msj => {

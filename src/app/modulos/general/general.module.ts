@@ -31,6 +31,7 @@ import { NaeService } from './servicios/nae.service';
 import { RemService } from './servicios/rem.service';
 import { TaeService } from './servicios/tae.service';
 import { TemService } from './servicios/tem.service';
+import { DataFilterPipe } from './pipes/data-filter.pipe';
 
 @NgModule({
   imports: [
@@ -39,9 +40,9 @@ import { TemService } from './servicios/tem.service';
     FormsModule
   ],
   exports: [NavbarTopComponent, NavbarLeftComponent, CapitalizarPipe, SedComponent, FiltrarPipe, MyLinkDirective, SafePipe, TgenComponent,
-    GenerarDireccionComponent, ModalAfiComponent],
+    GenerarDireccionComponent, ModalAfiComponent, DataFilterPipe],
   declarations: [NavbarTopComponent, CapitalizarPipe, NavbarLeftComponent, SedComponent, FiltrarPipe, MyLinkDirective, SafePipe,
-    TgenComponent, GenerarDireccionComponent, ModalAfiComponent],
+    TgenComponent, GenerarDireccionComponent, ModalAfiComponent, DataFilterPipe],
   providers: [SedService, TidService, AfiService, MunService, NovService, TgenService, GenService, GpoService, TdiService, GdiService, TiprService, ZonService, IpsService, EmplService, NaeService, RemService, TaeService, TemService]
 })
 export class GeneralModule { }
