@@ -4,12 +4,14 @@ import { AuthGuard } from '../../app-authguard';
 import { PrincipalComponent } from './componentes/principal/principal.component';
 import { ConsultasComponent } from './componentes/consultas/consultas.component';
 import { DinamicReportComponent } from '../reportes/componentes/dinamic-report/dinamic-report.component';
+// tslint:disable-next-line:max-line-length
 import { DinamicReportConfiguracionComponent } from '../reportes/componentes/dinamic-report-configuracion/dinamic-report-configuracion.component';
 import { ArchivosComponent } from '../archivo/componentes/archivos/archivos.component';
 import { RadicacionesComponent } from '../archivo/componentes/radicaciones/radicaciones.component';
 import { AfiliacionesNovedadesComponent } from '../formularios/componentes/afiliaciones-novedades/afiliaciones-novedades.component';
 import { TgenComponent } from '../general/componentes/tgen/tgen.component';
 import { EmplComponent } from '../crud/componentes/empl/empl.component';
+import { ArchivoComponent } from '../archivo/componentes/archivo/archivo.component';
 const routes: Routes = [
   { path: '', redirectTo: 'principal', pathMatch: 'full' },
   {
@@ -19,6 +21,7 @@ const routes: Routes = [
       { path: 'consultas', component: DinamicReportComponent, canActivate: [AuthGuard] },
       { path: 'confconsultas', component: DinamicReportConfiguracionComponent, canActivate: [AuthGuard] },
       { path: 'archivos', component: ArchivosComponent, canActivate: [AuthGuard] },
+      { path: 'archivo/:archivoid', component: ArchivoComponent, canActivate: [AuthGuard] },
       { path: 'radicaciones', component: RadicacionesComponent, canActivate: [AuthGuard] },
       { path: 'formulariounico', component: AfiliacionesNovedadesComponent, canActivate: [AuthGuard] },
       { path: 'tablasgenericas', component: TgenComponent, canActivate: [AuthGuard] },

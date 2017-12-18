@@ -1,3 +1,4 @@
+// #region Zona de importaciones de librerías
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NovService } from '../../../general/servicios/nov.service';
@@ -23,6 +24,7 @@ import { Zon } from '../../../general/modelos/zon';
 import { EmplService } from '../../../general/servicios/empl.service';
 import { Empl } from '../../../general/modelos/empl';
 import { environment } from '../../../../../environments/environment';
+// #endregion
 declare var $: any;
 @Component({
   selector: 'app-afiliaciones-novedades',
@@ -32,6 +34,7 @@ declare var $: any;
 export class AfiliacionesNovedadesComponent implements OnInit, AfterViewInit {
   public cargando = false;
   constructor(
+    // #region Servicios
     private _novService: NovService,
     private _tidService: TidService,
     private _genService: GenService,
@@ -44,9 +47,8 @@ export class AfiliacionesNovedadesComponent implements OnInit, AfterViewInit {
     private _zonService: ZonService,
     private _emplService: EmplService,
     private _router: Router,
-  ) {
-
-  }
+    // #endregion
+  ) { }
 
   // #region Métodos de obtención y establecimiento de valores
   private _novedades: Nov[] = [];
@@ -430,17 +432,12 @@ export class AfiliacionesNovedadesComponent implements OnInit, AfterViewInit {
     if (!this._helper.EmailValido(this.formulario.CorreoElectronico)) {
       this.formulario.CorreoElectronico = '';
     }
-    // localStorage.setItem('formulario', JSON.stringify({ formulario: this.formulario }));
-    // const formulario = JSON.parse(localStorage.getItem('formulario'))['formulario'];
-    // console.log(formulario);
   }
 
   setDireccion(event): void {
     const me = this;
     me.formulario.Direccion = event.direccion;
     me.refrescarFormulario();
-    // console.log(event);
-    // alert(event.direccion);
   }
 
   lanzarVentanaConyugue() {
@@ -462,14 +459,12 @@ export class AfiliacionesNovedadesComponent implements OnInit, AfterViewInit {
   }
 
   setConyugue(event) {
-    // console.log(event.afiliado);
     this.formulario.Conyugue = event.afiliado;
     this.refrescarFormulario();
   }
 
   addBeneficiario(event) {
     this.formulario.Beneficiarios.push(event.afiliado);
-    // console.log(this.formulario.Beneficiarios);
     this.refrescarFormulario();
   }
 

@@ -141,6 +141,20 @@ export class AuthService {
     }
   }
 
+  public ReenviarClave(email: string): Observable<boolean> {
+    const _url = environment.apiurl + '/usuarios/reenviarclave/' + email;
+    return this._http.get(_url)
+      .map((response: Response) => {
+        const data = this.ExtraerResultados(response);
+        // console.log(data);
+        // return data;
+        if (data === true) {
+          return true;
+        } else { return false; }
+      })
+      .catch(err => this.CapturarError(err));
+  }
+
   public SupervisarSesionDEPRECATED(): Observable<any> {
     if (this.Usuario().USUARIOID === '') {
       return;

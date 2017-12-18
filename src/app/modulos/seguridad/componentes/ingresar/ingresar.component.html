@@ -28,27 +28,29 @@
                   <form id="formularios">
                     <fieldset>
 
-                        <label class="block clearfix">
-                            <span class="block input-icon input-icon-right">
-                                <select class="form-control" placeholder="Sede" id="SEDE" name="SEDE" [(ngModel)]="sede" >
-                                    <option [ngValue]="sedeDefault" selected>{{sedeDefault.RAZONSOCIAL}}</option>
-                                    <option [ngValue]="sede" *ngFor="let sede of sedes">{{sede.RAZONSOCIAL}} - {{sede.EMPRESA}}</option>
-                                    
-                                  </select>
-                              <i class="ace-icon fa fa-building-o"></i>
-                            </span>
-                          </label>
+                      <label class="block clearfix">
+                        <span class="block input-icon input-icon-right">
+                          <select class="form-control" placeholder="Sede" id="SEDE" name="SEDE" [(ngModel)]="sede">
+                            <option [ngValue]="sedeDefault" selected>{{sedeDefault.RAZONSOCIAL}}</option>
+                            <option [ngValue]="sede" *ngFor="let sede of sedes">{{sede.RAZONSOCIAL}} - {{sede.EMPRESA}}</option>
+
+                          </select>
+                          <i class="ace-icon fa fa-building-o"></i>
+                        </span>
+                      </label>
 
                       <label class="block clearfix">
                         <span class="block input-icon input-icon-right">
-                          <input type="text" class="form-control" placeholder="Usuario" name="USUARIOID" id="USUARIOID" [(ngModel)]="usuario.USUARIOID" />
+                          <input type="text" class="form-control" placeholder="Usuario" name="USUARIOID" id="USUARIOID" [(ngModel)]="usuario.USUARIOID"
+                          />
                           <i class="ace-icon fa fa-user"></i>
                         </span>
                       </label>
 
                       <label class="block clearfix">
                         <span class="block input-icon input-icon-right">
-                          <input type="password" autocomplete="new-password" class="form-control" placeholder="Contraseña" name="CLAVE" id="CLAVE" [(ngModel)]="usuario.CLAVE" />
+                          <input type="password" autocomplete="new-password" class="form-control" placeholder="Contraseña" name="CLAVE" id="CLAVE"
+                            [(ngModel)]="usuario.CLAVE" />
                           <i class="ace-icon fa fa-lock"></i>
                         </span>
                       </label>
@@ -102,7 +104,7 @@
                   </div>
 
                   <div>
-                    <a href="#" data-target="#signup-box" class="user-signup-link">
+                    <a href="#" data-target="#signup-box" class="user-signup-link hide">
                       Quiero registrarme
                       <i class="ace-icon fa fa-arrow-right"></i>
                     </a>
@@ -118,27 +120,27 @@
                 <div class="widget-main">
                   <h4 class="header red lighter bigger">
                     <i class="ace-icon fa fa-key"></i>
-                    Retrieve Password
+                    Recuperar Contraseña
                   </h4>
 
                   <div class="space-6"></div>
                   <p>
-                    Enter your email and to receive instructions
+                    Ingresa tu correo eléctronico para recibir instrucciones
                   </p>
 
                   <form>
                     <fieldset>
                       <label class="block clearfix">
                         <span class="block input-icon input-icon-right">
-                          <input type="email" class="form-control" placeholder="Email" />
+                          <input type="email" class="form-control" placeholder="Email" id="emailReenvioClave" />
                           <i class="ace-icon fa fa-envelope"></i>
                         </span>
                       </label>
 
                       <div class="clearfix">
-                        <button type="button" class="width-35 pull-right btn btn-sm btn-danger">
-                          <i class="ace-icon fa fa-lightbulb-o"></i>
-                          <span class="bigger-110">Send Me!</span>
+                        <button type="button" id="btnReenvioClave" (click)="reenviarClave()" class="width-35 pull-right btn btn-sm btn-danger" data-loading-text="Cargando...">
+                          <i class="ace-icon fa fa-envelope-o"></i>
+                          <span class="bigger-110">Enviar</span>
                         </button>
                       </div>
                     </fieldset>

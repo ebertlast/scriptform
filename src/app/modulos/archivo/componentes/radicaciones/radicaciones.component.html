@@ -85,12 +85,15 @@
                 <iframe id="iframe{{archivo.ARCHIVOID}}" width="100%" height="200px" [src]="archivo.URLARCHIVO | safe"></iframe>
                 <div class="caption">
                   <div class="clearfix">
+                    <span class="pull-left">
+                      <a href="#" (click)="pdfPantallaCompleta('iframe'+archivo.ARCHIVOID)">Ver</a>
+                    </span>
                     <!-- <span class="pull-right label label-warning info-label">{{archivo.MUNICIPIO}}</span> -->
                     <span class="pull-right label label-info arrowed-in-right arrowed">{{archivo.MUNICIPIO}}</span>
                   </div>
 
                   <h4 class="search-title">
-                    <a href="#" (click)="pdfPantallaCompleta('iframe'+archivo.ARCHIVOID)" class="blue"> {{archivo.FORMULARIOID}} </a>
+                    <a [routerLink]="['/escritorio/principal/archivo', archivo.ARCHIVOID]" class="blue"> {{archivo.FORMULARIOID}} </a>
                   </h4>
                   <p>{{archivo.TIPOID}} {{archivo.NUMEROIDENTIFICACION}}</p>
                 </div>

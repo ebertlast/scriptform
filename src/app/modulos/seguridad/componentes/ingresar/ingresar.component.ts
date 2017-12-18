@@ -89,7 +89,7 @@ export class IngresarComponent implements OnInit {
       $('#btn-login-blur').on('click', function (e) {
         $('body').attr('class', 'login-layout blur-login');
         $('#id-text2').attr('class', 'white');
-        $('#id-company-text').attr('class', 'light-blue');
+        $('#id-company-text').attr('c  lass', 'light-blue');
 
         e.preventDefault();
       });
@@ -117,6 +117,12 @@ export class IngresarComponent implements OnInit {
       }
     });
 
+    aux = <HTMLElement>document.getElementById('emailReenvioClave');
+    aux.addEventListener('keypress', function (e) {
+      if (e.keyCode === 13) {
+        me.reenviarClave();
+      }
+    });
   }
 
   ingresar() {
@@ -146,6 +152,26 @@ export class IngresarComponent implements OnInit {
       } else {
         this._helper.Notificacion('Ups! No te reconozco, vuelve a intentarlo.', 'error');
         this._helper.AnimarDiv('formularios');
+      }
+    });
+    return false;
+  }
+
+  reenviarClave() {
+    const btnReenvioClave = $('#btnReenvioClave');
+    btnReenvioClave.button('loading');
+    const email = $('#emailReenvioClave').val();
+    if (!this._helper.EmailValido(email)) {
+      this._helper.Notificacion('Dirección de correo electónico no está correctamente escrito', 'error');
+      return false;
+    }
+    this._authService.ReenviarClave(email).subscribe(enviado => {
+      btnReenvioClave.button('reset');
+      if (enviado) {
+        this._helper.Notificacion('Revisa la bandeja de entrada de tu correo electrónico', 'info');
+      } else {
+        this._helper.Notificacion('No hemos podido enviarte la clave a tu correo, vuelve a intentarlo.' +
+          ' Si el problema persiste no dudes en contactar al departamento de tecnología', 'info');
       }
     });
     return false;

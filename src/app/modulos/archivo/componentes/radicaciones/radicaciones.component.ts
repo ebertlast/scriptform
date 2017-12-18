@@ -19,12 +19,37 @@ export class RadicacionesComponent implements OnInit {
     private _archService: ArchService,
   ) { }
 
+
+  // #region Metodos de obtención y establecimientos
+  private _archivos: Arc[] = [];
+  public get archivos(): Arc[] {
+    return this._archivos;
+  }
+  public set archivos(v: Arc[]) {
+    this._archivos = v;
+  }
+  private _consultaPor = '1';
+  public get consultaPor(): string {
+    return this._consultaPor;
+  }
+  public set consultaPor(v: string) {
+    this._consultaPor = v;
+  }
+  private _textoAConsultar = '';
+  public get textoAConsultar(): string {
+    return this._textoAConsultar;
+  }
+  public set textoAConsultar(v: string) {
+    this._textoAConsultar = v;
+  }
+  // #endregion
+
   ngOnInit() {
     this.refrescarArchivos();
 
   }
 
-  generarCodigoBarras() {
+  generarCodigoBarrasPRUEBA() {
     const canvas: any = document.getElementById('codebar');
     const context = canvas.getContext('2d');
     const imageObj = new Image();
@@ -37,40 +62,9 @@ export class RadicacionesComponent implements OnInit {
   }
 
 
-  // #region Metodos de obtención y establecimientos
-
-  // tslint:disable-next-line:member-ordering
-  private _archivos: Arc[] = [];
-  public get archivos(): Arc[] {
-    return this._archivos;
-  }
-  public set archivos(v: Arc[]) {
-    this._archivos = v;
-  }
-
-  // tslint:disable-next-line:member-ordering
-  private _consultaPor = '1';
-  public get consultaPor(): string {
-    return this._consultaPor;
-  }
-  public set consultaPor(v: string) {
-    this._consultaPor = v;
-  }
-
-  // tslint:disable-next-line:member-ordering
-  private _textoAConsultar = '';
-  public get textoAConsultar(): string {
-    return this._textoAConsultar;
-  }
-  public set textoAConsultar(v: string) {
-    this._textoAConsultar = v;
-  }
-  // #endregion
-
   public refrescarArchivos() {
     this.archivos = [];
     this._arcService.archivos().subscribe(archivos => {
-
       // archivos.forEach(archivo => {
       //   this._archService.archivos(archivo.ARCHIVOID).subscribe(pdfs => {
       //     let urlArchivo = '';
@@ -90,21 +84,10 @@ export class RadicacionesComponent implements OnInit {
     });
   }
 
-  // (click)="pdfPantallaCompleta('iframe'+archivo.ARCHIVOID)"
   public pdfPantallaCompleta(iframeId) {
-    // console.log(iframeId);
     const iframe = $('#' + iframeId);
-    // const newWindow = window.open(
-    //   iframe.attr('src'),
-    //   'Dynamic Popup',
-    //   'height=100%, width=100%, scrollbars=auto, resizable=no, location=no, status=no');
-    // newWindow.document.write(iframe[0].outerHTML);
-    // newWindow.document.close();
-    // iframe[0].outerHTML = ''; // to remove iframe in page.
-
     const win = window.open();
     win.document.write('<iframe width="100%" height="100%" src="' + iframe.attr('src') + '" frameborder="0" allowfullscreen></iframe>');
-
     return false;
   }
 
