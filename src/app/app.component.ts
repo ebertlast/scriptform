@@ -41,7 +41,7 @@ export class AppComponent implements OnInit {
         // }
       ],
       volume: 0.5,
-      path: "assets/components/ion.sound/sounds/",
+      path: 'assets/components/ion.sound/sounds/',
       preload: true
     });
 
@@ -49,7 +49,7 @@ export class AppComponent implements OnInit {
   }
 
   private supervisarSesion() {
-    console.log("Supervisar Sesión " + Date());
+    console.log('Supervisar Sesión ' + Date());
     this._authService.SupervisarSesion();
     const _me = this;
     setTimeout(function () {

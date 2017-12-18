@@ -482,28 +482,120 @@ export class EmplComponent implements OnInit {
     };
   }
 
+
+  // #region Zona de obtención de valores
   private cargar() {
-    this.cargando = true;
-    this._tidService.tiposIdentificacion().subscribe(tids => {
-      this.tids = tids;
+    this.dbTid();
+    this.dbNae();
+    this.dbRem();
+    this.dbTae();
+    this.dbTem();
+    this.dbMun();
+  }
+
+  dbTid(reload = false) {
+    if (!reload) {
+      this.tids = this._helper.GetLocalStorage('tid');
+      if (this.tids.length <= 0) {
+        reload = true;
+      }
+    }
+    if (reload) {
+      this.cargando = true;
+      this._tidService.registros().subscribe(tids => {
+        this.tids = tids;
+        this.cargando = false;
+        this._helper.SetLocalEstorage('tid', this.tids);
+      });
+    }
+  }
+
+  dbNae(reload = false) {
+    if (!reload) {
+      this.naes = this._helper.GetLocalStorage('nae');
+      if (this.naes.length <= 0) {
+        reload = true;
+      }
+    }
+    if (reload) {
+      this.cargando = true;
       this._naeService.registros().subscribe(naes => {
         this.naes = naes;
-        this._remService.registros().subscribe(rems => {
-          this.rems = rems;
-          this._taeService.registros().subscribe(taes => {
-            this.taes = taes;
-            this._temService.registros().subscribe(tems => {
-              this.tems = tems;
-              this._munService.municipios().subscribe(muns => {
-                this.muns = muns;
-                this.cargando = false;
-              });
-            });
-          });
-        });
+        this.cargando = false;
+        this._helper.SetLocalEstorage('nae', this.naes);
       });
-    });
+    }
   }
+
+  dbRem(reload = false) {
+    if (!reload) {
+      this.rems = this._helper.GetLocalStorage('rem');
+      if (this.rems.length <= 0) {
+        reload = true;
+      }
+    }
+    if (reload) {
+      this.cargando = true;
+      this._remService.registros().subscribe(rems => {
+        this.rems = rems;
+        this.cargando = false;
+        this._helper.SetLocalEstorage('rem', this.rems);
+      });
+    }
+  }
+
+  dbTae(reload = false) {
+    if (!reload) {
+      this.taes = this._helper.GetLocalStorage('tae');
+      if (this.taes.length <= 0) {
+        reload = true;
+      }
+    }
+    if (reload) {
+      this.cargando = true;
+      this._taeService.registros().subscribe(taes => {
+        this.taes = taes;
+        this.cargando = false;
+        this._helper.SetLocalEstorage('tae', this.taes);
+      });
+    }
+  }
+
+  dbTem(reload = false) {
+    if (!reload) {
+      this.tems = this._helper.GetLocalStorage('tem');
+      if (this.tems.length <= 0) {
+        reload = true;
+      }
+    }
+    if (reload) {
+      this.cargando = true;
+      this._temService.registros().subscribe(tems => {
+        this.tems = tems;
+        this.cargando = false;
+        this._helper.SetLocalEstorage('tem', this.tems);
+      });
+    }
+  }
+
+  dbMun(reload = false) {
+    if (!reload) {
+      this.muns = this._helper.GetLocalStorage('mun');
+      if (this.muns.length <= 0) {
+        reload = true;
+      }
+    }
+    if (reload) {
+      this.cargando = true;
+      this._munService.registros().subscribe(muns => {
+        this.muns = muns;
+        this.cargando = false;
+        this._helper.SetLocalEstorage('mun', this.muns);
+      });
+    }
+  }
+
+  // #endregion
 
   public consultarEmpleador2() {
     const TipoID = this.empl.TipoID;

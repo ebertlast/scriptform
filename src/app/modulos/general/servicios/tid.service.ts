@@ -15,7 +15,7 @@ export class TidService {
    * Documentos de identidad de la tabla TID
    * @param tipoid Id del tipo de documento de identidad
    */
-  public tiposIdentificacion(tipoid: string = ''): Observable<Model[]> {
+  public registros(tipoid: string = ''): Observable<Model[]> {
     const _headers = new Headers({ 'Authorization': 'Bearer ' + this._authService.Usuario().TOKEN });
     const _options = new RequestOptions({ headers: _headers });
     const _url = environment.apiurl + '/tipoidentificaciones/' + tipoid;

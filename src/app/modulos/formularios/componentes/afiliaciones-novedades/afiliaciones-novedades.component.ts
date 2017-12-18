@@ -1,4 +1,5 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NovService } from '../../../general/servicios/nov.service';
 import { Nov } from '../../../general/modelos/nov';
 import { Formulario } from '../../modelos/formulario';
@@ -21,6 +22,7 @@ import { ZonService } from '../../../general/servicios/zon.service';
 import { Zon } from '../../../general/modelos/zon';
 import { EmplService } from '../../../general/servicios/empl.service';
 import { Empl } from '../../../general/modelos/empl';
+import { environment } from '../../../../../environments/environment';
 declare var $: any;
 @Component({
   selector: 'app-afiliaciones-novedades',
@@ -41,7 +43,10 @@ export class AfiliacionesNovedadesComponent implements OnInit, AfterViewInit {
     private _munService: MunService,
     private _zonService: ZonService,
     private _emplService: EmplService,
-  ) { }
+    private _router: Router,
+  ) {
+
+  }
 
   // #region Métodos de obtención y establecimiento de valores
   private _novedades: Nov[] = [];
@@ -154,7 +159,8 @@ export class AfiliacionesNovedadesComponent implements OnInit, AfterViewInit {
   // #endregion
 
   private autoGuardado() {
-    let formulario = JSON.parse(localStorage.getItem('formulario'))['formulario'];
+    let formulario = (!localStorage.getItem('formulario'))
+      ? new Formulario() : JSON.parse(localStorage.getItem('formulario'))['formulario'];
     const a = JSON.stringify({ formulario });
     formulario = this.formulario;
     const b = JSON.stringify({ formulario });
@@ -163,7 +169,7 @@ export class AfiliacionesNovedadesComponent implements OnInit, AfterViewInit {
     } else {
       // console.log('Guardar Formulario');
       localStorage.setItem('formulario', JSON.stringify({ formulario: this.formulario }));
-      this._helper.Notificacion('Autoguardado');
+      this._helper.Notificacion('Autoguardado', 'info');
     }
     setTimeout(function () {
       _me.autoGuardado();
@@ -172,44 +178,19 @@ export class AfiliacionesNovedadesComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    const me = this;
-    this.cargando = true;
-    this._novService.novedades().subscribe(novedades => {
-      this.novedades = novedades;
-      this._tidService.tiposIdentificacion().subscribe(tiposDocumentos => {
-        this.tiposDocumentos = tiposDocumentos;
-        this._genService.registros().subscribe(generos => {
-          this.generos = generos;
-          this._tgenService.registros('GENERAL', 'GRUPOETNICO').subscribe(etnias => {
-            this.etnias = etnias;
-            this._tgenService.registros('GENERAL', 'GRUPOPOBESPECIAL').subscribe(poblacionEspecial => {
-              this.poblacionEspecial = poblacionEspecial;
-              this._gdiService.registros().subscribe(gradosDiscapacidades => {
-                this.gradosDiscapacidades = gradosDiscapacidades;
-                this._tdiService.registros().subscribe(tiposDiscapacidades => {
-                  this.tiposDiscapacidades = tiposDiscapacidades;
-                  this._gpoService.registros().subscribe(gruposPoblacionales => {
-                    this.gruposPoblacionales = gruposPoblacionales;
-                    this._munService.municipios().subscribe(municipios => {
-                      this.municipios = municipios;
-                      this._zonService.registros().subscribe(zonas => {
-                        this.zonas = zonas;
-                        this._emplService.registros().subscribe(empls => {
-                          this.empls = empls;
-                          console.log(this.empls);
-                          this.cargando = false;
-                        });
-                      });
-                    });
-                  });
-                });
-              });
-            });
-          });
-        });
-      });
-    });
+    this.dbNov();
+    this.dbTdi();
+    this.dbGpo();
+    this.dbZon();
+    this.dbMun();
+    this.dbGdi();
+    this.dbGpoe();
+    this.dbEtn();
+    this.dbGen();
+    this.dbTid();
+    this.dbEmpl();
 
+    const me = this;
     $('input[name^="TipoTramite"]').focus();
 
     $.mask.definitions['~'] = '[+-]';
@@ -251,6 +232,190 @@ export class AfiliacionesNovedadesComponent implements OnInit, AfterViewInit {
       // console.log(this.formulario.Beneficiarios);
     }
   }
+
+  // #region Sección de consultas a base de datos
+  dbNov(reload = false) {
+    if (!reload) {
+      this.novedades = this._helper.GetLocalStorage('nov');
+      if (this.novedades.length <= 0) {
+        reload = true;
+      }
+    }
+    if (reload) {
+      this.cargando = true;
+      this._novService.novedades().subscribe(novedades => {
+        this.novedades = novedades;
+        this.cargando = false;
+        this._helper.SetLocalEstorage('nov', this.novedades);
+      });
+    }
+  }
+  dbEmpl(reload = false) {
+    if (!reload) {
+      this.novedades = this._helper.GetLocalStorage('empl');
+      if (this.novedades.length <= 0) {
+        reload = true;
+      }
+    }
+    if (reload) {
+      this.cargando = true;
+      this._emplService.registros().subscribe(empls => {
+        this.empls = empls;
+        this.cargando = false;
+        this._helper.SetLocalEstorage('empl', this.empls);
+      });
+    }
+  }
+  dbZon(reload = false) {
+    if (!reload) {
+      this.zonas = this._helper.GetLocalStorage('zon');
+      if (this.zonas.length <= 0) {
+        reload = true;
+      }
+    }
+    if (reload) {
+      this.cargando = true;
+      this._zonService.registros().subscribe(zonas => {
+        this.zonas = zonas;
+        this.cargando = false;
+        this._helper.SetLocalEstorage('zon', this.zonas);
+      });
+    }
+  }
+  dbMun(reload = false) {
+    if (!reload) {
+      this.municipios = this._helper.GetLocalStorage('mun');
+      if (this.municipios.length <= 0) {
+        reload = true;
+      }
+    }
+    if (reload) {
+      this.cargando = true;
+      this._munService.registros().subscribe(municipios => {
+        this.municipios = municipios;
+        this.cargando = false;
+        this._helper.SetLocalEstorage('mun', this.municipios);
+      });
+    }
+  }
+  dbGpo(reload = false) {
+    if (!reload) {
+      this.gruposPoblacionales = this._helper.GetLocalStorage('gpo');
+      if (this.gruposPoblacionales.length <= 0) {
+        reload = true;
+      }
+    }
+    if (reload) {
+      this.cargando = true;
+      this._gpoService.registros().subscribe(gruposPoblacionales => {
+        this.gruposPoblacionales = gruposPoblacionales;
+        this.cargando = false;
+        this._helper.SetLocalEstorage('gpo', this.gruposPoblacionales);
+      });
+    }
+  }
+  /**
+   * Tipos de Discapacidad
+   * @param reload
+   */
+  dbTdi(reload = false) {
+    if (!reload) {
+      this.tiposDiscapacidades = this._helper.GetLocalStorage('tdi');
+      if (this.tiposDiscapacidades.length <= 0) {
+        reload = true;
+      }
+    }
+    if (reload) {
+      this.cargando = true;
+      this._tdiService.registros().subscribe(tiposDiscapacidades => {
+        this.tiposDiscapacidades = tiposDiscapacidades;
+        this.cargando = false;
+        this._helper.SetLocalEstorage('tdi', this.tiposDiscapacidades);
+      });
+    }
+  }
+  dbGdi(reload = false) {
+    if (!reload) {
+      this.gradosDiscapacidades = this._helper.GetLocalStorage('gdi');
+      if (this.gradosDiscapacidades.length <= 0) {
+        reload = true;
+      }
+    }
+    if (reload) {
+      this.cargando = true;
+      this._gdiService.registros().subscribe(gradosDiscapacidades => {
+        this.gradosDiscapacidades = gradosDiscapacidades;
+        this.cargando = false;
+        this._helper.SetLocalEstorage('gdi', this.gradosDiscapacidades);
+      });
+    }
+  }
+  dbGpoe(reload = false) {
+    if (!reload) {
+      this.poblacionEspecial = this._helper.GetLocalStorage('gpoe');
+      if (this.poblacionEspecial.length <= 0) {
+        reload = true;
+      }
+    }
+    if (reload) {
+      this.cargando = true;
+      this._tgenService.registros('GENERAL', 'GRUPOPOBESPECIAL').subscribe(poblacionEspecial => {
+        this.poblacionEspecial = poblacionEspecial;
+        this.cargando = false;
+        this._helper.SetLocalEstorage('gpoe', this.poblacionEspecial);
+      });
+    }
+  }
+  dbEtn(reload = false) {
+    if (!reload) {
+      this.etnias = this._helper.GetLocalStorage('etn');
+      if (this.etnias.length <= 0) {
+        reload = true;
+      }
+    }
+    if (reload) {
+      this.cargando = true;
+      this._tgenService.registros('GENERAL', 'GRUPOETNICO').subscribe(etnias => {
+        this.etnias = etnias;
+        this.cargando = false;
+        this._helper.SetLocalEstorage('etn', this.etnias);
+      });
+    }
+  }
+  dbGen(reload = false) {
+    if (!reload) {
+      this.generos = this._helper.GetLocalStorage('gen');
+      if (this.generos.length <= 0) {
+        reload = true;
+      }
+    }
+    if (reload) {
+      this.cargando = true;
+      this._genService.registros().subscribe(generos => {
+        this.generos = generos;
+        this.cargando = false;
+        this._helper.SetLocalEstorage('gen', this.generos);
+      });
+    }
+  }
+  dbTid(reload = false) {
+    if (!reload) {
+      this.tiposDocumentos = this._helper.GetLocalStorage('tid');
+      if (this.tiposDocumentos.length <= 0) {
+        reload = true;
+      }
+    }
+    if (reload) {
+      this.cargando = true;
+      this._tidService.registros().subscribe(tiposDocumentos => {
+        this.tiposDocumentos = tiposDocumentos;
+        this.cargando = false;
+        this._helper.SetLocalEstorage('tid', this.tiposDocumentos);
+      });
+    }
+  }
+
+  // #endregion
 
   ngAfterViewInit() {
     this.autoGuardado();
@@ -316,5 +481,8 @@ export class AfiliacionesNovedadesComponent implements OnInit, AfterViewInit {
       }
       i++;
     });
+  }
+  irAEmpleadores() {
+    this._router.navigate(['/escritorio/principal/crudempl']);
   }
 }

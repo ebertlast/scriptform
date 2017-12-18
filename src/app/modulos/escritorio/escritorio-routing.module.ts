@@ -15,6 +15,7 @@ const routes: Routes = [
   {
     path: 'principal', component: PrincipalComponent, canActivate: [AuthGuard], children: [
       // { path: 'consultas', component: ConsultasComponent, canActivate: [AuthGuard] }
+      { path: '', redirectTo: 'radicaciones', pathMatch: 'full' },
       { path: 'consultas', component: DinamicReportComponent, canActivate: [AuthGuard] },
       { path: 'confconsultas', component: DinamicReportConfiguracionComponent, canActivate: [AuthGuard] },
       { path: 'archivos', component: ArchivosComponent, canActivate: [AuthGuard] },
@@ -22,6 +23,7 @@ const routes: Routes = [
       { path: 'formulariounico', component: AfiliacionesNovedadesComponent, canActivate: [AuthGuard] },
       { path: 'tablasgenericas', component: TgenComponent, canActivate: [AuthGuard] },
       { path: 'crudempl', component: EmplComponent, canActivate: [AuthGuard] },
+      { path: '**', redirectTo: 'radicaciones' }
     ],
   },
   { path: '**', redirectTo: 'principal' }

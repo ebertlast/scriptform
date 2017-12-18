@@ -126,7 +126,18 @@ export class AuthService {
     if (this.Usuario().USUARIOID !== '') {
       this._helper.Notificacion('Sesión previa cerrada (' + this.Usuario().USUARIOID + '.- ' + this.Usuario().NOMBRE + ')', 'info');
       localStorage.removeItem(environment.currentuser);
+      localStorage.clear();
       this.usuario = new Model();
+
+      // for (let x = 0; x <= localStorage.length - 1; x++) {
+      //   const clave = localStorage.key(x);
+      //   //   console.log("La clave " + clave + "contiene el valor " + localStorage.getItem(clave) + "<br />");
+      //   // if (clave.indexOf(environment.dbconsultas) !== -1) {
+      //   if (clave.includes(environment.dbconsultas)) {
+      //     console.log('Eliminando ' + clave);
+      //     localStorage.removeItem(clave);
+      //   }
+      // }
     }
   }
 

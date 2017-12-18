@@ -15,7 +15,7 @@ export class MunService {
    * Municipios, registros de la tabla MUN
    * @param municipioid Código del municipio
    */
-  public municipios(municipioid: string = ''): Observable<Model[]> {
+  public registros(municipioid: string = ''): Observable<Model[]> {
     const _headers = new Headers({ 'Authorization': 'Bearer ' + this._authService.Usuario().TOKEN });
     const _options = new RequestOptions({ headers: _headers });
     const _url = environment.apiurl + '/municipios/' + municipioid;

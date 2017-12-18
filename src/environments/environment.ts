@@ -10,6 +10,7 @@ export const environment = {
   companyname: 'RENDIMOS, LTDA',
   yearscopyrigth: '2017-2018',
   currentuser: 'scriptformswebuser',
+  dbconsultas: 'SFConsultas',
   apiurl: 'http://localhost:8082/scriptform.api/public',
   urlFilesDownload: 'http://localhost:8082/scriptform.api/public/files/uploads/',
   urlfacebook: 'https://www.facebook.com/ebert.zerpa',

@@ -34,6 +34,8 @@ export class PrincipalComponent implements OnInit {
     // this._router.navigate(['/consultas']);
 
     this.msjMarquesina();
+
+    // $('#btnRouterLinkRadicaciones').click();
   }
   private msjMarquesina() {
     this.marquesina = this._authService.MsjBienvenida();

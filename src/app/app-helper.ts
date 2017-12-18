@@ -353,4 +353,34 @@ export class Helper {
   //   // $('#respuesta').append('Producto registrado: ' + $('#serialsticker').val() + '');
   //   $('#serialsticker').val('');
   //   }, 200);
+
+  /**
+   * Obtiene los valores de una tabla almacenados localmente
+   * @param tabla Nombre de la tabla correspondiente a los valores a obtener
+   */
+  GetLocalStorage(tabla: string): any[] {
+    tabla = environment.dbconsultas + '_' + tabla.toUpperCase();
+    if (!localStorage.getItem(tabla)) {
+      this.SetLocalEstorage(tabla);
+      return [];
+    }
+    return JSON.parse(localStorage.getItem(tabla))['data'];
+  }
+
+  /**
+   * Almacena localmente valores de una tabla para tenerlos disponibles en toda la vida de la sesión
+   * @param tabla Nombre de la tabla a almacenar los datos localmente
+   * @param valores Arreglo de datos correspondiente a la tabla consultada en la base de datos para guardarlos localmente
+   */
+  SetLocalEstorage(tabla: string, valores: any[] = []) {
+    const nombreTabla = tabla;
+    tabla = environment.dbconsultas + '_' + tabla.toUpperCase();
+    if (valores.length > 0) {
+      this.Notificacion(
+        'Datos de la tabla ' + nombreTabla.toUpperCase() + ' fueron actualizados localmente en ésta sesión'
+        , 'info'
+      );
+    }
+    localStorage.setItem(tabla, JSON.stringify({ data: valores }));
+  }
 }

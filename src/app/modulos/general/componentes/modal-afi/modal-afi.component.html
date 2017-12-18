@@ -10,7 +10,7 @@
 
         <!-- Identificacion -->
         <div class="form-group">
-          <label class="col-sm-3 control-label no-padding-right bolder blue" for="Identificacion"> Identificación:</label>
+          <label class="col-sm-3 control-label no-padding-right bolder blue" for="Identificacion" (click)="dbTid()" style="cursor: pointer"> Identificación:</label>
           <div class="col-sm-9" id="Identificacion">
             <div class="form-inline">
               <select name="tid" id="tid" [(ngModel)]="afiliado.TipoId" (change)="consultarDocumento()" style="width:200px">
@@ -48,7 +48,7 @@
         </div>
         <!-- Género -->
         <div class="form-group">
-          <label class="col-sm-3 control-label no-padding-right bolder blue" for="Género"> Género:</label>
+          <label class="col-sm-3 control-label no-padding-right bolder blue" for="Género" (click)="dbGen()" style="cursor: pointer"> Género:</label>
           <div class="col-sm-9" id="Género">
             <div class="control-group">
               <select name="Genero" id="Generio">
@@ -83,7 +83,7 @@
 
         <!-- Parentesco -->
         <div class="form-group">
-          <label class="col-sm-3 control-label no-padding-right bolder blue" for="Parentesco"> Parentesco:</label>
+          <label class="col-sm-3 control-label no-padding-right bolder blue" for="Parentesco" (click)="dbTipr()" style="cursor: pointer"> Parentesco:</label>
           <div class="col-sm-9" id="Parentesco">
             <div class="form-inline">
               <select name="tipr" id="tipr" [(ngModel)]="afiliado.Parentesco" style="width:300px">
@@ -96,7 +96,7 @@
 
         <!-- Etnia -->
         <div class="form-group">
-          <label class="col-sm-3 control-label no-padding-right bolder blue" for="Etnia"> Etnia:</label>
+          <label class="col-sm-3 control-label no-padding-right bolder blue" for="Etnia" (click)="dbEtn()" style="cursor: pointer"> Etnia:</label>
           <div class="col-sm-9" id="Etnia">
             <div class="form-inline">
               <select name="Etnia" id="Etnia" [(ngModel)]="afiliado.Etnia" style="width:200px">
@@ -125,7 +125,7 @@
         </div>
 
         <div class="form-group">
-          <label class="col-sm-3 control-label no-padding-right bolder blue" for="Direccion{{dividdireccion}}">Zona:</label>
+          <label class="col-sm-3 control-label no-padding-right bolder blue" for="Direccion{{dividdireccion}}" (click)="dbZon()" style="cursor: pointer">Zona:</label>
           <div class="col-sm-9" id="Direccion{{dividdireccion}}">
             <div class="radio inline">
               <label *ngFor="let zona of zonas">
@@ -137,7 +137,7 @@
         </div>
 
         <div class="form-group">
-          <label class="col-sm-3 control-label no-padding-right bolder blue" for="Direccion{{dividdireccion}}">Ciudad:</label>
+          <label class="col-sm-3 control-label no-padding-right bolder blue" for="Direccion{{dividdireccion}}" (click)="dbMun()" style="cursor: pointer">Ciudad:</label>
           <div class="col-sm-9" id="Direccion{{dividdireccion}}">
             <div class="form-inline">
               <select name="CiudadResidencia{{dividdireccion}}" id="CiudadResidencia{{dividdireccion}}" [(ngModel)]="afiliado.CiudadResidencia">
@@ -199,7 +199,7 @@
         <p class="alert alert-success" [ngClass]="{'hide': ipsMedica.Codigo_Med_BH===ipsMedica.Codigo_Odo_BH}">
           {{ipsOdontologica.Codigo_Odo_BH}}.- {{ipsOdontologica.Prestador_Odontologico}} ({{ipsOdontologica.Regional}})
           &nbsp; [{{ipsOdontologica.Direccion_Odo}}]
-          
+
         </p>
 
         <table class="table table-striped table-bordered table-hover hide">

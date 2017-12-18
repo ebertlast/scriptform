@@ -31,11 +31,6 @@ export class ModalAfiComponent implements OnInit, AfterViewInit {
 
   private _afiliado: any = new Afi();
   public get afiliado(): any {
-    this._afiliado.PrimerApellido = this._helper.Capitalizar(this._afiliado.PrimerApellido);
-    this._afiliado.PrimerNombre = this._helper.Capitalizar(this._afiliado.PrimerNombre);
-    this._afiliado.SegundoApellido = this._helper.Capitalizar(this._afiliado.SegundoApellido);
-    this._afiliado.SegundoNombre = this._helper.Capitalizar(this._afiliado.SegundoNombre);
-    if (this._afiliado.DireccionResidencia === '') { this._afiliado.DireccionResidencia = this.direccion; }
     return this._afiliado;
   }
   public set afiliado(v: any) {
@@ -166,13 +161,12 @@ export class ModalAfiComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     // alert(this.modalid);
-    this._tidService.tiposIdentificacion().subscribe(tids => { this.tids = tids; });
-    this._genService.registros().subscribe(gens => { this.gens = gens; });
-    this._tiprService.registros().subscribe(tiprs => { this.tiprs = tiprs; });
-    this._tgenService.registros('GENERAL', 'GRUPOETNICO').subscribe(etnias => { this.etnias = etnias; });
-    // this._tgenService.registros('GENERAL', 'GRUPOETNICO').subscribe(etnias => { this.etnias = etnias; });
-    this._munService.municipios().subscribe(municipios => { this.municipios = municipios; });
-    this._zonService.registros().subscribe(zonas => { this.zonas = zonas; });
+    this.dbTid();
+    this.dbGen();
+    this.dbTipr();
+    this.dbEtn();
+    this.dbMun();
+    this.dbZon();
 
     this._ipsService.registros().subscribe(ipsTodas => {
       this.ipsTodas = ipsTodas;
@@ -194,7 +188,107 @@ export class ModalAfiComponent implements OnInit, AfterViewInit {
       { placeholder: ' ', completed: function () { alert('Escribiste lo siguiente: ' + this.val()); } }
     );
     // $('.input-mask-email').mask('999.999.999.999.999,99', {reverse: true});
+    if (this.afiliado.DireccionResidencia === '') { this.afiliado.DireccionResidencia = this.direccion; }
   }
+
+  // #region Zona de obtención de valores
+  dbTid(reload = false) {
+    if (!reload) {
+      this.tids = this._helper.GetLocalStorage('tid');
+      if (this.tids.length <= 0) {
+        reload = true;
+      }
+    }
+    if (reload) {
+      this.cargando = true;
+      this._tidService.registros().subscribe(tids => {
+        this.tids = tids;
+        this.cargando = false;
+        this._helper.SetLocalEstorage('tid', this.tids);
+      });
+    }
+  }
+  dbGen(reload = false) {
+    if (!reload) {
+      this.gens = this._helper.GetLocalStorage('gen');
+      if (this.gens.length <= 0) {
+        reload = true;
+      }
+    }
+    if (reload) {
+      this.cargando = true;
+      this._genService.registros().subscribe(gens => {
+        this.gens = gens;
+        this.cargando = false;
+        this._helper.SetLocalEstorage('gen', this.gens);
+      });
+    }
+  }
+  dbTipr(reload = false) {
+    if (!reload) {
+      this.tiprs = this._helper.GetLocalStorage('tipr');
+      if (this.tiprs.length <= 0) {
+        reload = true;
+      }
+    }
+    if (reload) {
+      this.cargando = true;
+      this._tiprService.registros().subscribe(tiprs => {
+        this.tiprs = tiprs;
+        this.cargando = false;
+        this._helper.SetLocalEstorage('tipr', this.tiprs);
+      });
+    }
+  }
+  dbEtn(reload = false) {
+    if (!reload) {
+      this.etnias = this._helper.GetLocalStorage('etn');
+      if (this.etnias.length <= 0) {
+        reload = true;
+      }
+    }
+    if (reload) {
+      this.cargando = true;
+      this._tgenService.registros('GENERAL', 'GRUPOETNICO').subscribe(etnias => {
+        this.etnias = etnias;
+        this.cargando = false;
+        this._helper.SetLocalEstorage('etn', this.etnias);
+      });
+    }
+  }
+  dbMun(reload = false) {
+    if (!reload) {
+      this.municipios = this._helper.GetLocalStorage('mun');
+      if (this.municipios.length <= 0) {
+        reload = true;
+      }
+    }
+    if (reload) {
+      this.cargando = true;
+      this._munService.registros().subscribe(municipios => {
+        this.municipios = municipios;
+        this.cargando = false;
+        this._helper.SetLocalEstorage('mun', this.municipios);
+      });
+    }
+  }
+  dbZon(reload = false) {
+    if (!reload) {
+      this.zonas = this._helper.GetLocalStorage('zon');
+      if (this.zonas.length <= 0) {
+        reload = true;
+      }
+    }
+    if (reload) {
+      this.cargando = true;
+      this._zonService.registros().subscribe(zonas => {
+        this.zonas = zonas;
+        this.cargando = false;
+        this._helper.SetLocalEstorage('zon', this.zonas);
+      });
+    }
+  }
+  // #endregion
 
   ngAfterViewInit() {
     // #region Fecha de Nacimiento
@@ -279,6 +373,12 @@ export class ModalAfiComponent implements OnInit, AfterViewInit {
   }
 
   enviarAfiliado(event) {
+    this.afiliado.PrimerApellido = this._helper.Capitalizar(this.afiliado.PrimerApellido);
+    this.afiliado.PrimerNombre = this._helper.Capitalizar(this.afiliado.PrimerNombre);
+    this.afiliado.SegundoApellido = this._helper.Capitalizar(this.afiliado.SegundoApellido);
+    this.afiliado.SegundoNombre = this._helper.Capitalizar(this.afiliado.SegundoNombre);
+    if (this.afiliado.DireccionResidencia === '') { this.afiliado.DireccionResidencia = this.direccion; }
+
     // console.log(this.afiliado);
     this.EnviarAfiliado.emit({ afiliado: this.afiliado });
     return false;

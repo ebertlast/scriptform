@@ -160,7 +160,8 @@
     </div>
     <!-- 7. Tipo de documento de identidad -->
     <div class="form-group">
-      <label class="col-sm-3 control-label no-padding-right bolder blue" for="form-field-1-1"> 7. Tipo de documento de identidad:</label>
+      <label class="col-sm-3 control-label no-padding-right bolder blue" for="form-field-1-1" style="cursor: pointer" (click)="dbTdi(true)">
+      7. Tipo de documento de identidad:</label>
       <div class="col-sm-9">
         <div class="control-group">
           <div class="radio hide" *ngFor="let tid of tiposDocumentos">
@@ -189,7 +190,8 @@
     </div>
     <!-- 9. Género -->
     <div class="form-group">
-      <label class="col-sm-3 control-label no-padding-right bolder blue" for="genero"> 9. Género:</label>
+      <label class="col-sm-3 control-label no-padding-right bolder blue" for="genero" (click)="dbGen(true)" style="cursor: pointer">
+      9. Género:</label>
       <div class="col-sm-9">
         <div class="control-group">
           <div class="radio inline" *ngFor="let genero of generos">
@@ -230,7 +232,7 @@
   <form class="form-horizontal" role="form">
     <!-- 11. Étnia -->
     <div class="form-group">
-      <label class="col-sm-3 control-label no-padding-right bolder blue" for="Etnia"> 11. Étnia:</label>
+      <label class="col-sm-3 control-label no-padding-right bolder blue" for="Etnia" (click)="dbEtn(true)" style="cursor: pointer"> 11. Étnia:</label>
       <div class="col-sm-9">
         <select name="etnia" id="etnia" [(ngModel)]="formulario.Etnia" (change)="refrescarFormulario()">
           <option value=""></option>
@@ -249,7 +251,7 @@
 
     <!-- 12. Discapacidad -->
     <div class="form-group">
-      <label class="col-sm-3 control-label no-padding-right bolder blue" for="TipoDiscapacidad"> 12. Discapacidad:</label>
+      <label class="col-sm-3 control-label no-padding-right bolder blue" for="TipoDiscapacidad"  (click)="dbTdi(true)" style="cursor: pointer"> 12. Discapacidad:</label>
       <div class="col-sm-9">
         <small>Tipo Discapacidad</small>
         <select class="form-control" placeholder="Tipo Discapacidad" id="TipoDiscapacidad" name="TipoDiscapacidad" [(ngModel)]="formulario.TipoDiscapacidad"
@@ -277,7 +279,7 @@
 
     <!-- 14. Grupo Poblacional Especial -->
     <div class="form-group">
-      <label class="col-sm-3 control-label no-padding-right bolder blue" for="grupo"> 14. Grupo Poblacional Especial:</label>
+      <label class="col-sm-3 control-label no-padding-right bolder blue" for="grupo"  (click)="dbGpoe(true)" style="cursor: pointer"> 14. Grupo Poblacional Especial:</label>
       <div class="col-sm-9">
         <select class="form-control" placeholder="Grupo Poblacional Especial" id="grupo" name="grupo" [(ngModel)]="formulario.GrupoPoblacionalEspecial"
           (change)="refrescarFormulario()">
@@ -317,7 +319,7 @@
 
     <!-- 18. Residencia -->
     <div class="form-group">
-      <label class="col-sm-3 control-label no-padding-right bolder blue" for="Direccion"> 18. Residencia:</label>
+      <label class="col-sm-3 control-label no-padding-right bolder blue" for="Direccion"  (click)="dbMun(true)" style="cursor: pointer"> 18. Residencia:</label>
       <div class="col-sm-9">
         <div class="control-group">
           <label class="inline" for="Zona">
@@ -604,16 +606,16 @@
     <!-- <small>(Del cotizante o cabeza de familia)</small> -->
   </h3>
   <form class="form-horizontal" role="form">
-    <!-- 19-23. Conyugue -->
+    <!-- 35-39. Empleador -->
     <div class="form-group">
-      <label class="col-sm-3 control-label no-padding-right bolder blue" for="PrimerApellido"> 19-23. Conyugue:</label>
+      <label class="col-sm-3 control-label no-padding-right bolder blue" for="PrimerApellido"> 35-39. Empleador:</label>
       <div class="col-sm-9">
         <div class="widget-box widget-color-blue" id="widget-box-2">
           <!-- #section:custom/widget-box.options -->
           <div class="widget-header">
-            <h5 class="widget-title bigger lighter" (click)="lanzarVentanaConyugue()" style="cursor: pointer">
+            <h5 class="widget-title bigger lighter" (click)="irAEmpleadores()" style="cursor: pointer">
               <i class="ace-icon fa fa-user hide"></i>
-              Datos básicos de identificación del cónyugue o compañero(a) permanente cotizante
+              Datos del empleador o entidad empleadora
             </h5>
             <!-- #section:custom/widget-box.toolbar -->
             <div class="widget-toolbar">
@@ -644,77 +646,7 @@
           <!-- /section:custom/widget-box.options -->
           <div class="widget-body">
             <div class="widget-main no-padding">
-              <table class="table table-striped table-bordered table-hover">
-                <thead class="thin-border-bottom">
-                  <tr>
-                    <th colspan="4">
-                      19. Apellidos y nombres
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr class="hide">
-                    <th>Primer Apellido</th>
 
-                    <th class="hidden-480">
-                      Segundo Apellido
-                    </th>
-
-                    <th>
-                      Primer Nombre
-                    </th>
-                    <th class="hidden-480">
-                      Segundo Nombre
-                    </th>
-                  </tr>
-                  <tr>
-                    <td>{{formulario.Conyugue.PrimerApellido}}</td>
-
-                    <td class="hidden-480">
-                      {{formulario.Conyugue.SegundoApellido}}
-                    </td>
-
-                    <td>
-                      {{formulario.Conyugue.PrimerNombre}}
-                    </td>
-                    <td class="hidden-480">
-                      {{formulario.Conyugue.SegundoNombre}}
-                    </td>
-                  </tr>
-                </tbody>
-                <thead class="thin-border-bottom">
-                  <tr>
-                    <th class="hidden-480">
-                      20. Tipo de Documento de Identidad
-                    </th>
-                    <th>
-                      21. Número de Documento de Identidad
-                    </th>
-                    <th class="hidden-480">
-                      22. Sexo
-                    </th>
-                    <th class="hidden-480">
-                      23. Fecha de Nacimiento
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td class="hidden-480">
-                      <div *ngFor="let tid of tiposDocumentos | filtrar: 'TipoID' : formulario.Conyugue.TipoId">{{tid.DescripcionID}}</div>
-                    </td>
-                    <td>
-                      {{formulario.Conyugue.NumeroIdentificacion}}
-                    </td>
-                    <td class="hidden-480">
-                      <div *ngFor="let gen of generos | filtrar: 'GeneroID' : formulario.Conyugue.Sexo">{{gen.DescripcionGenero}}</div>
-                    </td>
-                    <td class="hidden-480">
-                      {{formulario.Conyugue.FechaNacimiento}}
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
             </div>
           </div>
 
@@ -723,85 +655,6 @@
         </div>
       </div>
     </div>
-    <!-- 25-34. Beneficiarios -->
-    <div class="form-group">
-      <label class="col-sm-3 control-label no-padding-right bolder blue" for="PrimerApellido"> 25-34. Beneficiarios:</label>
-      <div class="col-sm-9">
-        <div class="widget-box widget-color-blue" id="widget-box-2">
-          <!-- #section:custom/widget-box.options -->
-          <div class="widget-header">
-            <h5 class="widget-title bigger lighter" (click)="lanzarVentanaBeneficiarios()" style="cursor: pointer">
-              <i class="ace-icon fa fa-user hide"></i>
-              Datos básicos de identificación de los beneficiarios y de los afiliados adicionales
-            </h5>
-            <!-- #section:custom/widget-box.toolbar -->
-            <div class="widget-toolbar">
-              <a href="#" data-action="collapse">
-                <i class="ace-icon fa fa-chevron-up"></i>
-              </a>
 
-              <!-- <a href="#" data-action="close">
-              <i class="ace-icon fa fa-times"></i>
-            </a> -->
-            </div>
-            <!-- /section:custom/widget-box.toolbar -->
-          </div>
-
-          <!-- /section:custom/widget-box.options -->
-          <div class="widget-body">
-            <div class="widget-main no-padding">
-              <table class="table table-striped table-bordered table-hover">
-                <thead class="thin-border-bottom">
-                  <tr>
-                    <th class="hidden-480">
-                      25-26. Identificación
-                    </th>
-                    <th>
-                      24. Apellidos y Nombres
-                    </th>
-                    <th class="hidden-480">
-                      27. Sexo
-                    </th>
-                    <th class="hidden-480">
-                      28. Fecha de Nacimiento
-                    </th>
-                    <th class="hidden-480">
-                      29. Parentesco
-                    </th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let ben of formulario.Beneficiarios">
-                    <td class="hidden-480">
-                      {{ben.TipoId}} {{ben.NumeroIdentificacion}}
-                    </td>
-                    <td>
-                      {{ben.PrimerApellido}} {{ben.SegundoApellido}} {{ben.PrimerNombre}} {{ben.SegundoNombre}}
-                    </td>
-                    <td class="hidden-480">
-                      <div *ngFor="let gen of generos | filtrar: 'GeneroID' : ben.Sexo">{{gen.DescripcionGenero}}</div>
-                    </td>
-                    <td class="hidden-480">
-                      {{ben.FechaNacimiento}}
-                    </td>
-                    <td class="hidden-480">
-                      {{ben.Parentesco.DescripcionTipoRelacion}}
-                    </td>
-                    <td>
-                      <button class="label label-danger label-white middle" (click)="delBeneficiario(ben.TipoId, ben.NumeroIdentificacion)">Quitar</button>
-                    </td>
-                  </tr>
-                </tbody>
-
-              </table>
-            </div>
-          </div>
-
-          <app-modal-afi [modalid]="'modal-formBeneficiarios'" [direccion]="formulario.Direccion" (EnviarAfiliado)="addBeneficiario($event)"></app-modal-afi>
-
-        </div>
-      </div>
-    </div>
   </form>
 </div>

@@ -389,11 +389,11 @@ export class ArchivosComponent implements OnInit {
 
 
     // #endregion
-    this._tidService.tiposIdentificacion().subscribe(tiposDocumentos => {
+    this._tidService.registros().subscribe(tiposDocumentos => {
       this.tiposDocumentos = tiposDocumentos;
     });
 
-    this._munService.municipios().subscribe(municipios => {
+    this._munService.registros().subscribe(municipios => {
       this.municipios = municipios;
     });
 
