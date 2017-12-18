@@ -526,9 +526,6 @@
             </ul>
           </li>
 
-
-
-
         </ul>
       </li>
 
@@ -558,8 +555,50 @@
               Tablas Genéricas
             </a>
           </li>
+          <li routerLinkActive="active">
+            <a routerLink="/escritorio/principal/seguridad/procedimientos">
+              <i class="menu-icon fa fa-caret-right"></i>
+              Procedimientos y Controles
+            </a>
+          </li>
+        </ul>
+
+        <ul class="submenu">
+          <li class="" routerLinkActive="active">
+            <a href="#" id="menuUsuarios" class="dropdown-toggle">
+              <i class="menu-icon fa fa-caret-right"></i>
+
+              Usuarios
+              <b class="arrow fa fa-angle-down"></b>
+            </a>
+
+            <b class="arrow"></b>
+
+            <ul class="submenu">
+              <li class="" routerLinkActive="active">
+                <a routerLink="/escritorio/principal/seguridad/grupos">
+                  <i class="menu-icon fa fa-caret-right"></i>
+                  Grupos
+                </a>
+                <!-- <b class="arrow"></b> -->
+              </li>
+              <li class="" routerLinkActive="active">
+                <a routerLink="/escritorio/principal/seguridad/usuarios">
+                  <i class="menu-icon fa fa-caret-right"></i>
+                  Usuarios
+                </a>
+                <!-- <b class="arrow"></b> -->
+              </li>
+            </ul>
+          </li>
+
+
+
         </ul>
       </li>
+
+
+
 
       <li class="" *ngIf="false">
         <a href="#" class="dropdown-toggle">

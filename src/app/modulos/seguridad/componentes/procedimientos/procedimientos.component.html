@@ -1,0 +1,150 @@
+<div class="page-header">
+  <h1>
+    Sistema
+    <small>
+      <i class="ace-icon fa fa-angle-double-right"></i>
+      Procedimientos y controles
+    </small>
+  </h1>
+</div>
+<!-- /.page-header -->
+<div class="row">
+  <div class="col-xs-12">
+    <div class="widget-box">
+      <div class="widget-header">
+        <h4 class="widget-title">Formulario de Registro</h4>
+
+        <div class="widget-toolbar">
+          <a href="#" data-action="collapse">
+            <i class="ace-icon fa fa-chevron-up"></i>
+          </a>
+
+          <a href="#" data-action="close">
+            <i class="ace-icon fa fa-times"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="widget-body">
+        <div class="widget-main">
+          <div>
+            <div id="accordion" class="accordion-style1 panel-group">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true">
+                      <i class="bigger-110 ace-icon fa fa-angle-down" data-icon-hide="ace-icon fa fa-angle-down" data-icon-show="ace-icon fa fa-angle-right"></i>
+                      &nbsp;Elige el procedimiento
+                      <small>{{uspro.ProcedimientoID}}.- {{uspro.DescripcionProcedimiento}}</small>
+                    </a>
+                  </h4>
+                </div>
+
+                <div class="panel-collapse collapse in" id="collapseOne" aria-expanded="true" style="">
+                  <div class="panel-body">
+                    <p class="alert alert-info" *ngIf="uspros.length<=0">
+                      Al parecer hasta el momento no se existe procedimientos registrados en la base de datos.
+                    </p>
+
+                    <select name="ProcedimientoID" id="ProcedimientoID" *ngIf="uspros.length>0" [(ngModel)]="uspro" (change)="refrescarUsproh()">
+                      <option [ngValue]="uspro" *ngFor="let uspro of uspros">{{uspro.ProcedimientoID}}</option>
+                    </select>
+                    <select name="ProcedimientoID" id="ProcedimientoID" *ngIf="uspros.length>0" [(ngModel)]="uspro" (change)="refrescarUsproh()">
+                      <option [ngValue]="uspro" *ngFor="let uspro of uspros">{{uspro.DescripcionProcedimiento}}</option>
+                    </select>
+                    <button type="button" id="btnDelUspro" (click)="delUspro()" class="btn btn-danger btn-sm" data-loading-text="Borrando..." [ngClass]="{'hide': uspro.ProcedimientoID==='' || usprohs.length>0}" >
+                      <i class="ace-icon fa fa-trash bigger-110"></i>Borrar Procedimiento
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false">
+                      <i class="bigger-110 ace-icon fa fa-angle-right" data-icon-hide="ace-icon fa fa-angle-down" data-icon-show="ace-icon fa fa-angle-right"></i>
+                      &nbsp;Agrega un nuevo Procedimiento
+                    </a>
+                  </h4>
+                </div>
+
+                <div class="panel-collapse collapse" id="collapseTwo" aria-expanded="false" style="height: 0px;">
+                  <div class="panel-body">
+                    <form class="form-inline">
+                      <input type="text" [(ngModel)]="uspro.ProcedimientoID" name="ProcedimientoID" id="ProcedimientoID" class="input-medium" maxlength="30"
+                        placeholder="ProcedimientoID">
+                      <input type="text" [(ngModel)]="uspro.DescripcionProcedimiento" name="DescripcionProcedimiento" id="DescripcionProcedimiento"
+                        class="input-large" maxlength="200" placeholder="Denominación">
+                      <button type="button" id="btnAddUspro" (click)="addUspro()" class="btn btn-info btn-sm" data-loading-text="Registrando...">
+                        <i class="ace-icon fa fa-check bigger-110"></i>Agregar Procedimiento
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <hr>
+
+          <!-- #section:plugins/input.limiter -->
+          <div>
+            <label for="form-field-9">Control:</label>
+
+            <form class="form-inline">
+              <input type="text" [(ngModel)]="usproh.ControlID" title="ControlID" name="ControlID" id="ControlID" class="input-medium" maxlength="100"
+                placeholder="ControlID">
+              <input type="text" [(ngModel)]="usproh.DescripcionControl" name="DescripcionControl" id="DescripcionControl"
+                class="input-large" maxlength="200" placeholder="Descripción">
+              <button type="button" id="btnAddUsproh" (click)="addUsproh()" class="btn btn-info btn-sm" data-loading-text="Registrando..." [ngClass]="{'hide':editar}">
+                <i class="ace-icon fa fa-check bigger-110"></i>Agregar Control
+              </button>
+              <button type="button" id="btnEditUsproh" (click)="editUsproh()" class="btn btn-warning btn-sm" data-loading-text="Actualizando..." [ngClass]="{'hide':!editar}">
+                <i class="ace-icon fa fa-refresh bigger-110"></i>Actualizar Control
+              </button>
+              <button type="button" id="btnDelUsproh" (click)="delUsproh()" class="btn btn-danger btn-sm" data-loading-text="Eliminando..." [ngClass]="{'hide':!editar}">
+                <i class="ace-icon fa fa-trash bigger-110"></i>Eliminar Control
+              </button>
+              <button type="button" id="btnCancelarEdicion" (click)="cancelarEdicion()" class="btn btn-sm" [ngClass]="{'hide':!editar}">
+                <i class="ace-icon fa fa-ban bigger-110"></i>Cancelar
+              </button>
+            </form>
+          </div>
+          <!-- /section:plugins/input.autosize -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /.span -->
+</div>
+
+<hr>
+
+<div class="row" [ngClass]="{'hide': usprohs.length <= 0}">
+  <div class="col-xs-12">
+    <div class="clearfix">
+      <div class="pull-right tableTools-container">
+      </div>
+    </div>
+    <div class="table-header">
+      Registros en la tabla "USPROH"
+    </div>
+    <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+      <thead>
+        <tr>
+          <th>ProcedimientoID</th>
+          <th>ControlID</th>
+          <th>DescripcionControl</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let usproh of usprohs" style="cursor: pointer;">
+          <td>{{usproh.ProcedimientoID}}</td>
+          <td>{{usproh.ControlID}}</td>
+          <td>{{usproh.DescripcionControl}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

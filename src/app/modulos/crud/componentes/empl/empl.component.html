@@ -956,31 +956,30 @@
     <div class="table-header">
       Registros en la tabla "EMPL"
     </div>
+    <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+      <thead>
+        <tr>
+          <th>Tipo</th>
+          <th>Identificación</th>
+          <th>Razón Social</th>
+          <th>Dirección Fiscal</th>
+          <th>Email</th>
+          <th>Teléfono</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let empl of empls" style="cursor: pointer;">
+          <td>{{empl.TipoID}}</td>
+          <td>{{empl.NumeroIdentificacion}}</td>
+          <td>{{empl.RazonSocial}}</td>
+          <td>
+            {{empl.DireccionFiscal}}
+            <div *ngFor="let mun of muns | filtrar: 'MunicipioID': empl.MunicipioID">{{mun.DescripcionMunicipio}} - {{mun.DescripcionDepartamento}}</div>
+          </td>
+          <td>{{empl.Email}}</td>
+          <td>{{empl.Telefono}}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
-
-<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
-  <thead>
-    <tr>
-      <th>Tipo</th>
-      <th>Identificación</th>
-      <th>Razón Social</th>
-      <th>Dirección Fiscal</th>
-      <th>Email</th>
-      <th>Teléfono</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let empl of empls" style="cursor: pointer;">
-      <td>{{empl.TipoID}}</td>
-      <td>{{empl.NumeroIdentificacion}}</td>
-      <td>{{empl.RazonSocial}}</td>
-      <td>
-        {{empl.DireccionFiscal}}
-        <div *ngFor="let mun of muns | filtrar: 'MunicipioID': empl.MunicipioID">{{mun.DescripcionMunicipio}} - {{mun.DescripcionDepartamento}}</div>
-      </td>
-      <td>{{empl.Email}}</td>
-      <td>{{empl.Telefono}}</td>
-    </tr>
-  </tbody>
-</table>

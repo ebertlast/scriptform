@@ -12,6 +12,9 @@ import { AfiliacionesNovedadesComponent } from '../formularios/componentes/afili
 import { TgenComponent } from '../general/componentes/tgen/tgen.component';
 import { EmplComponent } from '../crud/componentes/empl/empl.component';
 import { ArchivoComponent } from '../archivo/componentes/archivo/archivo.component';
+import { UsuariosComponent } from '../seguridad/componentes/usuarios/usuarios.component';
+import { GruposComponent } from '../seguridad/componentes/grupos/grupos.component';
+import { ProcedimientosComponent } from '../seguridad/componentes/procedimientos/procedimientos.component';
 const routes: Routes = [
   { path: '', redirectTo: 'principal', pathMatch: 'full' },
   {
@@ -26,6 +29,9 @@ const routes: Routes = [
       { path: 'formulariounico', component: AfiliacionesNovedadesComponent, canActivate: [AuthGuard] },
       { path: 'tablasgenericas', component: TgenComponent, canActivate: [AuthGuard] },
       { path: 'crudempl', component: EmplComponent, canActivate: [AuthGuard] },
+      { path: 'seguridad/procedimientos', component: ProcedimientosComponent, canActivate: [AuthGuard] },
+      { path: 'seguridad/grupos', component: GruposComponent, canActivate: [AuthGuard] },
+      { path: 'seguridad/usuarios', component: UsuariosComponent, canActivate: [AuthGuard] },
       { path: '**', redirectTo: 'radicaciones' }
     ],
   },
