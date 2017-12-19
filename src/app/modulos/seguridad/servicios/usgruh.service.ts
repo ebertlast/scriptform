@@ -18,7 +18,9 @@ export class UsgruhService {
     });
     const _options = new RequestOptions({ headers: _headers });
     const _json = 'json=' + JSON.stringify({ model });
+    // console.log(_json);
     const _url = environment.apiurl + '/detallegrupos/nuevo';
+    // console.log(_url);
     return this._http.put(_url, _json, _options)
       .map((response: Response) => {
         const data = this._authService.ExtraerResultados(response);
@@ -61,6 +63,8 @@ export class UsgruhService {
     const _options = new RequestOptions({ headers: _headers });
     const _json = 'json=' + JSON.stringify({ model });
     const _url = environment.apiurl + '/detallegrupos/actualizar';
+    console.log(_json);
+    console.log(_url);
     return this._http.post(_url, _json, _options)
       .map((response: Response) => {
         const data = this._authService.ExtraerResultados(response);

@@ -12,7 +12,8 @@ export const environment = {
   currentuser: 'scriptformswebuser',
   dbconsultas: 'SFConsultas',
   apiurl: 'http://localhost:8082/scriptform.api/public',
-  urlFilesDownload: 'http://localhost:8082/scriptform.api/public/files/uploads/',
+  urlFilesUploads: 'http://localhost:8082/scriptform.api/public/files/uploads/',
+  urlFilesDownload: 'http://localhost:8082/scriptform.api/public/files/',
   urlfacebook: 'https://www.facebook.com/ebert.zerpa',
   urltwitter: 'https://twitter.com/ebertzerpa'
 };

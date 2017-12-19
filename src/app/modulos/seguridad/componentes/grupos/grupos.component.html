@@ -1,3 +1,198 @@
-<p>
-  grupos works!
-</p>
+<div class="page-header">
+  <h1>
+    Sistema
+    <small>
+      <i class="ace-icon fa fa-angle-double-right"></i>
+      Usuarios
+      <i class="ace-icon fa fa-angle-double-right"></i>
+      Grupos
+    </small>
+  </h1>
+</div>
+<!-- /.page-header -->
+
+<div class="row">
+  <div class="col-xs-12">
+    <div class="widget-box">
+      <div class="widget-header">
+        <h4 class="widget-title">Formulario de Registro</h4>
+
+        <div class="widget-toolbar">
+          <a href="#" data-action="collapse">
+            <i class="ace-icon fa fa-chevron-up"></i>
+          </a>
+
+          <a href="#" data-action="close">
+            <i class="ace-icon fa fa-times"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="widget-body">
+        <div class="widget-main">
+          <div>
+            <div id="accordion" class="accordion-style1 panel-group">
+              <!-- Elegir Usgru -->
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true">
+                      <i class="bigger-110 ace-icon fa fa-angle-down" data-icon-hide="ace-icon fa fa-angle-down" data-icon-show="ace-icon fa fa-angle-right"></i>
+                      &nbsp;Elige el grupo
+                      <small>{{usgru.GrupoID}}.- {{usgru.DescripcionGrupo}}</small>
+                    </a>
+                  </h4>
+                </div>
+
+                <div class="panel-collapse collapse in" id="collapseOne" aria-expanded="true" style="">
+                  <div class="panel-body">
+                    <p class="alert alert-info" *ngIf="usgrus.length<=0">
+                      Al parecer hasta el momento no se existe grupos registrados en la base de datos.
+                    </p>
+
+                    <select name="GrupoID" id="GrupoID" *ngIf="usgrus.length>0" [(ngModel)]="usgru" (change)="refrescarUsgruh()">
+                      <option [ngValue]="usgru" *ngFor="let usgru of usgrus">{{usgru.GrupoID}}</option>
+                    </select>
+                    <select name="DescripcionGrupo" id="DescripcionGrupo" *ngIf="usgrus.length>0" [(ngModel)]="usgru" (change)="refrescarUsgruh()">
+                      <option [ngValue]="usgru" *ngFor="let usgru of usgrus">{{usgru.DescripcionGrupo}}</option>
+                    </select>
+                    <button type="button" id="btnDelUsgru" (click)="delUsgru()" class="btn btn-danger btn-sm" data-loading-text="Borrando..."
+                      [ngClass]="{'hide': usgru.GrupoID==='' || usgruhs.length>0}">
+                      <i class="ace-icon fa fa-trash bigger-110"></i>Borrar Grupo
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Elegir Usproh -->
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false">
+                      <i class="bigger-110 ace-icon fa fa-angle-right" data-icon-hide="ace-icon fa fa-angle-down" data-icon-show="ace-icon fa fa-angle-right"></i>
+                      &nbsp;Elige el procedimiento
+                      <small>{{uspro.ProcedimientoID}}.- {{uspro.DescripcionProcedimiento}}</small>
+                    </a>
+                  </h4>
+                </div>
+
+                <div class="panel-collapse collapse" id="collapseThree" aria-expanded="false" style="">
+                  <div class="panel-body">
+                    <p class="alert alert-info" *ngIf="uspros.length<=0">
+                      Al parecer hasta el momento no se existe procedimientos registrados en la base de datos.
+                    </p>
+
+                    <select name="ProcedimientoID" id="ProcedimientoID" *ngIf="uspros.length>0" [(ngModel)]="uspro" (change)="refrescarUsproh()">
+                      <option [ngValue]="usproVacio"></option>
+                      <option [ngValue]="uspro" *ngFor="let uspro of uspros">{{uspro.ProcedimientoID}}</option>
+                    </select>
+                    <select name="ProcedimientoID" id="ProcedimientoID" *ngIf="uspros.length>0" [(ngModel)]="uspro" (change)="refrescarUsproh()">
+                      <option [ngValue]="usproVacio"></option>
+                      <option [ngValue]="uspro" *ngFor="let uspro of uspros">{{uspro.DescripcionProcedimiento}}</option>
+                    </select>
+                    <select name="ControlID" id="ControlID" [(ngModel)]="usproh" [ngClass]="{'hide': usprohs.length<=0  || uspro.ProcedimientoID===''}" (change)="consultarAcceso()">
+                      <option [ngValue]="usprohVacio"></option>
+                      <option [ngValue]="usproh" *ngFor="let usproh of usprohs">{{usproh.ControlID}}</option>
+                    </select>
+                    <select name="DescripcionControl" id="DescripcionControl" [(ngModel)]="usproh" [ngClass]="{'hide': usprohs.length<=0 || uspro.ProcedimientoID===''}" (change)="consultarAcceso()">
+                      <option [ngValue]="usprohVacio"></option>
+                      <option [ngValue]="usproh" *ngFor="let usproh of usprohs">{{usproh.DescripcionControl}}</option>
+                    </select>
+
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false">
+                      <i class="bigger-110 ace-icon fa fa-angle-right" data-icon-hide="ace-icon fa fa-angle-down" data-icon-show="ace-icon fa fa-angle-right"></i>
+                      &nbsp;Agrega un nuevo Grupo
+                    </a>
+                  </h4>
+                </div>
+
+                <div class="panel-collapse collapse" id="collapseTwo" aria-expanded="false" style="height: 0px;">
+                  <div class="panel-body">
+                    <form class="form-inline">
+                      <input type="text" [(ngModel)]="usgru.GrupoID" name="GrupoID" id="GrupoID" class="input-medium" maxlength="30" placeholder="GrupoID">
+                      <input type="text" [(ngModel)]="usgru.DescripcionGrupo" name="DescripcionGrupo" id="DescripcionGrupo" class="input-large"
+                        maxlength="200" placeholder="Denominación">
+                      <button type="button" id="btnAddUsgru" (click)="addUsgru()" class="btn btn-info btn-sm" data-loading-text="Registrando...">
+                        <i class="ace-icon fa fa-check bigger-110"></i>Agregar Grupo
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <hr>
+
+          <!-- #section:plugins/input.limiter -->
+          <div class="center">
+            <!-- <label for="form-field-9">Control:</label> -->
+
+            <!-- <form class="form-inline">
+              <input type="text" [(ngModel)]="usproh.ControlID" title="ControlID" name="ControlID" id="ControlID" class="input-medium" maxlength="100"
+                placeholder="ControlID">
+              <input type="text" [(ngModel)]="usproh.DescripcionControl" name="DescripcionControl" id="DescripcionControl"
+                class="input-large" maxlength="200" placeholder="Descripción">
+              <button type="button" id="btnAddUsproh" (click)="addUsproh()" class="btn btn-info btn-sm" data-loading-text="Registrando..." [ngClass]="{'hide':editar}">
+                <i class="ace-icon fa fa-check bigger-110"></i>Agregar Control
+              </button>
+              <button type="button" id="btnCancelarEdicion" (click)="cancelarEdicion()" class="btn btn-sm" [ngClass]="{'hide':!editar}">
+                <i class="ace-icon fa fa-ban bigger-110"></i>Cancelar
+              </button>
+            </form> -->
+            <button type="button" id="btnPermitir" (click)="darPermiso()" class="btn btn-success btn-sm" data-loading-text="Permitiendo..."
+              [ngClass]="{'hide':restringir || usproh.ControlID === ''}">
+              <i class="ace-icon fa fa-check bigger-110"></i>Dar Acceso
+            </button>
+            <button type="button" id="btnRestringir" (click)="darPermiso(true)" class="btn btn-danger btn-sm" data-loading-text="Restringiendo..."
+              [ngClass]="{'hide':!restringir || usproh.ControlID === ''}">
+              <i class="ace-icon fa fa-ban bigger-110"></i>Denegar Acceso
+            </button>
+          </div>
+          <!-- /section:plugins/input.autosize -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /.span -->
+</div>
+
+<hr>
+
+<div class="row" [ngClass]="{'hide': usgruhs.length <= 0}">
+  <div class="col-xs-12">
+    <div class="clearfix">
+      <div class="pull-right tableTools-container">
+      </div>
+    </div>
+    <div class="table-header">
+      Registros en la tabla "USGRUH"
+    </div>
+    <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+      <thead>
+        <tr>
+          <th>ProcedimientoID</th>
+          <th>ControlID</th>
+          <th>DescripcionControl</th>
+          <th>Permiso</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let usgruh of usgruhs" style="cursor: pointer;">
+          <td>{{usgruh.ProcedimientoID}}</td>
+          <td>{{usgruh.ControlID}}</td>
+          <td>{{usgruh.ProcedimientoID}}</td>
+          <td>{{usgruh.Permiso}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+

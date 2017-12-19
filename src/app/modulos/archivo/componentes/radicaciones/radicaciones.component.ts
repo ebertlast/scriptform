@@ -77,7 +77,7 @@ export class RadicacionesComponent implements OnInit {
       // });
       // this.archivos = archivos;
       archivos.forEach(archivo => {
-        archivo.URLARCHIVO = environment.urlFilesDownload + archivo.URLARCHIVO;
+        archivo.URLARCHIVO = environment.urlFilesUploads + archivo.URLARCHIVO;
         this.archivos.push(archivo);
       });
       console.log(this.archivos);

@@ -19,7 +19,7 @@ export class DinamicReportComponent implements OnInit {
   public totalPaginasConsultaFull = 1;
   public paginaActualConsultaFull = 0;
 
-
+  // #region M+etodos de obtención y establecimiento de valores
   private _reportes: Rep[] = [];
   public get reportes(): Rep[] {
     return this._reportes;
@@ -28,7 +28,7 @@ export class DinamicReportComponent implements OnInit {
     this._reportes = v;
   }
 
-  private _reporte: Rep = new Rep();;
+  private _reporte: Rep = new Rep();
   public get reporte(): Rep {
     if (!this._reporte) { this._reporte = new Rep(); }
     // console.log('REPORTEID: ' + this._reporte.REPORTEID.valueOf());
@@ -60,7 +60,6 @@ export class DinamicReportComponent implements OnInit {
     this._paginador = v;
   }
 
-
   private _data: any[];
   public get data(): any[] {
     if (!this._data) { this._data = []; }
@@ -69,7 +68,6 @@ export class DinamicReportComponent implements OnInit {
   public set data(v: any[]) {
     this._data = v;
   }
-
 
   private _columnas: string[] = [];
   public get columnas(): string[] {
@@ -80,7 +78,6 @@ export class DinamicReportComponent implements OnInit {
     this._columnas = v;
   }
 
-
   private _consultaParametros: ConsultaParametro[];
   public get consultaParametros(): ConsultaParametro[] {
     return this._consultaParametros;
@@ -88,8 +85,7 @@ export class DinamicReportComponent implements OnInit {
   public set consultaParametros(v: ConsultaParametro[]) {
     this._consultaParametros = v;
   }
-
-
+  // #endregion
 
   ngOnInit() {
     this._repService.reportesDisponibles().subscribe(reportes => {
@@ -103,31 +99,33 @@ export class DinamicReportComponent implements OnInit {
 
     // And for the first simple table, which doesn't have TableTools or dataTables
     // select/deselect all rows according to table header checkbox
-    var active_class = 'active';
+    const active_class = 'active';
     $('#simple-table > thead > tr > th input[type=checkbox]').eq(0).on('click', function () {
-      var th_checked = this.checked;//checkbox inside "TH" table header
+      const th_checked = this.checked; // checkbox inside "TH" table header
 
       $(this).closest('table').find('tbody > tr').each(function () {
-        var row = this;
-        if (th_checked) $(row).addClass(active_class).find('input[type=checkbox]').eq(0).prop('checked', true);
-        else $(row).removeClass(active_class).find('input[type=checkbox]').eq(0).prop('checked', false);
+        const row = this;
+        if (th_checked) {
+          $(row).addClass(active_class).find('input[type=checkbox]').eq(0).prop('checked', true);
+        } else { $(row).removeClass(active_class).find('input[type=checkbox]').eq(0).prop('checked', false); }
       });
     });
 
 
     // select/deselect a row when the checkbox is checked/unchecked
     $('#simple-table').on('click', 'td input[type=checkbox]', function () {
-      var $row = $(this).closest('tr');
-      if ($row.is('.detail-row ')) return;
-      if (this.checked) $row.addClass(active_class);
-      else $row.removeClass(active_class);
+      const $row = $(this).closest('tr');
+      if ($row.is('.detail-row ')) { return; }
+      if (this.checked) {
+        $row.addClass(active_class);
+      } else { $row.removeClass(active_class); }
     });
 
     // add horizontal scrollbars to a simple table
     $('#simple-table').css({ 'width': '2000px', 'max-width': 'none' }).wrap('<div style="padding-right: 0px;" />').parent().ace_scroll(
       {
         horizontal: true,
-        styleClass: 'scroll-top scroll-dark scroll-visible',//show the scrollbars on top(default is bottom)
+        styleClass: 'scroll-top scroll-dark scroll-visible', // show the scrollbars on top(default is bottom)
         size: 2000,
         mouseWheelLock: true
       }
@@ -140,46 +138,47 @@ export class DinamicReportComponent implements OnInit {
 
       $('#aside-inside-modal').addClass('aside').ace_aside({ container: '#my-modal > .modal-dialog' });
 
-      //$('#top-menu').modal('show')
+      // $('#top-menu').modal('show')
 
       $(document).one('ajaxloadstart.page', function (e) {
-        //in ajax mode, remove before leaving page
+        // in ajax mode, remove before leaving page
         $('.modal.aside').remove();
-        $(window).off('.aside')
+        $(window).off('.aside');
       });
 
-      //make content sliders resizable using jQuery UI (you should include jquery ui files)
-      //$('#right-menu > .modal-dialog').resizable({handles: "w", grid: [ 20, 0 ], minWidth: 200, maxWidth: 600});
+      // make content sliders resizable using jQuery UI (you should include jquery ui files)
+      // $('#right-menu > .modal-dialog').resizable({handles: "w", grid: [ 20, 0 ], minWidth: 200, maxWidth: 600});
 
-      $($('.tableTools-container')).find('a.dt-button').each(function() {
-        var div = $(this).find(' > div').first();
-        if(div.length == 1) div.tooltip({container: 'body', title: div.parent().text()});
-        else $(this).tooltip({container: 'body', title: $(this).text()});
+      $($('.tableTools-container')).find('a.dt-button').each(function () {
+        const div = $(this).find(' > div').first();
+        if (div.length === 1) {
+          div.tooltip({ container: 'body', title: div.parent().text() });
+        } else { $(this).tooltip({ container: 'body', title: $(this).text() }); }
       });
 
     });
 
-    //datepicker plugin
-    //link
+    // datepicker plugin
+    // link
     $('.date-picker').datepicker({
       autoclose: true,
       todayHighlight: true,
       language: 'es'
     })
-      //show datepicker when clicking on the icon
+      // show datepicker when clicking on the icon
       .next().on(ace.click_event, function () {
         $(this).prev().focus();
       });
 
     $('.date-picker').click(function () {
-      var popup = $(this).offset();
-      var popupTop = popup.top - 40;
+      const popup = $(this).offset();
+      const popupTop = popup.top - 40;
       $('.ui-datepicker').css({
         'top': popupTop
       });
     });
 
-    //or change it into a date range picker
+    // or change it into a date range picker
     $('.input-daterange').datepicker({ autoclose: true });
     // $.datepicker.setDefaults($.datepicker.regional['es']);
 
@@ -187,17 +186,20 @@ export class DinamicReportComponent implements OnInit {
     $('.input-mask-date').mask('99/99/9999');
     $('.input-mask-phone').mask('(999) 999-9999');
     $('.input-mask-eyescript').mask('~9.99 ~9.99 999');
-    $(".input-mask-product").mask("a*-999-a999", { placeholder: " ", completed: function () { alert("You typed the following: " + this.val()); } });
+    $('.input-mask-product').mask('a*-999-a999', {
+      placeholder: ' ',
+      completed: function () { alert('You typed the following: ' + this.val()); }
+    });
 
     $('#spinner1').ace_spinner({ value: 0, min: 0, max: 200, step: 10, btn_up_class: 'btn-info', btn_down_class: 'btn-info' })
       .closest('.ace-spinner')
       .on('changed.fu.spinbox', function () {
-        //console.log($('#spinner1').val())
+        // console.log($('#spinner1').val())
       });
-    //$('#spinner1').ace_spinner('disable').ace_spinner('value', 11);
-    //or
-    //$('#spinner1').closest('.ace-spinner').spinner('disable').spinner('enable').spinner('value', 11);//disable, enable or change value
-    //$('#spinner1').closest('.ace-spinner').spinner('value', 0);//reset to 0
+    // $('#spinner1').ace_spinner('disable').ace_spinner('value', 11);
+    // or
+    // $('#spinner1').closest('.ace-spinner').spinner('disable').spinner('enable').spinner('value', 11);//disable, enable or change value
+    // $('#spinner1').closest('.ace-spinner').spinner('value', 0);//reset to 0
 
 
   }
@@ -206,7 +208,7 @@ export class DinamicReportComponent implements OnInit {
     this._reppService.geConsulta(this.reporte.REPORTEID, parametroid).subscribe(datos => {
       // console.log(datos);
       datos.forEach(element => {
-        var array = $.map(element, function (value, index) {
+        const array = $.map(element, function (value, index) {
           return [value];
         });
         this.consultaParametros.push(new ConsultaParametro(parametroid, array[0], array[1]));
@@ -242,7 +244,9 @@ export class DinamicReportComponent implements OnInit {
     this.data = [];
     const _me = this;
     this.btnEjecutarConsulta.button('loading');
-    const request = this._repService.ejecutarReporte(this.reporte.REPORTEID, this.paginador.filasPorPagina, this.paginador.paginaActual).subscribe(
+    const request = this._repService
+      .ejecutarReporte(this.reporte.REPORTEID, this.paginador.filasPorPagina, this.paginador.paginaActual)
+      .subscribe(
       respuesta => {
         this.data = respuesta['data'];
         this.paginador.totalPaginas = respuesta['totalpaginas'];
@@ -250,7 +254,7 @@ export class DinamicReportComponent implements OnInit {
         // console.log(this.data);
         // console.log(this.paginador.totalPaginas);
         this.columnas = [];
-        for (var i = 0; i < 1; i++) {
+        for (let i = 0; i < 1; i++) {
           for (let key in this.data[i]) {
             // console.log(key + " :: " + this.data[i][key]);
             // console.log(key);
@@ -259,11 +263,8 @@ export class DinamicReportComponent implements OnInit {
         }
         // console.log(this.columnas);
         _me.btnEjecutarConsulta.button('reset');
-
-
-
       }
-    );
+      );
     // request.unsubscribe();
     // this.paginador.paginaActual = 1000;
     // console.log(this.paginador)
@@ -289,9 +290,10 @@ export class DinamicReportComponent implements OnInit {
       if (actualizado) {
         this._helper.Notificacion('Valor de filtro actualizado en la base de datos');
       } else {
+        // tslint:disable-next-line:max-line-length
         this._helper.Notificacion('El filtro no ha podido ser actualizado en la base de datos. Si el problema persiste, contacta por favor al departamento de tecnología', 'error', '', false);
       }
-    })
+    });
     // console.log(this.reporte.REPORTEID+'.- '+parametroid+': '+valor);
   }
 
@@ -299,15 +301,20 @@ export class DinamicReportComponent implements OnInit {
     this._helper.ExportarExcel(this.data);
   }
   exportarAllData() {
-    let data: any[] = [];
+    const data: any[] = [];
     const filasPorPagina = 10000;
-    let totalPaginas = 1;
+    const totalPaginas = 1;
     // this.btnEjecutarConsulta.button('loading');
-    const request = this._repService.excel(this.reporte.REPORTEID).subscribe(filename=>{
-      // console.log(environment.urlFilesDownload+filename);
-      window.open(environment.urlFilesDownload+filename);
+    const request = this._repService.excel(this.reporte.REPORTEID).subscribe(filename => {
+      // console.log(environment.urlFilesDownload + filename);
+      window.open(environment.urlFilesDownload + filename);
     });
 
+  }
+  exportarAllData2() {
+    this._repService.downloadExcel(this.reporte.REPORTEID).subscribe(file => {
+      console.log(file);
+    });
   }
 }
 

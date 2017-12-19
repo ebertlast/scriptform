@@ -6,9 +6,13 @@
 } */
 
 a:not([href]){
-    cursor: pointer; 
-    -webkit-user-select: none; 
-    -moz-user-select: none; 
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
     user-select: none;
     /* pointer-events: none; */
+}
+
+.TODO{
+  display: none;
 }

@@ -49,10 +49,11 @@
                     <select name="ProcedimientoID" id="ProcedimientoID" *ngIf="uspros.length>0" [(ngModel)]="uspro" (change)="refrescarUsproh()">
                       <option [ngValue]="uspro" *ngFor="let uspro of uspros">{{uspro.ProcedimientoID}}</option>
                     </select>
-                    <select name="ProcedimientoID" id="ProcedimientoID" *ngIf="uspros.length>0" [(ngModel)]="uspro" (change)="refrescarUsproh()">
+                    <select name="DescripcionProcedimiento" id="DescripcionProcedimiento" *ngIf="uspros.length>0" [(ngModel)]="uspro" (change)="refrescarUsproh()">
                       <option [ngValue]="uspro" *ngFor="let uspro of uspros">{{uspro.DescripcionProcedimiento}}</option>
                     </select>
-                    <button type="button" id="btnDelUspro" (click)="delUspro()" class="btn btn-danger btn-sm" data-loading-text="Borrando..." [ngClass]="{'hide': uspro.ProcedimientoID==='' || usprohs.length>0}" >
+                    <button type="button" id="btnDelUspro" (click)="delUspro()" class="btn btn-danger btn-sm" data-loading-text="Borrando..."
+                      [ngClass]="{'hide': uspro.ProcedimientoID==='' || usprohs.length>0}">
                       <i class="ace-icon fa fa-trash bigger-110"></i>Borrar Procedimiento
                     </button>
                   </div>
@@ -93,17 +94,20 @@
             <label for="form-field-9">Control:</label>
 
             <form class="form-inline">
-              <input type="text" [(ngModel)]="usproh.ControlID" title="ControlID" name="ControlID" id="ControlID" class="input-medium" maxlength="100"
-                placeholder="ControlID">
-              <input type="text" [(ngModel)]="usproh.DescripcionControl" name="DescripcionControl" id="DescripcionControl"
-                class="input-large" maxlength="200" placeholder="Descripción">
-              <button type="button" id="btnAddUsproh" (click)="addUsproh()" class="btn btn-info btn-sm" data-loading-text="Registrando..." [ngClass]="{'hide':editar}">
+              <input type="text" [(ngModel)]="usproh.ControlID" title="ControlID" name="ControlID" id="ControlID" class="input-medium"
+                maxlength="100" placeholder="ControlID">
+              <input type="text" [(ngModel)]="usproh.DescripcionControl" name="DescripcionControl" id="DescripcionControl" class="input-large"
+                maxlength="200" placeholder="Descripción">
+              <button type="button" id="btnAddUsproh" (click)="addUsproh()" class="btn btn-info btn-sm" data-loading-text="Registrando..."
+                [ngClass]="{'hide':editar}">
                 <i class="ace-icon fa fa-check bigger-110"></i>Agregar Control
               </button>
-              <button type="button" id="btnEditUsproh" (click)="editUsproh()" class="btn btn-warning btn-sm" data-loading-text="Actualizando..." [ngClass]="{'hide':!editar}">
+              <button type="button" id="btnEditUsproh" (click)="editUsproh()" class="btn btn-warning btn-sm" data-loading-text="Actualizando..."
+                [ngClass]="{'hide':!editar}">
                 <i class="ace-icon fa fa-refresh bigger-110"></i>Actualizar Control
               </button>
-              <button type="button" id="btnDelUsproh" (click)="delUsproh()" class="btn btn-danger btn-sm" data-loading-text="Eliminando..." [ngClass]="{'hide':!editar}">
+              <button type="button" id="btnDelUsproh" (click)="delUsproh()" class="btn btn-danger btn-sm" data-loading-text="Eliminando..."
+                [ngClass]="{'hide':!editar}">
                 <i class="ace-icon fa fa-trash bigger-110"></i>Eliminar Control
               </button>
               <button type="button" id="btnCancelarEdicion" (click)="cancelarEdicion()" class="btn btn-sm" [ngClass]="{'hide':!editar}">

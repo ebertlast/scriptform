@@ -110,6 +110,26 @@ export class ProcedimientosComponent implements OnInit {
         return row;
       },
     };
+
+    const me = this;
+    $('#ControlID').on('keypress', function (e) {
+      if (e.keyCode === 13) {
+        if (me.editar) {
+          me.editUsproh();
+        } else {
+          me.addUsproh();
+        }
+      }
+    });
+    $('#DescripcionControl').on('keypress', function (e) {
+      if (e.keyCode === 13) {
+        if (me.editar) {
+          me.editUsproh();
+        } else {
+          me.addUsproh();
+        }
+      }
+    });
   }
 
   refrescarUspro() {
@@ -237,6 +257,7 @@ export class ProcedimientosComponent implements OnInit {
         this.refrescarUsproh();
         this._helper.Notificacion('Registro agregado en la base de datos');
         this.editar = false;
+        $('#ControlID').focus();
       } else {
         // tslint:disable-next-line:max-line-length
         this._helper.Notificacion('No hemos podido agregar el registro a la base de datos, vuelve a intentarlo. Si el problema persiste no dudes en contactar con el departamento de tecnología.', 'error');
@@ -257,6 +278,7 @@ export class ProcedimientosComponent implements OnInit {
         this.refrescarUsproh();
         this._helper.Notificacion('Registro actualizado');
         this.editar = false;
+        $('#ControlID').focus();
       } else {
         // tslint:disable-next-line:max-line-length
         this._helper.Notificacion('No hemos podido actualizar el registro a la base de datos, vuelve a intentarlo. Si el problema persiste no dudes en contactar con el departamento de tecnología.', 'error');
@@ -289,7 +311,7 @@ export class ProcedimientosComponent implements OnInit {
               'label': 'Borrar!',
               'className': 'btn-sm btn-danger',
               'callback': function () {
-                const btn = $('#btnAddUspro');
+                const btn = $('#btnDelUsproh');
                 btn.button('loading');
                 me._usprohService.eliminarRegistro(me.usproh.ProcedimientoID, me.usproh.ControlID).subscribe(exito => {
                   btn.button('reset');
@@ -297,6 +319,7 @@ export class ProcedimientosComponent implements OnInit {
                     me.usproh = new Usproh(me.uspro.ProcedimientoID);
                     me.refrescarUsproh();
                     me._helper.Notificacion('Registro borrado de la base de datos');
+                    $('#ControlID').focus();
                   } else {
                     // tslint:disable-next-line:max-line-length
                     me._helper.Notificacion('No hemos podido borrar el registro a la base de datos, vuelve a intentarlo. Si el problema persiste no dudes en contactar con el departamento de tecnología.', 'error');

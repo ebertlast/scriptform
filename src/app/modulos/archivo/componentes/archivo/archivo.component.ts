@@ -54,7 +54,7 @@ export class ArchivoComponent implements OnInit {
     this._activatedRoute.params.forEach((params: Params) => {
       this._arcService.archivos(params['archivoid']).subscribe(arcs => {
         arcs.forEach(arc => {
-          arc.URLARCHIVO = environment.urlFilesDownload + arc.URLARCHIVO;
+          arc.URLARCHIVO = environment.urlFilesUploads + arc.URLARCHIVO;
           this.arc = arc;
         });
         this._afiService.afiliadoPorDocumento(this.arc.TIPODOCUMENTO, this.arc.NUMEROIDENTIFICACION).subscribe(afis => {
