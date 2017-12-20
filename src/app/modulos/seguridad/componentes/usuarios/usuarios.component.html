@@ -46,11 +46,11 @@
               <label class="col-sm-3 control-label no-padding-right" for="SEDEID"> Sede </label>
 
               <div class="col-sm-9">
-                <select name="SEDEID" id="SEDEID" [(ngModel)]="usu.SEDEID">
+                <select name="SEDEID" id="SEDEID" [(ngModel)]="usu.SEDEID"  [disabled]="editar">
                   <option [ngValue]="sedeVacia.SEDEID"></option>
                   <option [ngValue]="sed.SEDEID" *ngFor="let sed of seds">{{sed.SEDEID}}</option>
                 </select>
-                <select name="RAZONSOCIAL" id="RAZONSOCIAL" [(ngModel)]="usu.SEDEID">
+                <select name="RAZONSOCIAL" id="RAZONSOCIAL" [(ngModel)]="usu.SEDEID"  [disabled]="editar">
                   <option [ngValue]="sedeVacia.SEDEID"></option>
                   <option [ngValue]="sed.SEDEID" *ngFor="let sed of seds">{{sed.RAZONSOCIAL}} - {{sed.EMPRESA}}</option>
                 </select>
@@ -73,7 +73,7 @@
             <div class="form-group">
               <label class="col-sm-3 control-label no-padding-right" for="USUARIOID"> Usuario </label>
               <div class="col-sm-9">
-                <input type="text" id="USUARIOID" name="USUARIOID" [(ngModel)]="usu.USUARIOID" title="Usuario" placeholder="Usuario" class="col-xs-10 col-sm-5">
+                <input type="text" id="USUARIOID" name="USUARIOID" [(ngModel)]="usu.USUARIOID" title="Usuario" placeholder="Usuario" class="col-xs-10 col-sm-5" [disabled]="editar">
               </div>
             </div>
 
@@ -107,7 +107,12 @@
 
             <div class="clearfix form-actions">
               <div class="col-md-offset-3 col-md-9">
-                <button class="btn btn-info" type="button" id="btnAceptar" data-loading-text="Guardando..." (click)="guardar()">
+                <button class="btn btn-warning" type="button" id="btnAceptar" data-loading-text="Guardando..." (click)="guardar()" *ngIf="editar">
+                  <i class="ace-icon fa fa-check bigger-110"></i>
+                  Actualizar
+                </button>
+
+                <button class="btn btn-info" type="button" id="btnAceptar" data-loading-text="Guardando..." (click)="guardar()" *ngIf="!editar">
                   <i class="ace-icon fa fa-check bigger-110"></i>
                   Aceptar
                 </button>

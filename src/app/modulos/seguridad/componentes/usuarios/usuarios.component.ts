@@ -188,9 +188,9 @@ export class UsuariosComponent implements OnInit {
     this.usu.EMAIL = this.usu.EMAIL.toLowerCase();
     this.usu.USUARIOID = this.usu.USUARIOID.toUpperCase();
     this.usu.NOMBRE = this.usu.NOMBRE.toUpperCase();
+    let existeEmail = false;
     if (!this.editar) {
       this._usuService.registros().subscribe(usus => {
-        let existeEmail = false;
         let existeUsuario = false;
         usus.forEach(usu => {
           if (usu.EMAIL === this.usu.EMAIL) {
@@ -220,6 +220,7 @@ export class UsuariosComponent implements OnInit {
             if (exito) {
               this.usu = new Usu();
               this.editar = false;
+              this.refrescarUsu();
               // tslint:disable-next-line:max-line-length
               this._helper.Notificacion('Usuario registrado, un email de confirmación se ha enviado al correo del usuario con su usuario y clave que puede se modificada en cualquier momento por él mismo.');
             } else {
@@ -230,8 +231,31 @@ export class UsuariosComponent implements OnInit {
         }
       });
     } else {
-      console.log(this.usu);
-      alert('TODO');
+      this._usuService.registros().subscribe(usus => {
+        usus.forEach(usu => {
+          if (usu.USUARIOID !== this.usu.USUARIOID && usu.EMAIL === this.usu.EMAIL) {
+            existeEmail = true;
+          }
+        });
+        if (existeEmail) {
+          btn.button('reset');
+          this._helper.Notificacion('El email (' + this.usu.EMAIL + ') se encuentra vinculado a otro usuario', 'warning', 'EMAIL');
+          $('#EMAIL').focus();
+          return;
+        }
+        this._usuService.actualizar(this.usu).subscribe(exito => {
+          btn.button('reset');
+          if (exito) {
+            this.usu = new Usu();
+            this.editar = false;
+            this.refrescarUsu();
+            this._helper.Notificacion('Usuario actualizado.');
+          } else {
+            // tslint:disable-next-line:max-line-length
+            this._helper.Notificacion('El usuario no ha podido ser actualizado, vuelve a intentarlo. Si el problema persiste no dudes en contactar al departamento de tecnología.', 'error');
+          }
+        });
+      });
     }
   }
 
