@@ -13,7 +13,7 @@ export class SedService {
 
   constructor(private _http: Http, private _authService: AuthService) { }
 
-  public Sedes(sedeid: string = ''): Observable<Model[]> {
+  public registros(sedeid: string = ''): Observable<Model[]> {
     return this._http.get(environment.apiurl + '/sedes/' + sedeid)
       .map((response: Response) => {
         const data = this._authService.ExtraerResultados(response);
@@ -22,6 +22,6 @@ export class SedService {
       .catch(err => this._authService.CapturarError(err));
   }
   public SedesPromise(sedeid: string = ''): Promise<Model[]> {
-    return this.Sedes(sedeid).toPromise();
+    return this.registros(sedeid).toPromise();
   }
 }

@@ -96,7 +96,7 @@ export class IngresarComponent implements OnInit {
 
     });
 
-    this._sedService.Sedes().subscribe(sedes => {
+    this._sedService.registros().subscribe(sedes => {
       this.sedes = sedes;
     });
 

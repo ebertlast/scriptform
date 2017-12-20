@@ -17,6 +17,7 @@ import { UsgruService } from './servicios/usgru.service';
 import { UsgruhService } from './servicios/usgruh.service';
 import { GruposComponent } from './componentes/grupos/grupos.component';
 import { ProcedimientosComponent } from './componentes/procedimientos/procedimientos.component';
+import { PerfilUsuarioComponent } from './componentes/perfil-usuario/perfil-usuario.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -26,8 +27,8 @@ import { ProcedimientosComponent } from './componentes/procedimientos/procedimie
     GeneralModule,
     DataTablesModule
   ],
-  exports: [UsuariosComponent, GruposComponent, ProcedimientosComponent],
-  declarations: [IngresarComponent, PrincipalComponent, UsuariosComponent, GruposComponent, ProcedimientosComponent],
+  exports: [UsuariosComponent, GruposComponent, ProcedimientosComponent, PerfilUsuarioComponent],
+  declarations: [IngresarComponent, PrincipalComponent, UsuariosComponent, GruposComponent, ProcedimientosComponent, PerfilUsuarioComponent],
   providers: [AuthService, UsuService, UsproService, UsprohService, UsgruService, UsgruhService]
 })
 export class SeguridadModule { }

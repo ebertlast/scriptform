@@ -1,0 +1,9 @@
+#USUARIOID{
+  text-transform: uppercase;
+}
+#EMAIL{
+  text-transform: lowercase;
+}
+#NOMBRE{
+  text-transform: uppercase;
+}

@@ -19,6 +19,7 @@ export class MunService {
     const _headers = new Headers({ 'Authorization': 'Bearer ' + this._authService.Usuario().TOKEN });
     const _options = new RequestOptions({ headers: _headers });
     const _url = environment.apiurl + '/municipios/' + municipioid;
+    // console.log(_url);
     return this._http.get(_url, _options)
       .map((response: Response) => {
         const data = this._authService.ExtraerResultados(response);

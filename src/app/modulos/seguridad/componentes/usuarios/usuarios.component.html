@@ -1,3 +1,171 @@
-<p>
-  usuarios works!
-</p>
+<div class="page-header">
+  <h1>
+    Sistema
+    <small>
+      <i class="ace-icon fa fa-angle-double-right"></i>
+      Usuarios
+      <i class="ace-icon fa fa-angle-double-right"></i>
+      Usuarios
+    </small>
+  </h1>
+</div>
+<!-- /.page-header -->
+
+<!-- Formulario de Registro -->
+<div class="row">
+  <div class="col-xs-12 col-sm-12 widget-container-col ui-sortable" id="widget-container-col-1">
+    <!-- #section:custom/widget-box -->
+    <div class="widget-box ui-sortable-handle" id="widget-box-1">
+      <div class="widget-header">
+        <h5 class="widget-title">Formulario de Registro</h5>
+
+        <!-- #section:custom/widget-box.toolbar -->
+        <div class="widget-toolbar">
+
+          <a href="#" data-action="fullscreen" class="orange2 hide">
+            <i class="ace-icon fa fa-expand"></i>
+          </a>
+
+          <a href="#" data-action="collapse">
+            <i class="ace-icon fa fa-chevron-up"></i>
+          </a>
+
+          <a href="#" data-action="close">
+            <i class="ace-icon fa fa-times"></i>
+          </a>
+        </div>
+
+        <!-- /section:custom/widget-box.toolbar -->
+      </div>
+
+      <div class="widget-body">
+        <div class="widget-main">
+          <form class="form-horizontal" role="form">
+            <!-- #section:elements.form -->
+            <div class="form-group">
+              <label class="col-sm-3 control-label no-padding-right" for="SEDEID"> Sede </label>
+
+              <div class="col-sm-9">
+                <select name="SEDEID" id="SEDEID" [(ngModel)]="usu.SEDEID">
+                  <option [ngValue]="sedeVacia.SEDEID"></option>
+                  <option [ngValue]="sed.SEDEID" *ngFor="let sed of seds">{{sed.SEDEID}}</option>
+                </select>
+                <select name="RAZONSOCIAL" id="RAZONSOCIAL" [(ngModel)]="usu.SEDEID">
+                  <option [ngValue]="sedeVacia.SEDEID"></option>
+                  <option [ngValue]="sed.SEDEID" *ngFor="let sed of seds">{{sed.RAZONSOCIAL}} - {{sed.EMPRESA}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label no-padding-right" for="GrupoID"> Grupo </label>
+              <div class="col-sm-9">
+                <select name="GrupoID" id="GrupoID" [(ngModel)]="usu.GRUPOID">
+                  <option [ngValue]="grupoVacio.GrupoID"></option>
+                  <option [ngValue]="usgru.GrupoID" *ngFor="let usgru of usgrus">{{usgru.GrupoID}}</option>
+                </select>
+                <select name="DescripcionGrupo" id="DescripcionGrupo" [(ngModel)]="usu.GRUPOID">
+                  <option [ngValue]="grupoVacio.GrupoID"></option>
+                  <option [ngValue]="usgru.GrupoID" *ngFor="let usgru of usgrus">{{usgru.DescripcionGrupo}}</option>
+                </select>
+
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label no-padding-right" for="USUARIOID"> Usuario </label>
+              <div class="col-sm-9">
+                <input type="text" id="USUARIOID" name="USUARIOID" [(ngModel)]="usu.USUARIOID" title="Usuario" placeholder="Usuario" class="col-xs-10 col-sm-5">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label no-padding-right" for="EMAIL"> Email </label>
+              <div class="col-sm-9">
+                <input type="text" id="EMAIL" name="EMAIL" [(ngModel)]="usu.EMAIL" title="Email" placeholder="Email" class="col-xs-10 col-sm-5">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label no-padding-right" for="NOMBRE"> Nombre Completo </label>
+              <div class="col-sm-9">
+                <input type="text" id="NOMBRE" name="NOMBRE" [(ngModel)]="usu.NOMBRE" placeholder="Nombre del usuario" class="form-control">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label no-padding-right" for="form-input-readonly"></label>
+
+              <div class="col-sm-9">
+                <span class="help-inline col-xs-12 col-sm-7">
+                  <label class="middle">
+                    <input class="ace" type="checkbox" id="ACTIVO" name="ACTIVO" [(ngModel)]="usu.ACTIVO">
+                    <span class="lbl"> Activo</span>
+                  </label>
+                </span>
+              </div>
+            </div>
+
+
+            <div class="clearfix form-actions">
+              <div class="col-md-offset-3 col-md-9">
+                <button class="btn btn-info" type="button" id="btnAceptar" data-loading-text="Guardando..." (click)="guardar()">
+                  <i class="ace-icon fa fa-check bigger-110"></i>
+                  Aceptar
+                </button>
+
+                &nbsp; &nbsp; &nbsp;
+                <button class="btn" type="button" (click)="cancelar()">
+                  <i class="ace-ban fa fa-undo bigger-110"></i>
+                  Cacelar
+                </button>
+              </div>
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- /section:custom/widget-box -->
+  </div>
+
+</div>
+
+<!-- Tabla de consulta -->
+<div class="row" [ngClass]="{'hide': usus.length <= 0}">
+  <div class="col-xs-12">
+    <div class="clearfix">
+      <div class="pull-right tableTools-container">
+      </div>
+    </div>
+    <div class="table-header">
+      Registros en la tabla "USU"
+    </div>
+    <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+      <thead>
+        <tr>
+          <th>Sede ID</th>
+          <th>Usuario</th>
+          <th>Nombre</th>
+          <th>Grupo</th>
+          <th>Email</th>
+          <th>Empresa</th>
+          <th>Sede</th>
+          <th>Activo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let usu of usus" style="cursor: pointer;">
+          <td>{{usu.SEDEID}}</td>
+          <td>{{usu.USUARIOID}}</td>
+          <td>{{usu.NOMBRE}}</td>
+          <td>{{usu.GRUPO}}</td>
+          <td>{{usu.EMAIL}}</td>
+          <td>{{usu.EMPRESA}}</td>
+          <td>{{usu.SEDE}}</td>
+          <td>{{usu.ACTIVO}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

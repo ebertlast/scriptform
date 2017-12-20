@@ -33,7 +33,7 @@ export class DinamicReportConfiguracionComponent implements OnInit {
       this.reportes = reportes;
     });
 
-    this._usuService.usuarios().subscribe(usuarios => {
+    this._usuService.registros().subscribe(usuarios => {
       this.usuariosDelSistema = usuarios;
     });
     this.btnAgregarUsuario = $('#btnAgregarUsuario');

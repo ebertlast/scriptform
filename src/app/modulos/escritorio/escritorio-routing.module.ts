@@ -15,6 +15,7 @@ import { ArchivoComponent } from '../archivo/componentes/archivo/archivo.compone
 import { UsuariosComponent } from '../seguridad/componentes/usuarios/usuarios.component';
 import { GruposComponent } from '../seguridad/componentes/grupos/grupos.component';
 import { ProcedimientosComponent } from '../seguridad/componentes/procedimientos/procedimientos.component';
+import { PerfilUsuarioComponent } from '../seguridad/componentes/perfil-usuario/perfil-usuario.component';
 const routes: Routes = [
   { path: '', redirectTo: 'principal', pathMatch: 'full' },
   {
@@ -32,6 +33,7 @@ const routes: Routes = [
       { path: 'seguridad/procedimientos', component: ProcedimientosComponent, canActivate: [AuthGuard] },
       { path: 'seguridad/grupos', component: GruposComponent, canActivate: [AuthGuard] },
       { path: 'seguridad/usuarios', component: UsuariosComponent, canActivate: [AuthGuard] },
+      { path: 'seguridad/perfil', component: PerfilUsuarioComponent, canActivate: [AuthGuard] },
       { path: '**', redirectTo: 'radicaciones' }
     ],
   },

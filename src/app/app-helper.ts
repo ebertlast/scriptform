@@ -176,7 +176,8 @@ export class Helper {
   }
 
   /**
-   * Reproduce efectos de sonidos para ser utilizados en botones y acciones de ventanas. Documentación: http://ionden.com/a/plugins/ion.sound/en.html, https://github.com/IonDen/ion.sound
+   * Reproduce efectos de sonidos para ser utilizados en botones y acciones de ventanas.
+   * Documentación: http://ionden.com/a/plugins/ion.sound/en.html, https://github.com/IonDen/ion.sound
    * @param audioName Nombre del audio a reproducir. Valor por defecto: branch_break, opciones: [button_tiny, computer_error, glass, water_droplet, snap, branch_break]
    */
   public Sonido(audioName: string = 'branch_break') {
@@ -382,5 +383,14 @@ export class Helper {
       );
     }
     localStorage.setItem(tabla, JSON.stringify({ data: valores }));
+  }
+
+  public GenerarID(longitud: number = 10) {
+    let text = '';
+    const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    for (let i = 0; i < longitud; i++) {
+      text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+    return text;
   }
 }
