@@ -350,19 +350,19 @@
     <div class="sidebar-shortcuts" id="sidebar-shortcuts">
       <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
         <!-- #section:basics/sidebar.layout.shortcuts -->
-        <a routerLink="/escritorio/principal/consultas" class="btn btn-success">
+        <a routerLink="/escritorio/principal/consultas" class="btn btn-success" *ngIf="permiso('MENUADMINREP')">
           <i class="ace-icon fa fa-signal"></i>
         </a>
 
-        <a routerLink="/escritorio/principal/formulariounico" class="btn btn-info">
+        <a routerLink="/escritorio/principal/formulariounico" class="btn btn-info" *ngIf="permiso('MENUADMINFROMUNICO')">
           <i class="ace-icon fa fa-pencil"></i>
         </a>
 
-        <a routerLink="/escritorio/principal/radicaciones" class="btn btn-warning" id="btnRouterLinkRadicaciones">
+        <a routerLink="/escritorio/principal/radicaciones" class="btn btn-warning" id="btnRouterLinkRadicaciones" *ngIf="permiso('MENUADMINRADICLIST')">
           <i class="ace-icon fa fa-th"></i>
         </a>
 
-        <a routerLink="/escritorio/principal/archivos" class="btn btn-danger">
+        <a routerLink="/escritorio/principal/archivos" class="btn btn-danger" *ngIf="permiso('MENUADMINNVARAD')">
           <i class="ace-icon fa fa-cloud-upload"></i>
         </a>
 
@@ -370,13 +370,13 @@
       </div>
 
       <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
-        <span class="btn btn-success"></span>
+        <span routerLink="/escritorio/principal/consultas" class="btn btn-success" *ngIf="permiso('MENUADMINREP')"></span>
 
-        <span class="btn btn-info"></span>
+        <span routerLink="/escritorio/principal/formulariounico" class="btn btn-info" *ngIf="permiso('MENUADMINFROMUNICO')"></span>
 
-        <span class="btn btn-warning"></span>
+        <span routerLink="/escritorio/principal/radicaciones" class="btn btn-warning" *ngIf="permiso('MENUADMINRADICLIST')"></span>
 
-        <span class="btn btn-danger"></span>
+        <span routerLink="/escritorio/principal/archivos" class="btn btn-danger" *ngIf="permiso('MENUADMINNVARAD')"></span>
       </div>
     </div>
     <!-- /.sidebar-shortcuts -->
@@ -393,7 +393,7 @@
 
       <li class="" routerLinkActive="active">
 
-        <a href="#" id="menuAdministrativo" class="dropdown-toggle">
+        <a href="#" id="menuAdministrativo" class="dropdown-toggle" *ngIf="permiso('MENUADMIN')">
           <i class="menu-icon fa fa-pencil-square-o"></i>
           <!-- <i class="menu-icon fa fa-desktop"></i> -->
           <span class="menu-text">
@@ -407,7 +407,7 @@
 
         <ul class="submenu">
           <li class="" routerLinkActive="active">
-            <a href="#" id="menuConsultas" class="dropdown-toggle">
+            <a href="#" id="menuConsultas" class="dropdown-toggle" *ngIf="permiso('MENUADMINCONSULTAS')">
               <i class="menu-icon fa fa-caret-right"></i>
 
               Consultas
@@ -418,7 +418,7 @@
 
             <ul class="submenu">
               <li class="" routerLinkActive="active">
-                <a routerLink="/escritorio/principal/consultas">
+                <a routerLink="/escritorio/principal/consultas" *ngIf="permiso('MENUADMINREP')">
                   <i class="menu-icon fa fa-caret-right"></i>
                   Reportes Dinámicos
                 </a>
@@ -439,7 +439,7 @@
         </ul>
         <ul class="submenu">
           <li class="" routerLinkActive="active">
-            <a href="#" id="menuRadicacion" class="dropdown-toggle">
+            <a href="#" id="menuRadicacion" class="dropdown-toggle" *ngIf="permiso('MENUADMINRADICA')">
               <i class="menu-icon fa fa-caret-right"></i>
 
               Radicaciones
@@ -450,14 +450,14 @@
 
             <ul class="submenu">
               <li class="" routerLinkActive="active">
-                <a routerLink="/escritorio/principal/archivos">
+                <a routerLink="/escritorio/principal/archivos" *ngIf="permiso('MENUADMINNVARAD')">
                   <i class="menu-icon fa fa-caret-right"></i>
                   Nueva Radicación
                 </a>
                 <!-- <b class="arrow"></b> -->
               </li>
               <li class="" routerLinkActive="active">
-                <a routerLink="/escritorio/principal/radicaciones">
+                <a routerLink="/escritorio/principal/radicaciones" *ngIf="permiso('MENUADMINRADICLIST')">
                   <i class="menu-icon fa fa-caret-right"></i>
                   Listado
                 </a>
@@ -479,7 +479,7 @@
 
         <ul class="submenu">
           <li class="" routerLinkActive="active">
-            <a href="#" id="menuFormularios" class="dropdown-toggle">
+            <a href="#" id="menuFormularios" class="dropdown-toggle" *ngIf="permiso('MENUADMINFORMS')">
               <i class="menu-icon fa fa-caret-right"></i>
 
               Formularios
@@ -490,7 +490,7 @@
 
             <ul class="submenu">
               <li class="" routerLinkActive="active">
-                <a routerLink="/escritorio/principal/formulariounico">
+                <a routerLink="/escritorio/principal/formulariounico" *ngIf="permiso('MENUADMINFROMUNICO')">
                   <i class="menu-icon fa fa-caret-right"></i>
                   Formulario Único
                 </a>
@@ -506,7 +506,7 @@
 
         <ul class="submenu">
           <li class="" routerLinkActive="active">
-            <a href="#" id="menuRegistros" class="dropdown-toggle">
+            <a href="#" id="menuRegistros" class="dropdown-toggle" *ngIf="permiso('MENUADMINTMAE')">
               <i class="menu-icon fa fa-caret-right"></i>
 
               Tablas Maestras
@@ -517,7 +517,7 @@
 
             <ul class="submenu">
               <li class="" routerLinkActive="active">
-                <a routerLink="/escritorio/principal/crudempl">
+                <a routerLink="/escritorio/principal/crudempl" *ngIf="permiso('MENUADMINTMAEEMPL')">
                   <i class="menu-icon fa fa-caret-right"></i>
                   Empleadores
                 </a>
@@ -530,7 +530,7 @@
       </li>
 
       <li class="" routerLinkActive="active">
-        <a href="#" id="menuSistema" class="dropdown-toggle">
+        <a href="#" id="menuSistema" class="dropdown-toggle" *ngIf="permiso('MENUSISTEMA')">
           <i class="menu-icon fa fa-desktop"></i>
           <!-- <i class="menu-icon fa fa-list"></i> -->
           <span class="menu-text"> Sistema </span>
@@ -541,7 +541,7 @@
 
         <ul class="submenu">
           <li routerLinkActive="active">
-            <a routerLink="/escritorio/principal/confconsultas">
+            <a routerLink="/escritorio/principal/confconsultas" *ngIf="permiso('MENUSISTEMAREP')">
               <i class="menu-icon fa fa-caret-right"></i>
               Reportes Dinamicos
             </a>
@@ -550,13 +550,13 @@
           </li>
 
           <li routerLinkActive="active">
-            <a routerLink="/escritorio/principal/tablasgenericas">
+            <a routerLink="/escritorio/principal/tablasgenericas" *ngIf="permiso('MENUSISTEMATGEN')">
               <i class="menu-icon fa fa-caret-right"></i>
               Tablas Genéricas
             </a>
           </li>
           <li routerLinkActive="active">
-            <a routerLink="/escritorio/principal/seguridad/procedimientos">
+            <a routerLink="/escritorio/principal/seguridad/procedimientos" *ngIf="permiso('MENUSISTEMAUSPRO')">
               <i class="menu-icon fa fa-caret-right"></i>
               Procedimientos y Controles
             </a>
@@ -565,9 +565,8 @@
 
         <ul class="submenu">
           <li class="" routerLinkActive="active">
-            <a href="#" id="menuUsuarios" class="dropdown-toggle">
+            <a href="#" id="menuUsuarios" class="dropdown-toggle" *ngIf="permiso('MENUSISTEMASUSU')">
               <i class="menu-icon fa fa-caret-right"></i>
-
               Usuarios
               <b class="arrow fa fa-angle-down"></b>
             </a>
@@ -576,14 +575,14 @@
 
             <ul class="submenu">
               <li class="" routerLinkActive="active">
-                <a routerLink="/escritorio/principal/seguridad/grupos">
+                <a routerLink="/escritorio/principal/seguridad/grupos" *ngIf="permiso('MENUSISTEMAUSGRU')">
                   <i class="menu-icon fa fa-caret-right"></i>
                   Grupos
                 </a>
                 <!-- <b class="arrow"></b> -->
               </li>
               <li class="" routerLinkActive="active">
-                <a routerLink="/escritorio/principal/seguridad/usuarios">
+                <a routerLink="/escritorio/principal/seguridad/usuarios" *ngIf="permiso('MENUSISTEMASUBUSU')">
                   <i class="menu-icon fa fa-caret-right"></i>
                   Usuarios
                 </a>

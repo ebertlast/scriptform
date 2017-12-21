@@ -45,6 +45,7 @@ export class UsprohService {
     });
     const _options = new RequestOptions({ headers: _headers });
     const _url = environment.apiurl + '/detalleprocedimientos/' + ProcedimientoID + '/' + ControlID;
+    // console.log(_url);
     return this._http.delete(_url, _options)
       .map((response: Response) => {
         const data = this._authService.ExtraerResultados(response);

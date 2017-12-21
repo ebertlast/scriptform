@@ -6,6 +6,8 @@ import { UsproService } from '../../servicios/uspro.service';
 import { UsprohService } from '../../servicios/usproh.service';
 import { Usproh } from '../../modelos/usproh';
 import { Uspro } from '../../modelos/uspro';
+import { UsgruhService } from '../../servicios/usgruh.service';
+import { UsgruService } from '../../servicios/usgru.service';
 declare var $: any;
 declare var bootbox: any;
 @Component({
@@ -224,6 +226,7 @@ export class ProcedimientosComponent implements OnInit {
                     me.usproh = new Usproh();
                     me.uspro = new Uspro();
                     me.refrescarUspro();
+                    me.cancelarEdicion();
                     me._helper.Notificacion('Registro borrado de la base de datos');
                   } else {
                     // tslint:disable-next-line:max-line-length
@@ -332,6 +335,11 @@ export class ProcedimientosComponent implements OnInit {
   }
 
   cancelarEdicion() {
+    $('#btnDelUspro').button('reset');
+    $('#btnAddUspro').button('reset');
+    $('#btnAddUsproh').button('reset');
+    $('#btnEditUsproh').button('reset');
+    $('#btnDelUsproh').button('reset');
     this.editar = false;
     this.usproh = new Usproh(this.uspro.ProcedimientoID, '', '');
   }

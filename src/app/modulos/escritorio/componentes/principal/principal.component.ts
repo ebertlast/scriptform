@@ -4,10 +4,12 @@ import { Usu } from '../../../seguridad/modelos/usu';
 import { AuthService } from '../../../seguridad/servicios/auth.service';
 import { Router } from '@angular/router';
 import { MyLinkDirective } from '../../../general/directivas/my-link.directive';
-
+import { UsgruhService } from '../../../seguridad/servicios/usgruh.service';
+import { Usgruh } from '../../../seguridad/modelos/usgruh';
 declare var jQuery: any;
 declare var $: any;
 declare var ace: any;
+
 @Component({
   selector: 'app-principal',
   templateUrl: './principal.component.html',
@@ -16,7 +18,11 @@ declare var ace: any;
 export class PrincipalComponent implements OnInit {
   environment = environment;
   public marquesina = '';
-  constructor(private _authService: AuthService, private _router: Router) { }
+  constructor(
+    private _authService: AuthService,
+    private _router: Router,
+    private _usgruhService: UsgruhService,
+  ) { }
 
   private _usuario: Usu;
   public get usuario(): Usu {
@@ -27,6 +33,17 @@ export class PrincipalComponent implements OnInit {
     this._usuario = v;
   }
 
+
+  private _ctrls: Usgruh[] = [];
+  public get ctrls(): Usgruh[] {
+    return this._ctrls;
+  }
+  public set ctrls(v: Usgruh[]) {
+    this._ctrls = v;
+  }
+
+
+
   ngOnInit() {
     $('body').attr('class', 'no-skin');
     this.usuario = this._authService.Usuario();
@@ -36,6 +53,8 @@ export class PrincipalComponent implements OnInit {
     this.msjMarquesina();
 
     // $('#btnRouterLinkRadicaciones').click();
+    // this._usgruhService.registros(this.usuario.GRUPOID,)
+    this.permisos();
   }
   private msjMarquesina() {
     this.marquesina = this._authService.MsjBienvenida();
@@ -62,6 +81,22 @@ export class PrincipalComponent implements OnInit {
     // }
     // console.log("Prueba ");
     // return false;
+  }
+
+  permisos() {
+    this.ctrls = [];
+    this._usgruhService.registros(this.usuario.GRUPOID, 'MENUPRINCIPAL').subscribe(ctrls => {
+      this.ctrls = ctrls;
+    });
+  }
+  permiso(controlid: string): boolean {
+    let permitido = false;
+    this.ctrls.forEach(permiso => {
+      if (permiso.ControlID === controlid && permiso.Permiso === 1) {
+        permitido = true;
+      }
+    });
+    return permitido;
   }
 
 }

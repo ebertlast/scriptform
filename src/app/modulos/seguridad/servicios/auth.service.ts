@@ -111,6 +111,12 @@ export class AuthService {
           userData
         ) {
           this.usuario = userData;
+          console.log(this.usuario.ACTIVO);
+          if (this.usuario.ACTIVO !== 1) {
+            // tslint:disable-next-line:max-line-length
+            this._helper.Notificacion('Tu usuario se encuentra inactivo en nuestra base de datos. Si esto es un error, comunicate por favor con tu supervisor o con el departamento de tecnologóa.', 'info', '', false);
+            return false;
+          }
           localStorage.setItem(environment.currentuser, JSON.stringify({ usuario: this.usuario }));
           // console.log(this.Usuario());
           return true;
